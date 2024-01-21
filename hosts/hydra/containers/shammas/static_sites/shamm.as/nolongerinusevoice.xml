@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Say voice="woman">This number is no longer in use. Please update your records to my number 347-371-2312. That's 347-371-2312"</Say>
+    <Say voice="woman">For your convenience, you will be transfered in 5 seconds.</Say>
+    <Pause length="5"/>
+    <Dial timeout="10" record="true">347-371-2312</Dial>
+</Response>

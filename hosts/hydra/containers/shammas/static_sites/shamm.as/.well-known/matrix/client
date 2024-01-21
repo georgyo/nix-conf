@@ -1,0 +1,11 @@
+{
+  "m.homeserver": {
+    "base_url": "https://matrix.shamm.as"
+  },
+  "m.identity_server": {
+    "base_url": "https://matrix.shamm.as"
+  },
+  "org.example.custom.property": {
+    "app_url": "https://custom.app.example.org"
+  }
+}

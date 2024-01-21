@@ -1,0 +1,83 @@
+==================================================================
+https://keybase.io/georgyo
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://xn--xj8h.ws
+  * I am georgyo (https://keybase.io/georgyo) on keybase.
+  * I have a public key with fingerprint D0CF 440A A703 E0F9 73CB  A078 82BB 70D5 41AE 2DB4
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "client": {
+            "name": "keybase.io node.js client",
+            "version": "0.3.2"
+        },
+        "key": {
+            "fingerprint": "d0cf440aa703e0f973cba07882bb70d541ae2db4",
+            "host": "keybase.io",
+            "key_id": "82BB70D541AE2DB4",
+            "uid": "060922a9c720fc9611cb0e7c66837a00",
+            "username": "georgyo"
+        },
+        "merkle_root": {
+            "ctime": 1399323239,
+            "hash": "f9d885094524dd9e804ad7ca3141032626d811b97302f55a75cf1eb9a1f70c1a4840251ced16db0f88efe8fe3e2d41bda181a94068e663e980642953a27dd3a1",
+            "seqno": 4882
+        },
+        "service": {
+            "hostname": "xn--xj8h.ws",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1399323685,
+    "expire_in": 157680000,
+    "prev": "1815519fc379f168e1601d6751cf8924ec54135b86d77560109230eae884fbb6",
+    "seqno": 10,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+owFVkn9MVWUYx+GG6KVMdKHmWMBBKH72nt/n4MAAWWBiFGshCdfz4z2XC5dzLude
+kBtgmDUHqOGPiTJZLYkpFgxUIGIwzcpASWECg4SI0tEYNsUtlVHvYbTyPf+873m+
+z/d9Ps/zVq98xsPk+eE3jlvxTVEXPPumRY9063x4CSZqshuLKcEkuw2qLmOnCvkQ
+i8HyoFsUnDDapgWqmgyjc52BS5pIrAjqTpumIhWIJqMJrCzSkBvJik21Qt2h2wwv
+TAaSQlFAEFhAQqDwLCmJAmA5jhBFFsg0hQuQkEUKWeZoTtdTt2KLnhabjP5yREIC
+C7YgfXwSsSXB0BcuBgADeIIQeIklgCLxDI5LIoCsxDAcyQoAGEIn1JeQrFDTrW7N
+KDcf6nl2aNE1bZFZctkMBU7yPEmgj0cFCc4clKPwMsfRgKdogpJlHnKAEmRWEkic
+wgFJMAQjczguIjRAKDQtsLSk4FDkBVxhgYQLFEcBgsYlKOOMLAKF46ACOQWSCJzC
+RVnAOVzgKcBwkGFIyHOAoQieJgWClWVSwBGBExaoGhZDobaVGSe9yCZBo2qjZ0to
+xWpUVHEulxO924kyHLrm0iTNjgI5LpcjxiB2uR2GcDcULYZFI/KwiDZVRgP7/0Rx
+JH26GwxHR2Kw2GHTocVmKGiW4QBaxj2wCHkiBJrGeUUiWV7BEQnOAFxmWIStcDxB
+QQlNjqRFjpFZlkYxNDQSQAFyHKWIIvMfI45MXYIVeTptVlVwFeoQK6sw+Xt5eJo8
+vJeZjDfr4WP2/fchU+GrFkK8fzqd06ZmfW2vePOR79yjFmfkRfYF/2XTweZUe02G
+46EpfcohReh+7vH84oGuDWmjW/8id629UPHe8nZzuvnz4LaFqiemTczQB/xkXliQ
+23dvRFRNW8NE/Jq0G4Olf3cVhbdh3R1HRkS5vy8sdbB9TcTdq992ll/1GfddGMOu
+3307tfREy770qe0bu7PVuYDLiQEnq+LvTPcMtHi3fukXOtQ/F1xjDphQ6fDla2ev
+vDNj/+hY2fkDwx0J2T1jiYeJprQHmdM3G4p+rG1N+qIy0MQ/bBxr9A68FzY93/by
+4Oteav3W9JcizkorMoJDe7OLMn85WbmnvDyUD2jLO2qJDa9LfszoHvXtqXmHVo70
+ffLi+Gkqcad2Kjg3Z/TgRYeYnHTfHhS2b77nwWsl4GjQ6lt89UwmY61JGT58M3Dd
+c5N7zpzIVzvPEJkLSllDzMxOc2xv7vD5hMQO2Ft7IITaW1lRGOeHFayLgSteCc76
+OW7zfuzJ9+tBqnfppskNQ2rn1Bv1TH/zqfLnB4/VtrZ89uzwlf2P/TcPvHtvdfPm
+xh/6zK0Z3llc/WWlbmQ707QjO2S8+qAQeDvu3LU77Fspzb33d02s/91+fbbg4+P2
+r36tu31EEhsqYy+5vapS/hz+Y6hx9rcdxVHdG1ed2/bdqwvRAdduZF6yfGp+v487
+7rMteaIr6OxoXdg/
+=wlnF
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/georgyo
+
+==================================================================
+

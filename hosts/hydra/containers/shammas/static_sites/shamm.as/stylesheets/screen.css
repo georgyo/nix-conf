@@ -1,0 +1,65 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+body, html, div, padding, input, p, img {
+  margin: 0;
+  padding: 0;
+  border: 0; }
+
+body, html {
+  height: 100%;
+  width: 100%; }
+
+.container {
+  width: 100%;
+  height: 100%; }
+
+.flip-container {
+  -webkit-perspective: 1000;
+  -moz-perspective: 1000;
+  -ms-perspective: 1000;
+  -o-perspective: 1000;
+  perspective: 1000;
+  position: relative;
+  margin: auto;
+  top: 50%;
+  margin-top: -150px; }
+
+.flip-container:hover .flipper, .back {
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  transform: rotateY(180deg); }
+
+.flip-container, .front, .back {
+  width: 540px;
+  height: 300px; }
+
+.flipper {
+  -webkit-transition: 0.8s;
+  -moz-transition: 0.8s;
+  -o-transition: 0.8s;
+  transition: 0.8s;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d; }
+
+.front, .back {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: absolute;
+  background-color: #FFFFFF;
+  text-align: center;
+  border: 1px solid gray;
+  z-index: 2;
+  font-size: 300%; }
+  .front p, .back p {
+    margin: 21% auto;
+    color: #444; }

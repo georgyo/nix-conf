@@ -1,0 +1,12 @@
+keys:
+  - &hydra_root age1mwuzlgcvgvrfmw5qey3jjt0dmzm3tdfmpvu76t50l9srw0s5puvq2hqxl6
+  - &hydra_host age1yekmwz9jlrhuwxqsc28wxs4er3aeuua6g5kjn7qz0kqgagdsxegqysghxp
+  - &hydra_pgp 46CE7FF89C5B5C099224F63BDA4450E18B0B0C49
+creation_rules:
+  - path_regex: hosts/hydra/(.*/)?secrets/.*$
+    key_groups:
+    - pgp:
+        - *hydra_pgp
+      age:
+        - *hydra_root
+        - *hydra_host

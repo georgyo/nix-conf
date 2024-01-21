@@ -1,0 +1,30 @@
+Hello!
+
+Interesting idea, I like it.
+
+The biggest problem I see is that this is going to (eventually) be used by spammers.
+
+I can send a mail with a FROM anywhere with a link. That link will be advertising for something, and your service will mail it off to some unsuspecting person.
+
+This means your mail server's reputation will end up being black listed everywhere.
+
+Enforcing DKIM/SPF validation would help a lot (but not perfect). I verified that you are not currently doing any validation today. I was able to spoof my gmail address from my residential IP. You do not have very long to fix it before it gets abused. 
+
+--George <george@shamm.as>
+
+Proof:
+
+
+#!/usr/bin/env expect
+
+set timeout 60
+
+spawn nc m.forlater.email 25
+
+expect "220 " { send "EHLO icyphox.sh\r" }
+expect "250 HELP" { send "MAIL FROM:<x@icyphox.sh>\r" }
+expect "250 2.0.0 Ok" { send "RCPT TO:<save@forlater.email>\r" }
+expect "250 2.1.5 Destination address valid: Recipient ok" { send "DATA\r" }
+expect "354 " {
+  send "FROM: x@icyphox.sh\r\nTO:save@forlater.email\r\nSUBJECT: save\r\n\r\nhttps://forlater.email/\r\n.\r\n"
+}
