@@ -114,8 +114,7 @@ in
       presence.enabled = true;
       enable_registration = false;
       enable_registration_captcha = true;
-      recaptcha_private_key = "6LcXp_4SAAAAABylWxVSBRUoSjDL1I1DvRRSFzER";
-      recaptcha_public_key = "6LcXp_4SAAAAAB6vB3o2LJwY_0ERxh9UN0yYipcm";
+      recaptcha_public_key = "6LcrI1gpAAAAAKm0ySV8exH23RPWnTytZJNaM-f_";
       turn_uris = [
         "turn:${config.services.coturn.realm}:5349?transport=udp"
         "turn:${config.services.coturn.realm}:5349?transport=tcp"
