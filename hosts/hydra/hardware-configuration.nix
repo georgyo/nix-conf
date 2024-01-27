@@ -66,5 +66,5 @@
   };
   #swapDevices = [{ device = "/dev/sdb"; }];
 
-  nix.settings.max-jobs = lib.mkDefault 2;
+  nix.settings.max-jobs = lib.mkDefault 4;
 }

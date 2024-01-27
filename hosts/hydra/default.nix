@@ -47,6 +47,12 @@ with pkgs; {
 
   services.resolved.enable = true;
   systemd.network.wait-online.anyInterface = true;
+  systemd.extraConfig = ''
+    DefaultLimitNOFILE=8192:524288
+  '';
+  security.pam.loginLimits = [
+    { domain = "*"; item = "nofile"; type = "soft"; value = "8192"; }
+  ];
   #systemd.network = {
   #    enable = true;
   #    networks.eth0 = {
