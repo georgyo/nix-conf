@@ -41,48 +41,17 @@
   };
 
   services.nginx.virtualHosts."media.nycr.social" = {
+    # We no longer use this site, but we need to keep around as even though it
+    # has not been used in about a year as of Feb 2024, there are still several
+    # hundred requests per day to it.
     forceSSL = true;
     enableACME = true;
     quic = true;
-    locations."/nycr-mastodon/" = {
-      proxyPass = "https://s3.us-east-2.wasabisys.com/nycr-mastodon/";
+    locations."/" = {
       extraConfig = ''
-        proxy_set_header Host 's3.us-east-2.wasabisys.com';
-        proxy_set_header Connection "";
-        proxy_set_header Authorization "";
-        proxy_hide_header Set-Cookie;
-        proxy_hide_header 'Access-Control-Allow-Origin';
-        proxy_hide_header 'Access-Control-Allow-Methods';
-        proxy_hide_header 'Access-Control-Allow-Headers';
-        proxy_hide_header x-amz-id-2;
-        proxy_hide_header x-amz-request-id;
-        proxy_hide_header x-amz-meta-server-side-encryption;
-        proxy_hide_header x-amz-server-side-encryption;
-        proxy_hide_header x-amz-bucket-region;
-        proxy_hide_header x-amzn-requestid;
-        proxy_ignore_headers Set-Cookie;
-
-        # proxy_cache CACHE;
-        proxy_cache_valid 200 48h;
-        proxy_cache_use_stale error timeout updating http_500 http_502 http_503 http_504;
-        proxy_cache_lock on;
-
-        expires 1y;
-        add_header Cache-Control public;
-        add_header 'Access-Control-Allow-Origin' '*';
-        add_header X-Cache-Status $upstream_cache_status;
+        rewrite ^/nycr-mastodon/(.*)$ https://cdn.nycr.social/$1 last;
+        return  302 https://cdn.nycr.social$request_uri;
       '';
-      #  proxy_cache mastodon_media;
-      #  proxy_cache_revalidate on;
-      #  proxy_buffering on;
-      #  proxy_cache_use_stale error timeout updating http_500 http_502 http_503 http_504;
-      #  proxy_cache_background_update on;
-      #  proxy_cache_lock on;
-      #  proxy_cache_valid 1d;
-      #  proxy_cache_valid 404 1h;
-      #  proxy_ignore_headers Cache-Control;
-      #  add_header X-Cached $upstream_cache_status;
-      #'';
     };
   };
 }
