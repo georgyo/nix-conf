@@ -47,6 +47,7 @@ in
       rclone
       restic
       spacevim
+      iftop
     ];
   environment.variables = {
     EDITOR = "nvim";
