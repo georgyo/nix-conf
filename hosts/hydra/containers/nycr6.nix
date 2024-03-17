@@ -7,6 +7,7 @@ let
         imagick
         opcache
         apcu
+        gnupg
       ]));
       extraConfig = ''
         log_errors = On
@@ -40,11 +41,14 @@ in
         graphicsmagick-imagemagick-compat
         phpPackage
         phpPackage.packages.composer
+        gnupg
       ];
 
+      users.users.wwwrun.home = "/var/lib/wwwrun";
 
       systemd.services.httpd.path = with pkgs; [
         graphicsmagick-imagemagick-compat
+        gnupg
       ];
 
       services = {
@@ -56,6 +60,9 @@ in
           enable = true;
           databases = [ "nycrmw" ];
         };
+
+        cron.enable = true;
+
         httpd = {
           enable = true;
           enablePHP = true;
@@ -63,6 +70,7 @@ in
           extraConfig = ''
             DirectoryIndex index.php index.html
           '';
+
           virtualHosts.wiki = {
             hostName = "wiki.nycresistor.com";
             enableACME = true;
@@ -71,6 +79,7 @@ in
             locations = {
               "/wiki" = { alias = "/srv/http/wiki.nycresistor.com/w/index.php"; };
             };
+
             extraConfig = ''
               <Directory "/srv/http/wiki.nycresistor.com">
                 AllowOverride All
@@ -82,6 +91,22 @@ in
               RewriteEngine  on
               RewriteRule    ^/$ /wiki [R]
 
+            '';
+          };
+
+          virtualHosts.pass = {
+            hostName = "pass.nycresistor.com";
+            enableACME = true;
+            forceSSL = true;
+            documentRoot = "/srv/http/pass.nycresistor.com/webroot";
+
+            extraConfig = ''
+              <Directory "/srv/http/pass.nycresistor.com/webroot">
+                AllowOverride All
+                DirectoryIndex index.php index.html
+                Options -Indexes +FollowSymLinks
+                Require all granted
+              </Directory>
             '';
           };
         };
