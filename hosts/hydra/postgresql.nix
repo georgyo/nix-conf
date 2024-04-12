@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
 
   services.postgresql = {
@@ -42,7 +47,8 @@
   };
 
   environment.systemPackages =
-    let newpg = config.containers.temp-pg.config.services.postgresql;
+    let
+      newpg = config.containers.temp-pg.config.services.postgresql;
     in
     [
       (pkgs.writeScriptBin "upgrade-pg-cluster" ''
@@ -64,5 +70,4 @@
           "$@"
       '')
     ];
-
 }

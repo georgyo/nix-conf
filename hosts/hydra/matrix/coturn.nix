@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 {
   sops.secrets = {
@@ -38,8 +43,7 @@
     min-port = 49000;
     max-port = 50000;
     use-auth-secret = true;
-    static-auth-secret-file =
-      config.sops.secrets."coturn/auth-secret".path;
+    static-auth-secret-file = config.sops.secrets."coturn/auth-secret".path;
     realm = "turn.nycr.chat";
     cert = "${config.security.acme.certs.${realm}.directory}/full.pem";
     pkey = "${config.security.acme.certs.${realm}.directory}/key.pem";

@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   nycr-element-web = pkgs.element-web.override {
@@ -8,7 +13,9 @@ let
           base_url = "https://nycr.chat";
           server_name = "nycr.chat";
         };
-        "m.identity_server" = { base_url = "https://vector.im"; };
+        "m.identity_server" = {
+          base_url = "https://vector.im";
+        };
       };
       defaultCountryCode = "US";
       showLabsSettings = true;
@@ -29,7 +36,9 @@ let
     "m.homeserver" = {
       "base_url" = baseUrl;
     };
-    "org.matrix.msc3575.proxy" = { "url" = "https://syncv3.nycr.chat"; };
+    "org.matrix.msc3575.proxy" = {
+      "url" = "https://syncv3.nycr.chat";
+    };
   };
   mkWellKnown = data: ''
     add_header Content-Type application/json;
@@ -90,7 +99,6 @@ in
         port = 9006;
         enableSelfServiceBridging = true;
         adminMxid = "@georgyo:nycr.chat";
-
       };
       auth = {
         usePrivilegedIntents = true;
@@ -121,23 +129,25 @@ in
       ];
       suppress_key_server_warning = true;
       turn_user_lifetime = "1h";
-      listeners = [{
-        bind_addresses = [ "" ];
-        port = 8447;
-        resources = [
-          {
-            compress = true;
-            names = [ "client" ];
-          }
-          {
-            compress = false;
-            names = [ "federation" ];
-          }
-        ];
-        tls = false;
-        type = "http";
-        x_forwarded = true;
-      }];
+      listeners = [
+        {
+          bind_addresses = [ "" ];
+          port = 8447;
+          resources = [
+            {
+              compress = true;
+              names = [ "client" ];
+            }
+            {
+              compress = false;
+              names = [ "federation" ];
+            }
+          ];
+          tls = false;
+          type = "http";
+          x_forwarded = true;
+        }
+      ];
       email = {
         enable_notifs = true;
         smtp_host = "localhost";
@@ -157,9 +167,7 @@ in
       matrix-synapse-pam
       #matrix-synapse-s3-storage-provider
     ];
-    extraConfigFiles = [
-      config.sops.secrets."matrix/extra-config.yaml".path
-    ];
+    extraConfigFiles = [ config.sops.secrets."matrix/extra-config.yaml".path ];
   };
 
   services.matrix-sliding-sync = {
@@ -229,5 +237,4 @@ in
       locations."/".proxyPass = "http://127.0.0.1:8447";
     };
   };
-
 }

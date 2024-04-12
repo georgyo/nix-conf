@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
 
@@ -6,7 +11,5 @@
     enable = true;
     owner = "@georgyo:nycr.chat";
     homeserver = "https://nycr.chat";
-
-
   };
 }

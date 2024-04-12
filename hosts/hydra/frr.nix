@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   services.frr = {
     bgp.enable = true;
@@ -53,6 +58,5 @@
     zebra.config = ''
       ipv6 nht resolve-via-default
     '';
-
   };
 }

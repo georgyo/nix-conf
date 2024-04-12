@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
 
   services.nginx = {
@@ -12,9 +17,10 @@
       let
         vhosts = builtins.attrNames config.services.nginx.virtualHosts;
 
-        buildVhostExtraParams = vhosts: builtins.listToAttrs (
-          builtins.map
-            (vhost: {
+        buildVhostExtraParams =
+          vhosts:
+          builtins.listToAttrs (
+            builtins.map (vhost: {
               name = vhost;
               value = {
                 quic = true;
@@ -22,9 +28,8 @@
                   access_log  /var/log/nginx/access.log  main;
                 '';
               };
-            })
-            vhosts
-        );
+            }) vhosts
+          );
       in
       buildVhostExtraParams vhosts;
   };

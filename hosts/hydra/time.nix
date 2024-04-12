@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
 
@@ -50,5 +55,4 @@
     '';
     extraFlags = [ "-N" ];
   };
-
 }

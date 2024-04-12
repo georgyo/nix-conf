@@ -6,13 +6,11 @@
     privateNetwork = true;
     extraFlags = [ "-U" ];
 
-
-    config = { ... }: {
-      nixpkgs.pkgs = pkgs;
-      imports = [
-        (import ./common.nix "nextcloud")
-      ];
-
-    };
+    config =
+      { ... }:
+      {
+        nixpkgs.pkgs = pkgs;
+        imports = [ (import ./common.nix "nextcloud") ];
+      };
   };
 }

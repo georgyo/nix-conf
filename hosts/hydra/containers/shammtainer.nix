@@ -1,8 +1,13 @@
-{ config, lib, pkgs, ... }@host:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}@host:
 with lib;
 
 {
   options.shammtainers = {
     containers = mkOption { };
-
-  }
+  };
+}

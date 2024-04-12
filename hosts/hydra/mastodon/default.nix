@@ -35,9 +35,7 @@
       S3_HOSTNAME = "s3.us-east-2.wasabisys.com";
       S3_ENDPOINT = "https://s3.us-east-2.wasabisys.com/";
     };
-    extraEnvFiles = [
-      config.sops.secrets."mastodon/extraEnv".path
-    ];
+    extraEnvFiles = [ config.sops.secrets."mastodon/extraEnv".path ];
   };
 
   services.nginx.virtualHosts."media.nycr.social" = {

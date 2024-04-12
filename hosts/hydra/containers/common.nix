@@ -1,16 +1,35 @@
 with builtins;
 let
   ipam = {
-    shammas = [ "198.74.56.101/32" "2600:3c03:e002:2510::/64" ];
-    nycr6 = [ "23.239.10.184/32" "2600:3c03:e002:2511::/64" ];
-    nextcloud = [ "192.168.55.12/32" "2600:3c03:e002:2512::/64" ];
-    tanya = [ "23.239.10.144/32" "2600:3c03:e002:2513::/64" ];
-    avalon = [ "192.168.55.14/32" "2600:3c03:e002:2514::/64" ];
+    shammas = [
+      "198.74.56.101/32"
+      "2600:3c03:e002:2510::/64"
+    ];
+    nycr6 = [
+      "23.239.10.184/32"
+      "2600:3c03:e002:2511::/64"
+    ];
+    nextcloud = [
+      "192.168.55.12/32"
+      "2600:3c03:e002:2512::/64"
+    ];
+    tanya = [
+      "23.239.10.144/32"
+      "2600:3c03:e002:2513::/64"
+    ];
+    avalon = [
+      "192.168.55.14/32"
+      "2600:3c03:e002:2514::/64"
+    ];
   };
-
 in
 host:
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   system.stateVersion = "23.11";
 
@@ -27,7 +46,6 @@ host:
     "net.ipv4.tcp_ecn" = 1;
   };
 
-
   networking = {
     useHostResolvConf = false;
     useNetworkd = true;
@@ -38,8 +56,10 @@ host:
     ];
 
     firewall = {
-      allowedTCPPorts =
-        [ 80 443 ];
+      allowedTCPPorts = [
+        80
+        443
+      ];
     };
   };
 
@@ -64,9 +84,17 @@ host:
     ];
   };
 
-
-  environment.systemPackages = with pkgs; [ htop vim git tcpdump restic ];
-  security.acme = { acceptTerms = true; defaults.email = "acme@shamm.as"; };
+  environment.systemPackages = with pkgs; [
+    htop
+    vim
+    git
+    tcpdump
+    restic
+  ];
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "acme@shamm.as";
+  };
   services.dbus.implementation = "broker";
   services.postfix = {
     enable = true;

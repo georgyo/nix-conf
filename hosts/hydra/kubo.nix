@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   services.kubo = {
 
@@ -25,39 +30,66 @@
         Peers = [
           {
             ID = "QmZMxNdpMkewiVZLMRxaNxUeZpDUb34pWjZ1kZvsd16Zic";
-            Addrs = [ "/dns4/node0.preload.ipfs.io/tcp/4001" "/dns4/node0.preload.ipfs.io/udp/4001/quic" ];
+            Addrs = [
+              "/dns4/node0.preload.ipfs.io/tcp/4001"
+              "/dns4/node0.preload.ipfs.io/udp/4001/quic"
+            ];
           }
           {
             ID = "Qmbut9Ywz9YEDrz8ySBSgWyJk41Uvm2QJPhwDJzJyGFsD6";
-            Addrs = [ "/dns4/node1.preload.ipfs.io/tcp/4001" "/dns4/node1.preload.ipfs.io/udp/4001/quic" ];
+            Addrs = [
+              "/dns4/node1.preload.ipfs.io/tcp/4001"
+              "/dns4/node1.preload.ipfs.io/udp/4001/quic"
+            ];
           }
           {
             ID = "QmV7gnbW5VTcJ3oyM2Xk1rdFBJ3kTkvxc87UFGsun29STS";
-            Addrs = [ "/dns4/node2.preload.ipfs.io/tcp/4001" "/dns4/node2.preload.ipfs.io/udp/4001/quic" ];
+            Addrs = [
+              "/dns4/node2.preload.ipfs.io/tcp/4001"
+              "/dns4/node2.preload.ipfs.io/udp/4001/quic"
+            ];
           }
           {
             ID = "QmY7JB6MQXhxHvq7dBDh4HpbH29v4yE9JRadAVpndvzySN";
-            Addrs = [ "/dns4/node3.preload.ipfs.io/tcp/4001" "/dns4/node3.preload.ipfs.io/udp/4001/quic" ];
+            Addrs = [
+              "/dns4/node3.preload.ipfs.io/tcp/4001"
+              "/dns4/node3.preload.ipfs.io/udp/4001/quic"
+            ];
           }
           {
             ID = "QmcZf59bWwK5XFi76CZX8cbJ4BhTzzA3gU1ZjYZcYW3dwt";
-            Addrs = [ "/dns4/nrt-1.bootstrap.libp2p.io/tcp/4001" "/dns4/nrt-1.bootstrap.libp2p.io/udp/4001/quic" ];
+            Addrs = [
+              "/dns4/nrt-1.bootstrap.libp2p.io/tcp/4001"
+              "/dns4/nrt-1.bootstrap.libp2p.io/udp/4001/quic"
+            ];
           }
           {
             ID = "QmbLHAnMoJPWSCR5Zhtx6BHJX9KiKNN6tpvbUcqanj75Nb";
-            Addrs = [ "/dns4/ams-2.bootstrap.libp2p.io/tcp/4001" "/dns4/ams-2.bootstrap.libp2p.io/udp/4001/quic" ];
+            Addrs = [
+              "/dns4/ams-2.bootstrap.libp2p.io/tcp/4001"
+              "/dns4/ams-2.bootstrap.libp2p.io/udp/4001/quic"
+            ];
           }
           {
             ID = "QmZa1sAxajnQjVM8WjWXoMbmPd7NsWhfKsPkErzpm9wGkp";
-            Addrs = [ "/dns4/sjc-2.bootstrap.libp2p.io/tcp/4001" "/dns4/sjc-2.bootstrap.libp2p.io/udp/4001/quic" ];
+            Addrs = [
+              "/dns4/sjc-2.bootstrap.libp2p.io/tcp/4001"
+              "/dns4/sjc-2.bootstrap.libp2p.io/udp/4001/quic"
+            ];
           }
           {
             ID = "QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN";
-            Addrs = [ "/dns4/sjc-1.bootstrap.libp2p.io/tcp/4001" "/dns4/sjc-1.bootstrap.libp2p.io/udp/4001/quic" ];
+            Addrs = [
+              "/dns4/sjc-1.bootstrap.libp2p.io/tcp/4001"
+              "/dns4/sjc-1.bootstrap.libp2p.io/udp/4001/quic"
+            ];
           }
           {
             ID = "QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa";
-            Addrs = [ "/dns4/ewr-1.bootstrap.libp2p.io/tcp/4001" "/dns4/ewr-1.bootstrap.libp2p.io/udp/4001/quic" ];
+            Addrs = [
+              "/dns4/ewr-1.bootstrap.libp2p.io/tcp/4001"
+              "/dns4/ewr-1.bootstrap.libp2p.io/udp/4001/quic"
+            ];
           }
         ];
       };
@@ -101,7 +133,11 @@
         Transports.Network.TCP = false;
       };
     };
-    extraFlags = [ "--enable-namesys-pubsub" "--migrate" "--init-profile" "badgerds" ];
+    extraFlags = [
+      "--enable-namesys-pubsub"
+      "--migrate"
+      "--init-profile"
+      "badgerds"
+    ];
   };
-
 }

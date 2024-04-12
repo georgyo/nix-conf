@@ -1,5 +1,11 @@
-{ config, lib, pkgs, ... }:
-let hostname = "hackertalks.com";
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  hostname = "hackertalks.com";
 in
 {
   services.lemmy = {
@@ -37,39 +43,35 @@ in
     };
   };
 
-
   systemd.services.pict-rs =
     let
       cfg = config.services.pict-rs;
-      config_file =
-        pkgs.writeTextFile {
-          name = "pict-rs.toml";
-          text = ''
-            [server]
-            address = '${cfg.address}:${toString cfg.port}'
+      config_file = pkgs.writeTextFile {
+        name = "pict-rs.toml";
+        text = ''
+          [server]
+          address = '${cfg.address}:${toString cfg.port}'
 
-            [old_db]
-            path =  '${cfg.dataDir}'           
-            
-            [repo]
-            path =  '${cfg.dataDir}'           
+          [old_db]
+          path =  '${cfg.dataDir}'           
 
-            [store]
-            type = 'object_storage'
-            endpoint = 'https://s3.us-east-2.wasabisys.com'
-            bucket_name = 'pict-rs'
-            use_path_style = true
-            region = 'us-east-2'
-          '';
-        };
+          [repo]
+          path =  '${cfg.dataDir}'           
+
+          [store]
+          type = 'object_storage'
+          endpoint = 'https://s3.us-east-2.wasabisys.com'
+          bucket_name = 'pict-rs'
+          use_path_style = true
+          region = 'us-east-2'
+        '';
+      };
     in
     {
       environment = {
         PICTRS__CONFIG_FILE = config_file;
       };
       serviceConfig.ExecStart = lib.mkForce "${pkgs.pict-rs}/bin/pict-rs --config-file ${config_file} run";
-      serviceConfig.EnvironmentFile = [
-        config.sops.secrets."pict-rs/env".path
-      ];
+      serviceConfig.EnvironmentFile = [ config.sops.secrets."pict-rs/env".path ];
     };
 }

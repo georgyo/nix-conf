@@ -23,33 +23,31 @@
     privateNetwork = true;
     extraFlags = [ "-U" ];
 
+    config =
+      { ... }:
+      {
+        nixpkgs.pkgs = pkgs;
+        imports = [ (import ../common.nix "avalon") ];
 
-    config = { ... }: {
-      nixpkgs.pkgs = pkgs;
-      imports = [
-        (import ../common.nix "avalon")
-      ];
+        networking.firewall.allowedTCPPorts = [ 8001 ];
 
-      networking.firewall.allowedTCPPorts = [ 8001 ];
-
-      systemd.services.avalon = {
-        enable = true;
-        wantedBy = [ "multi-user.target" ];
-        environment = {
-          FIREBASE_KEY_FILE = "/etc/avalon/firebase-key.json";
-        };
-        serviceConfig = {
-          ExecStart = "${pkgs.avalon-online}/bin/avalon-server";
-          User = "avalon";
-          DynamicUser = true;
-          WorkingDirectory = "${pkgs.avalon-online}/libexec/avalon/server";
-          ProtectSystem = true;
-          ProtectHome = true;
-          RuntimeDirectory = "avalon";
-          ConfigurationDirectory = "avalon";
+        systemd.services.avalon = {
+          enable = true;
+          wantedBy = [ "multi-user.target" ];
+          environment = {
+            FIREBASE_KEY_FILE = "/etc/avalon/firebase-key.json";
+          };
+          serviceConfig = {
+            ExecStart = "${pkgs.avalon-online}/bin/avalon-server";
+            User = "avalon";
+            DynamicUser = true;
+            WorkingDirectory = "${pkgs.avalon-online}/libexec/avalon/server";
+            ProtectSystem = true;
+            ProtectHome = true;
+            RuntimeDirectory = "avalon";
+            ConfigurationDirectory = "avalon";
+          };
         };
       };
-
-    };
   };
 }
