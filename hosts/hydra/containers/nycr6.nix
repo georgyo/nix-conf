@@ -9,7 +9,7 @@ let
         imagick
         opcache
         apcu
-        gnupg
+#        gnupg
       ])
     );
     extraConfig = ''
@@ -100,21 +100,21 @@ in
               '';
             };
 
-            virtualHosts.pass = {
-              hostName = "pass.nycresistor.com";
-              enableACME = true;
-              forceSSL = true;
-              documentRoot = "/srv/http/pass.nycresistor.com/webroot";
+            # virtualHosts.pass = {
+            #   hostName = "pass.nycresistor.com";
+            #   enableACME = true;
+            #   forceSSL = true;
+            #   documentRoot = "/srv/http/pass.nycresistor.com/webroot";
 
-              extraConfig = ''
-                <Directory "/srv/http/pass.nycresistor.com/webroot">
-                  AllowOverride All
-                  DirectoryIndex index.php index.html
-                  Options -Indexes +FollowSymLinks
-                  Require all granted
-                </Directory>
-              '';
-            };
+            #   extraConfig = ''
+            #     <Directory "/srv/http/pass.nycresistor.com/webroot">
+            #       AllowOverride All
+            #       DirectoryIndex index.php index.html
+            #       Options -Indexes +FollowSymLinks
+            #       Require all granted
+            #     </Directory>
+            #   '';
+            # };
           };
         };
       };

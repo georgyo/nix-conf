@@ -219,7 +219,7 @@ with pkgs;
       ];
       auto-optimise-store = true;
     };
-    package = nixUnstable;
+    package = nixVersions.latest;
     extraOptions = ''
       experimental-features = nix-command flakes ca-derivations
     '';
