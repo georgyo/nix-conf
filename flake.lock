@@ -22,6 +22,26 @@
         "type": "github"
       }
     },
+    "blog_shamm_as": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1715556909,
+        "narHash": "sha256-Xu8k73aqSGQT3d4GIYj9MPHn5P4Pwg7BqjPI0WVZi20=",
+        "owner": "georgyo",
+        "repo": "blog.shamm.as",
+        "rev": "8da062de79471dbc6986d05089d33e2d591c3e6b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "georgyo",
+        "repo": "blog.shamm.as",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": [
@@ -116,6 +136,7 @@
     "root": {
       "inputs": {
         "avalon": "avalon",
+        "blog_shamm_as": "blog_shamm_as",
         "flake-utils": "flake-utils_2",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",

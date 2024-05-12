@@ -31,6 +31,12 @@
               root = ./static_sites/shamm.as;
               default = true;
             };
+            "blog.shamm.as" = {
+              forceSSL = true;
+              enableACME = true;
+              quic = true;
+              root = pkgs.blog_shamm_as;
+             };
             "hackerfoundation.org" = {
               serverAliases = [ "www.hackerfoundation.org" ];
               forceSSL = true;

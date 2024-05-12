@@ -20,6 +20,11 @@
       url = "github:georgyo/avalon";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    blog_shamm_as = {
+      url = "github:georgyo/blog.shamm.as";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     {
@@ -30,6 +35,7 @@
       home-manager,
       flake-utils,
       avalon,
+      blog_shamm_as,
       ...
     }@inputs:
     let
@@ -38,7 +44,10 @@
         sops-nix.overlays.default
         self.overlay
         avalon.overlays.default
-        (prev: final: { flakeInputs = inputs; })
+        blog_shamm_as.overlay
+        (prev: final: {
+          flakeInputs = inputs;
+        })
       ];
     in
     utils.lib.mkFlake {

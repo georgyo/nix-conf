@@ -9,7 +9,7 @@ let
         imagick
         opcache
         apcu
-#        gnupg
+        # gnupg
       ])
     );
     extraConfig = ''
