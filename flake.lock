@@ -29,11 +29,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1715556909,
-        "narHash": "sha256-Xu8k73aqSGQT3d4GIYj9MPHn5P4Pwg7BqjPI0WVZi20=",
+        "lastModified": 1716033536,
+        "narHash": "sha256-hw2zpaVbWP4NLFzdiuPJlbUUnRkvYvS6aCIQFVlDwNc=",
         "owner": "georgyo",
         "repo": "blog.shamm.as",
-        "rev": "8da062de79471dbc6986d05089d33e2d591c3e6b",
+        "rev": "944346ab84029f8bae462b5eaa27327eeb63bf52",
         "type": "github"
       },
       "original": {
