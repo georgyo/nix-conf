@@ -36,7 +36,7 @@
               enableACME = true;
               quic = true;
               root = pkgs.blog_shamm_as;
-             };
+            };
             "hackerfoundation.org" = {
               serverAliases = [ "www.hackerfoundation.org" ];
               forceSSL = true;

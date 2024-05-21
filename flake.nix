@@ -45,9 +45,7 @@
         self.overlay
         avalon.overlays.default
         blog_shamm_as.overlay
-        (prev: final: {
-          flakeInputs = inputs;
-        })
+        (prev: final: { flakeInputs = inputs; })
       ];
     in
     utils.lib.mkFlake {
