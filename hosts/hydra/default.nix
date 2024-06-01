@@ -240,7 +240,7 @@ with pkgs;
     settings = {
       PermitRootLogin = "no";
       Ciphers = [
-        "chacha20-poly1305@openssh.com"
+        # "chacha20-poly1305@openssh.com"
         "aes256-gcm@openssh.com"
         # "aes128-gcm@openssh.com"
         # "aes256-ctr"
