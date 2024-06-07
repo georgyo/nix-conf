@@ -68,18 +68,14 @@ host:
     address = ipam.${host};
     routes = [
       {
-        routeConfig = {
-          Gateway = "169.254.0.1";
-          GatewayOnLink = "yes";
-          Scope = "global";
-        };
+        Gateway = "169.254.0.1";
+        GatewayOnLink = "yes";
+        Scope = "global";
       }
       {
-        routeConfig = {
-          Gateway = "FE80::1";
-          GatewayOnLink = "yes";
-          Scope = "global";
-        };
+        Gateway = "FE80::1";
+        GatewayOnLink = "yes";
+        Scope = "global";
       }
     ];
   };
