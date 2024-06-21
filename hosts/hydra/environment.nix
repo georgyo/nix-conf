@@ -69,7 +69,7 @@ in
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  programs.bash.enableCompletion = true;
+  programs.bash.completion.enable = true;
   programs.mtr.enable = true;
   programs.mosh.enable = true;
   programs.tmux.enable = true;
