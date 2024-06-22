@@ -87,10 +87,44 @@
           inherit system;
           overlays = sharedOverlays;
         };
+
+        pkgsCuda = import nixpkgs {
+          inherit system;
+          cudaSupport = true;
+          overlays = sharedOverlays;
+        };
       in
       {
 
         formatter = pkgs.nixfmt-rfc-style;
+
+        packages.home-env =
+          with pkgsCuda;
+          buildEnv {
+            name = "home-env";
+            extraOutputsToInstall = [
+              "man"
+              "doc"
+            ];
+            paths = [
+              buck2
+              git-bug
+              git-absorb
+              guix
+              hugo
+              hydra-check
+              jujutsu
+              nix-du
+              nix-index
+              nix-update
+              nixd
+              nixfmt-rfc-style
+              sapling
+              usql
+              watchman
+            ];
+
+          };
 
         devShell =
           with pkgs;
