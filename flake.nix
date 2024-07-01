@@ -115,6 +115,14 @@
                 usql
                 watchman
               ];
+              postBuild = ''
+                if [ -x $out/bin/install-info -a -w $out/share/info ]; then
+                  shopt -s nullglob
+                  for i in $out/share/info/*.info $out/share/info/*.info.gz; do
+                      $out/bin/install-info $i $out/share/info/dir
+                  done
+                fi
+              '';
 
             };
         };
