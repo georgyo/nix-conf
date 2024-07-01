@@ -1,0 +1,96 @@
+From e21559153b81b0de896f735893796bb9042a54d4 Mon Sep 17 00:00:00 2001
+From: Emily <vcs@emily.moe>
+Date: Mon, 1 Jul 2024 10:21:24 +0100
+Subject: [PATCH] openssh_{hpn,gssapi}: add backported security fix patches
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Fixes a critical security bug allowing remote code execution as root:
+<https://www.openssh.com/txt/release-9.8>
+
+This may be CVE-2024-6387 (currently embargoed):
+<https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-6387>
+
+Thanks to upstream and Sam James <sam@gentoo.org> for the backport:
+<https://github.com/gentoo/gentoo/commit/1633ef45475afb9eea04e9cf27021c9d994af338>
+
+Please don’t use these packages on the open internet if you care
+a lot about security.
+---
+ pkgs/tools/networking/openssh/default.nix     |  4 ++++
+ .../openssh-9.6_p1-CVE-2024-6387.patch        | 19 +++++++++++++++++++
+ .../openssh/openssh-9.6_p1-chaff-logic.patch  | 16 ++++++++++++++++
+ 3 files changed, 39 insertions(+)
+ create mode 100644 pkgs/tools/networking/openssh/openssh-9.6_p1-CVE-2024-6387.patch
+ create mode 100644 pkgs/tools/networking/openssh/openssh-9.6_p1-chaff-logic.patch
+
+diff --git a/pkgs/tools/networking/openssh/default.nix b/pkgs/tools/networking/openssh/default.nix
+index c002fccb8d837f..1c60f8f304d78c 100644
+--- a/pkgs/tools/networking/openssh/default.nix
++++ b/pkgs/tools/networking/openssh/default.nix
+@@ -29,6 +29,8 @@ in
+     extraPatches = let url = "https://raw.githubusercontent.com/freebsd/freebsd-ports/b3f86656fc67aa397f60747c85f7f7b967c3279d/security/openssh-portable/files/extra-patch-hpn"; in
+     [
+       ./ssh-keysign-8.5.patch
++      ./openssh-9.6_p1-CVE-2024-6387.patch
++      ./openssh-9.6_p1-chaff-logic.patch
+ 
+       # HPN Patch from FreeBSD ports
+       (fetchpatch {
+@@ -68,6 +70,8 @@ in
+ 
+     extraPatches = [
+       ./ssh-keysign-8.5.patch
++      ./openssh-9.6_p1-CVE-2024-6387.patch
++      ./openssh-9.6_p1-chaff-logic.patch
+ 
+       (fetchpatch {
+         name = "openssh-gssapi.patch";
+diff --git a/pkgs/tools/networking/openssh/openssh-9.6_p1-CVE-2024-6387.patch b/pkgs/tools/networking/openssh/openssh-9.6_p1-CVE-2024-6387.patch
+new file mode 100644
+index 00000000000000..7b7fb70380d9f9
+--- /dev/null
++++ b/pkgs/tools/networking/openssh/openssh-9.6_p1-CVE-2024-6387.patch
+@@ -0,0 +1,19 @@
++https://bugs.gentoo.org/935271
++Backport proposed by upstream at https://marc.info/?l=oss-security&m=171982317624594&w=2.
++--- a/log.c
+++++ b/log.c
++@@ -451,12 +451,14 @@ void
++ sshsigdie(const char *file, const char *func, int line, int showfunc,
++     LogLevel level, const char *suffix, const char *fmt, ...)
++ {
+++#ifdef SYSLOG_R_SAFE_IN_SIGHAND
++ 	va_list args;
++ 
++ 	va_start(args, fmt);
++ 	sshlogv(file, func, line, showfunc, SYSLOG_LEVEL_FATAL,
++ 	    suffix, fmt, args);
++ 	va_end(args);
+++#endif
++ 	_exit(1);
++ }
++ 
+diff --git a/pkgs/tools/networking/openssh/openssh-9.6_p1-chaff-logic.patch b/pkgs/tools/networking/openssh/openssh-9.6_p1-chaff-logic.patch
+new file mode 100644
+index 00000000000000..90544d1a457ed5
+--- /dev/null
++++ b/pkgs/tools/networking/openssh/openssh-9.6_p1-chaff-logic.patch
+@@ -0,0 +1,16 @@
++"Minor logic error in ObscureKeystrokeTiming"
++https://marc.info/?l=oss-security&m=171982317624594&w=2
++--- a/clientloop.c
+++++ b/clientloop.c
++@@ -608,8 +608,9 @@ obfuscate_keystroke_timing(struct ssh *ssh, struct timespec *timeout,
++ 		if (timespeccmp(&now, &chaff_until, >=)) {
++ 			/* Stop if there have been no keystrokes for a while */
++ 			stop_reason = "chaff time expired";
++-		} else if (timespeccmp(&now, &next_interval, >=)) {
++-			/* Otherwise if we were due to send, then send chaff */
+++		} else if (timespeccmp(&now, &next_interval, >=) &&
+++		    !ssh_packet_have_data_to_write(ssh)) {
+++			/* If due to send but have no data, then send chaff */
++ 			if (send_chaff(ssh))
++ 				nchaff++;
++ 		}

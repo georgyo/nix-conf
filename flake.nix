@@ -42,7 +42,7 @@
       overlay = import ./overlay.nix;
       sharedOverlays = [
         sops-nix.overlays.default
-        self.overlay
+        # self.overlay
         avalon.overlays.default
         blog_shamm_as.overlay
         (prev: final: { flakeInputs = inputs; })
@@ -79,21 +79,13 @@
       };
 
       hosts.hydra.modules = [ ./hosts/hydra ];
-    }
-    // (flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = sharedOverlays;
-        };
-      in
-      {
 
-        formatter = pkgs.nixfmt-rfc-style;
+      outputsBuilder = channels: {
+        formatter = channels.default.nixfmt-rfc-style;
+        packages = channels.default;
 
         devShell =
-          with pkgs;
+          with channels.default;
           mkShell {
             nativeBuildInputs = [
               sops-import-keys-hook
@@ -105,6 +97,8 @@
               "./keys/users"
             ];
           };
-      }
-    ));
+      };
+
+    };
+
 }
