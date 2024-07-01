@@ -48,7 +48,7 @@
         (prev: final: { flakeInputs = inputs; })
       ];
     in
-    utils.lib.mkFlake {
+    utils.lib.mkFlake rec {
       inherit
         self
         inputs
@@ -70,6 +70,12 @@
           );
       };
 
+      channels.cudaDefault = channels.default // {
+        config = {
+          cudaSupport = true;
+        };
+      };
+
       hostDefaults = {
         channelName = "default";
         modules = [
@@ -82,7 +88,36 @@
 
       outputsBuilder = channels: {
         formatter = channels.default.nixfmt-rfc-style;
-        packages = channels.default;
+        packages = channels.default // {
+
+          home-env =
+            with channels.cudaDefault;
+            buildEnv {
+              name = "home-env";
+              extraOutputsToInstall = [
+                "man"
+                "doc"
+              ];
+              paths = [
+                buck2
+                git-bug
+                git-absorb
+                guix
+                hugo
+                hydra-check
+                jujutsu
+                nix-du
+                nix-index
+                nix-update
+                nixd
+                nixfmt-rfc-style
+                sapling
+                usql
+                watchman
+              ];
+
+            };
+        };
 
         devShell =
           with channels.default;
