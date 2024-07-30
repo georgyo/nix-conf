@@ -55,8 +55,10 @@
         set community 65000:2
     '';
     zebra.enable = true;
-    zebra.config = ''
+    mgmt.enable = true;
+    mgmt.config = ''
       ipv6 nht resolve-via-default
     '';
+
   };
 }
