@@ -42,7 +42,6 @@ in
     nftables
     openssl
     nixpkgs-fmt
-    nix-du
     graphviz-nox
     # pantalaimon
     gnupg
