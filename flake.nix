@@ -111,7 +111,6 @@
                 nix-update
                 nixd
                 nixfmt-rfc-style
-                sapling
                 usql
                 watchman
               ];

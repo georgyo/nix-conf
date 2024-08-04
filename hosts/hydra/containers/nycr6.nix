@@ -46,6 +46,7 @@ in
           phpPackage
           phpPackage.packages.composer
           gnupg
+          lua51Packages.lua
         ];
 
         users.users.wwwrun.home = "/var/lib/wwwrun";
@@ -53,6 +54,7 @@ in
         systemd.services.httpd.path = with pkgs; [
           graphicsmagick-imagemagick-compat
           gnupg
+          lua51Packages.lua
         ];
 
         services = {
