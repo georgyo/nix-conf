@@ -15,6 +15,8 @@ let
     extraConfig = ''
       log_errors = On
       display_errors = Off
+      upload_max_filesize = 20M
+      post_max_size = 21M
     '';
   };
 in
