@@ -52,7 +52,6 @@ in
     spacevim
     iftop
     ncdu
-    wezterm
   ];
   environment.variables = {
     EDITOR = "nvim";

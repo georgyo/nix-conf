@@ -98,7 +98,7 @@
                 "man"
                 "doc"
               ];
-              paths = [
+              paths = with pkgs; [
                 buck2
                 git-bug
                 git-absorb
@@ -106,13 +106,14 @@
                 hugo
                 hydra-check
                 jujutsu
-                nix-du
                 nix-index
                 nix-update
                 nixd
+                nixf
                 nixfmt-rfc-style
                 usql
                 watchman
+                htop-vim
               ];
               postBuild = ''
                 if [ -x $out/bin/install-info -a -w $out/share/info ]; then
