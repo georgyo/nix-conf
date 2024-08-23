@@ -58,7 +58,9 @@
 
       channels.default = {
         input = nixpkgs;
-        config = { };
+        config = {
+          permittedInsecurePackages = [ "olm-3.2.16" ];
+        };
         patches =
           let
             patchDir = ./patches;
