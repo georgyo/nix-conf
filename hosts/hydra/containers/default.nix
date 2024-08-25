@@ -69,5 +69,6 @@
     ./shammas
     ./tanya.nix
     ./avalon
+    ./forge.nix
   ];
 }
