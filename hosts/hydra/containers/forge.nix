@@ -50,6 +50,8 @@
               START_SSH_SERVER = true;
               SSH_LISTEN_PORT = 2222;
               BUILTIN_SSH_SERVER_USER = "git";
+              SSH_SERVER_MACS = "hmac-sha2-256-etm@openssh.com";
+              SSH_SERVER_KEY_EXCHANGES = "curve25519-sha256";
 
             };
             service = {
