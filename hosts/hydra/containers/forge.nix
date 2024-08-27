@@ -56,8 +56,16 @@
             };
             service = {
               DISABLE_REGISTRATION = true;
+              REGISTER_EMAIL_CONFIRM = true;
             };
-            cache.ADAPTER = "twoqueue";
+
+            oauth2_client = {
+              ENABLE_AUTO_REGISTRATION = true;
+            };
+            federation.enabled = true;
+            cache.ADAPTER = "redis";
+            session.PROVIDER = "redis";
+            queue.TYPE = "redis";
             mailer = {
               ENABLED = true;
               FROM = "forgejo@scalable.io";
@@ -67,6 +75,10 @@
 
             };
           };
+        };
+
+        services.redis.servers."" = {
+          enable = true;
         };
       };
 
