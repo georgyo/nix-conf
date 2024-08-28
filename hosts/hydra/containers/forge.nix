@@ -54,11 +54,11 @@
               SSH_SERVER_KEY_EXCHANGES = "curve25519-sha256";
 
             };
+            cron.ENABLED = true;
             service = {
               DISABLE_REGISTRATION = true;
               REGISTER_EMAIL_CONFIRM = true;
             };
-
             oauth2_client = {
               ENABLE_AUTO_REGISTRATION = true;
             };
