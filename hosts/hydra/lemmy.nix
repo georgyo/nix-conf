@@ -74,4 +74,6 @@ in
       serviceConfig.ExecStart = lib.mkForce "${pkgs.pict-rs}/bin/pict-rs --config-file ${config_file} run";
       serviceConfig.EnvironmentFile = [ config.sops.secrets."pict-rs/env".path ];
     };
+
+  services.pict-rs.package = pkgs.pict-rs;
 }
