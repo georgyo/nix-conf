@@ -34,12 +34,18 @@ in
 
         services.tailscale = {
           enable = true;
+          package = tailscale_derp;
+          extraDaemonFlags = [
+            "--tun=userspace-networking"
+            "--socks5-server=localhost:1055"
+            "--outbound-http-proxy-listen=localhost:1055"
+          ];
         };
 
         systemd.services.derper = {
           enable = true;
           script = ''
-            ${tailscale_derp} -hostname derp.scalable.io -verify-clients
+            ${tailscale_derp}/bin/derper -hostname derp.scalable.io -verify-clients
           '';
           wantedBy = [ "multi-user.target" ];
         };
