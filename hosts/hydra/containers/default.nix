@@ -70,5 +70,6 @@
     ./tanya.nix
     ./avalon
     ./forge.nix
+    ./derp.nix
   ];
 }
