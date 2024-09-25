@@ -19,7 +19,8 @@
     "sd_mod"
   ];
   boot.kernelModules = [ ];
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = [
     "console=ttyS0,19200n8"
     "systemd.unified_cgroup_hierarchy=true"
