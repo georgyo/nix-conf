@@ -112,6 +112,7 @@ in
   services.matrix-synapse = {
     enable = true;
     withJemalloc = true;
+    log.root.level = "WARNING";
     settings = {
       public_baseurl = "https://nycr.chat/";
       server_name = "nycr.chat";

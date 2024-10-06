@@ -43,6 +43,10 @@ in
     };
   };
 
+  systemd.services.lemmy.environment = {
+    RUST_LOG = "error";
+  };
+
   systemd.services.pict-rs =
     let
       cfg = config.services.pict-rs;

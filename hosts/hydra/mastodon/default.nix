@@ -28,6 +28,7 @@
     };
     smtp.createLocally = false;
     extraConfig = {
+      RAILS_LOG_LEVEL = "warn";
       S3_ENABLED = "true";
       S3_BUCKET = "cdn.nycr.social";
       S3_PROTOCOL = "https";
