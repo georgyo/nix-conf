@@ -29,7 +29,10 @@ in
       { ... }:
       {
         nixpkgs.pkgs = pkgs;
-        imports = [ (import ./common.nix "tanya") ];
+        imports = [
+          (import ./common.nix "tanya")
+          (import ./modules/cloudflare_remoteip.nix "wordpress")
+        ];
 
         security.acme = {
           acceptTerms = true;
