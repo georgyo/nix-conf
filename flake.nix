@@ -31,7 +31,7 @@
       flake = false;
     };
     cloudflare_ips_v6 = {
-      url = "https://www.cloudflare.com/ips-v4";
+      url = "https://www.cloudflare.com/ips-v6";
       flake = false;
     };
   };
