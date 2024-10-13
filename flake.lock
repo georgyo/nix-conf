@@ -42,6 +42,30 @@
         "type": "github"
       }
     },
+    "cloudflare_ips_v4": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-V4dThTb8iw02hjngubVtSJbEeWgOS1e/ODt1fLjLZvk=",
+        "type": "file",
+        "url": "https://www.cloudflare.com/ips-v4"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://www.cloudflare.com/ips-v4"
+      }
+    },
+    "cloudflare_ips_v6": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-V4dThTb8iw02hjngubVtSJbEeWgOS1e/ODt1fLjLZvk=",
+        "type": "file",
+        "url": "https://www.cloudflare.com/ips-v4"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://www.cloudflare.com/ips-v4"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": [
@@ -137,6 +161,8 @@
       "inputs": {
         "avalon": "avalon",
         "blog_shamm_as": "blog_shamm_as",
+        "cloudflare_ips_v4": "cloudflare_ips_v4",
+        "cloudflare_ips_v6": "cloudflare_ips_v6",
         "flake-utils": "flake-utils_2",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",

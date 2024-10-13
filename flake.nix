@@ -25,6 +25,15 @@
       url = "github:georgyo/blog.shamm.as";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    cloudflare_ips_v4 = {
+      url = "https://www.cloudflare.com/ips-v4";
+      flake = false;
+    };
+    cloudflare_ips_v6 = {
+      url = "https://www.cloudflare.com/ips-v4";
+      flake = false;
+    };
   };
   outputs =
     {
@@ -45,7 +54,13 @@
         # self.overlay
         avalon.overlays.default
         blog_shamm_as.overlay
-        (prev: final: { flakeInputs = inputs; })
+        (prev: final: {
+          flakeInputs = inputs;
+
+          cloudflare_ips_v4 = final.lib.strings.splitString "\n" (builtins.readFile inputs.cloudflare_ips_v4);
+          cloudflare_ips_v6 = final.lib.strings.splitString "\n" (builtins.readFile inputs.cloudflare_ips_v6 );
+
+        })
       ];
     in
     utils.lib.mkFlake rec {
@@ -58,6 +73,8 @@
 
       channels.default = {
         input = nixpkgs;
+
+        overlays = sharedOverlays ++ [ overlay ];
         config = {
           permittedInsecurePackages = [ "olm-3.2.16" ];
         };
