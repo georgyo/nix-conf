@@ -59,11 +59,6 @@ in
       key = "appservice-discord";
       restartUnits = [ "matrix-appservice-discord.service" ];
     };
-    "matrix/sliding-sync.env" = {
-      sopsFile = ./secrets/environment.yaml;
-      key = "sliding-sync";
-      restartUnits = [ "matrix-sliding-sync.service" ];
-    };
     "matrix/discord-registration.yaml" = {
       format = "binary";
       sopsFile = ./secrets/discord-registration.yamlb;
@@ -169,13 +164,6 @@ in
       #matrix-synapse-s3-storage-provider
     ];
     extraConfigFiles = [ config.sops.secrets."matrix/extra-config.yaml".path ];
-  };
-
-  services.matrix-sliding-sync = {
-    enable = true;
-    settings.SYNCV3_SERVER = "https://nycr.chat";
-
-    environmentFile = config.sops.secrets."matrix/sliding-sync.env".path;
   };
 
   services.nginx = {
