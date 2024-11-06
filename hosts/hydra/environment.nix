@@ -17,7 +17,6 @@ in
     gnugrep
     ripgrep
     vim
-    neovim
     curl
     htop
     dstat
