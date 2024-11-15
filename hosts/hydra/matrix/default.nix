@@ -54,18 +54,6 @@ in
   ];
 
   sops.secrets = {
-    "matrix/appservice-discord.env" = {
-      sopsFile = ./secrets/environment.yaml;
-      key = "appservice-discord";
-      restartUnits = [ "matrix-appservice-discord.service" ];
-    };
-    "matrix/discord-registration.yaml" = {
-      format = "binary";
-      sopsFile = ./secrets/discord-registration.yamlb;
-      owner = config.users.users.matrix-synapse.name;
-      group = config.users.users.matrix-synapse.group;
-      restartUnits = [ "matrix-synapse.service" ];
-    };
     "matrix/heisenbridge-registration.yaml" = {
       format = "binary";
       sopsFile = ./secrets/heisenbridge-registration.yamlb;
@@ -82,28 +70,6 @@ in
     };
   };
 
-  services.matrix-appservice-discord = {
-    enable = true;
-    port = 9006;
-    # package = /nix/store/r79qklg78z62kpgqpda6wx6gj4cainw6-matrix-appservice-discord;
-    environmentFile = config.sops.secrets."matrix/appservice-discord.env".path;
-    settings = {
-      bridge = {
-        domain = "nycr.chat";
-        homeserverUrl = "https://nycr.chat";
-        port = 9006;
-        enableSelfServiceBridging = true;
-        adminMxid = "@georgyo:nycr.chat";
-      };
-      auth = {
-        usePrivilegedIntents = true;
-      };
-      database = {
-        filename = "/var/lib/matrix-appservice-discord/discord.db";
-      };
-    };
-  };
-
   services.matrix-synapse = {
     enable = true;
     withJemalloc = true;
@@ -112,7 +78,6 @@ in
       public_baseurl = "https://nycr.chat/";
       server_name = "nycr.chat";
       app_service_config_files = [
-        config.sops.secrets."matrix/discord-registration.yaml".path
         config.sops.secrets."matrix/heisenbridge-registration.yaml".path
       ];
       presence.enabled = true;
