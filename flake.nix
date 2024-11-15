@@ -126,7 +126,6 @@
                 guix
                 hugo
                 hydra-check
-                jujutsu
                 nix-index
                 nix-update
                 nixd

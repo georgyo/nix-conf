@@ -32,7 +32,6 @@ in
     tcpdump
     git
     tig
-    jujutsu
     gh
     usql
     gitAndTools.git-hub
