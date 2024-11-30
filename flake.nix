@@ -59,8 +59,17 @@
 
           redis = prev.redis.overrideAttrs { doCheck = false; };
 
+          pythonPackagesOverlays = prev.pythonPackagesOverlays ++ [
+            (python-final: python-prev: {
+              aiohttp = python-prev.aiohttp.overrideAttrs {
+                doCheck = false;
+                doInstallCheck = false;
+              };
+            })
+          ];
+
           cloudflare_ips_v4 = final.lib.strings.splitString "\n" (builtins.readFile inputs.cloudflare_ips_v4);
-          cloudflare_ips_v6 = final.lib.strings.splitString "\n" (builtins.readFile inputs.cloudflare_ips_v6 );
+          cloudflare_ips_v6 = final.lib.strings.splitString "\n" (builtins.readFile inputs.cloudflare_ips_v6);
 
         })
       ];
