@@ -132,7 +132,6 @@
                 buck2
                 git-bug
                 git-absorb
-                guix
                 hugo
                 hydra-check
                 nix-index
