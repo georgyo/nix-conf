@@ -2,7 +2,7 @@
   description = "HOME";
 
   inputs = {
-    nixpkgs.url = "github:georgyo/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     utils = {
       url = "github:gytis-ivaskevicius/flake-utils-plus";
       inputs.flake-utils.follows = "flake-utils";
@@ -56,17 +56,6 @@
         blog_shamm_as.overlay
         (final: prev: {
           flakeInputs = inputs;
-
-          redis = prev.redis.overrideAttrs { doCheck = false; };
-
-          pythonPackagesOverlays = prev.pythonPackagesOverlays ++ [
-            (python-final: python-prev: {
-              aiohttp = python-prev.aiohttp.overrideAttrs {
-                doCheck = false;
-                doInstallCheck = false;
-              };
-            })
-          ];
 
           cloudflare_ips_v4 = final.lib.strings.splitString "\n" (builtins.readFile inputs.cloudflare_ips_v4);
           cloudflare_ips_v6 = final.lib.strings.splitString "\n" (builtins.readFile inputs.cloudflare_ips_v6);
