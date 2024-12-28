@@ -48,8 +48,10 @@
       ...
     }@inputs:
     let
+      lib = import (nixpkgs + /lib);
       overlay = import ./overlay.nix;
       sharedOverlays = [
+        overlay
         sops-nix.overlays.default
         # self.overlay
         avalon.overlays.default
@@ -77,6 +79,10 @@
         overlays = sharedOverlays ++ [ overlay ];
         config = {
           permittedInsecurePackages = [ "olm-3.2.16" ];
+          allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+             "nvidia-x11"
+           ];
+
         };
         patches =
           let
@@ -107,7 +113,8 @@
 
       outputsBuilder = channels: {
         formatter = channels.default.nixfmt-rfc-style;
-        packages = channels.default // {
+        # legacyPackages = channels.default;
+        packages =  {
 
           home-env =
             with channels.cudaDefault;
@@ -142,6 +149,22 @@
               '';
 
             };
+
+  opengl_dir = channels.default.callPackage  (
+    {
+      buildEnv,
+      mesa,
+      linuxPackages,
+    }:
+    buildEnv {
+      name = "opengl_dir";
+      paths = [
+        mesa.drivers
+        linuxPackages.nvidia_x11.out
+      ];
+
+    }
+  ) { };
         };
 
         devShell =
