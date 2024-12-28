@@ -8,7 +8,7 @@
 
   services.postgresql = {
     enable = true;
-    package = pkgs.postgresql_16;
+    package = pkgs.postgresql_17;
     settings = {
       max_connections = "200";
       shared_buffers = "4GB";
@@ -39,7 +39,7 @@
     system.stateVersion = "23.11";
     services.postgresql = {
       enable = true;
-      package = pkgs.postgresql_16;
+      package = pkgs.postgresql_17;
 
       ## set a custom new dataDir
       # dataDir = "/some/data/dir";
