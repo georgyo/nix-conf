@@ -54,7 +54,7 @@ in
   environment.variables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
-    LESS = "FRSX";
+    LESS = "FRX";
   };
 
   programs.neovim = {
