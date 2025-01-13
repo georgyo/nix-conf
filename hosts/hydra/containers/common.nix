@@ -94,6 +94,8 @@ host:
     git
     tcpdump
     restic
+
+    ghostty # Strictly for TERM happiness
   ];
   security.acme = {
     acceptTerms = true;

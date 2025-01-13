@@ -50,6 +50,8 @@ in
     spacevim
     iftop
     ncdu
+
+    ghostty # Strictly for TERM happiness
   ];
   environment.variables = {
     EDITOR = "nvim";
