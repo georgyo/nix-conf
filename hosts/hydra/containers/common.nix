@@ -95,7 +95,7 @@ host:
     tcpdump
     restic
 
-    ghostty # Strictly for TERM happiness
+    ghostty.terminfo # Strictly for TERM happiness
   ];
   security.acme = {
     acceptTerms = true;

@@ -51,7 +51,7 @@ in
     iftop
     ncdu
 
-    ghostty # Strictly for TERM happiness
+    ghostty.terminfo # Strictly for TERM happiness
   ];
   environment.variables = {
     EDITOR = "nvim";
