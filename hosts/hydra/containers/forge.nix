@@ -77,6 +77,10 @@
           };
         };
 
+        services.postgresql = {
+          package = pkgs.postgresql_15;
+        };
+
         services.redis.servers."" = {
           enable = true;
         };
