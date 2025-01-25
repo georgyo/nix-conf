@@ -5,6 +5,7 @@
     hostBridge = "virtbr0";
     privateNetwork = true;
     extraFlags = [ "-U" ];
+    enableTun = true;
 
     config =
       { ... }:
