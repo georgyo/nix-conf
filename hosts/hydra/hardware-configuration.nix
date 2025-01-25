@@ -13,6 +13,10 @@
   # Moved this import to flake.nix
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
+  nixpkgs.hostPlatform = {
+    system = "x86_64-linux";
+  };
+
   boot.initrd.availableKernelModules = [
     "virtio_pci"
     "ahci"

@@ -19,7 +19,7 @@ in
     vim
     curl
     htop
-    dstat
+    dool
     docker-compose
     whois
     my-python3
