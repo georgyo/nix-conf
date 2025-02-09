@@ -5,7 +5,7 @@
   ...
 }:
 {
-  services.bird2 = {
+  services.bird = {
     enable = true;
     config = builtins.readFile ./bird2.conf;
   };
