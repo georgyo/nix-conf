@@ -37,17 +37,6 @@
       S3_ENDPOINT = "https://s3.us-east-2.wasabisys.com/";
     };
     extraEnvFiles = [ config.sops.secrets."mastodon/extraEnv".path ];
-
-    # HACK REMOVE ASAP
-    package = pkgs.mastodon.overrideAttrs (old: {
-      mastodonModules = old.mastodonModules.overrideAttrs (old: {
-        # FIXME: Remove once fixed in nixpkgs. See https://github.com/NixOS/nixpkgs/issues/380366
-        postBuild = ''
-          # Remove workspace "package" as it contains broken symlinks
-          rm -r ~/node_modules/@mastodon
-        '';
-      });
-    });
   };
 
   services.nginx.virtualHosts."media.nycr.social" = {

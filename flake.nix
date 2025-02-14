@@ -62,10 +62,6 @@
           cloudflare_ips_v4 = final.lib.strings.splitString "\n" (builtins.readFile inputs.cloudflare_ips_v4);
           cloudflare_ips_v6 = final.lib.strings.splitString "\n" (builtins.readFile inputs.cloudflare_ips_v6);
 
-          coturn = prev.coturn.overrideAttrs {
-            dontCheckForBrokenSymlinks = true;
-          };
-
         })
       ];
     in
