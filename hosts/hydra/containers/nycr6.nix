@@ -102,6 +102,7 @@ in
           phpPackage.packages.composer
           gnupg
           lua51Packages.lua
+          python3Packages.pygments
         ];
 
         networking.firewall.allowedUDPPorts = [ 443 ];
@@ -110,6 +111,7 @@ in
           graphicsmagick-imagemagick-compat
           gnupg
           lua51Packages.lua
+          python3Packages.pygments
         ];
 
         # This user is no longer used, but kept around because of file ownership.
