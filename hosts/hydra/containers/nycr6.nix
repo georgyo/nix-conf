@@ -6,6 +6,27 @@
 }:
 
 let
+
+  wikidiff2 = pkgs.php.buildPecl rec {
+    pname = "wikidiff2";
+    version = "1.14.1";
+    src = pkgs.fetchFromGitHub {
+      owner = "wikimedia";
+      repo = "mediawiki-php-wikidiff2";
+      tag = version;
+      hash = "sha256-UTOfLXv2QWdjThxfrPQDLB8Mqo4js6LzOKXePivdp9k=";
+    };
+    nativeBuildInputs = [ pkgs.pkg-config ];
+    buildInputs = [ pkgs.libthai ];
+
+    meta = with lib; {
+      description = "PHP extension which formats changes between two input texts, producing HTML or JSON.";
+      license = licenses.gpl2;
+      homepage = "https://www.mediawiki.org/wiki/Wikidiff2";
+      maintainers = with lib.maintainers; [ georgyo ];
+    };
+  };
+
   phpPackage = pkgs.php.buildEnv {
     extensions = (
       { enabled, all }:
@@ -14,6 +35,7 @@ let
         imagick
         opcache
         apcu
+        wikidiff2
         # gnupg
       ])
     );
