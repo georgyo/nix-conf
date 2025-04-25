@@ -116,6 +116,9 @@
         # legacyPackages = channels.default;
         packages =  {
 
+          inherit (channels.default) blog_shamm_as;
+
+
           home-env =
             with channels.cudaDefault;
             buildEnv {
