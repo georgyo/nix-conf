@@ -140,7 +140,6 @@
                 nixfmt-rfc-style
                 usql
                 watchman
-                htop-vim
               ];
               postBuild = ''
                 if [ -x $out/bin/install-info -a -w $out/share/info ]; then
