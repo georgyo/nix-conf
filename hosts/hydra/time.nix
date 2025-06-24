@@ -12,13 +12,6 @@
   time.hardwareClockInLocalTime = true;
 
   networking.timeServers = [
-    "time1.apple.com"
-    "time2.apple.com"
-    "time3.apple.com"
-    "time4.apple.com"
-    "time5.apple.com"
-    "time6.apple.com"
-    "time7.apple.com"
     "time1.facebook.com"
     "time2.facebook.com"
     "time3.facebook.com"
@@ -31,6 +24,7 @@
     "time.cloudflare.com"
     "time.aws.com"
     "time.nist.gov"
+    "time.apple.com"
   ];
 
   services.chrony = {
