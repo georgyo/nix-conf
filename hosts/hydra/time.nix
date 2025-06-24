@@ -12,21 +12,25 @@
   time.hardwareClockInLocalTime = true;
 
   networking.timeServers = [
-    "time.google.com"
-    "time.aws.com"
-    "time.facebook.com"
-    "time.windows.com"
-    "time.apple.com"
-    "time.nist.gov"
+    "time1.apple.com"
+    "time2.apple.com"
+    "time3.apple.com"
+    "time4.apple.com"
+    "time5.apple.com"
+    "time6.apple.com"
+    "time7.apple.com"
+    "time1.facebook.com"
+    "time2.facebook.com"
+    "time3.facebook.com"
+    "time4.facebook.com"
+    "time5.facebook.com"
     "time1.google.com"
     "time2.google.com"
     "time3.google.com"
     "time4.google.com"
     "time.cloudflare.com"
-    "0.nixos.pool.ntp.org"
-    "1.nixos.pool.ntp.org"
-    "2.nixos.pool.ntp.org"
-    "3.nixos.pool.ntp.org"
+    "time.aws.com"
+    "time.nist.gov"
   ];
 
   services.chrony = {
