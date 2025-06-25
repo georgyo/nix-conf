@@ -71,5 +71,6 @@
     ./avalon
     ./forge.nix
     ./derp.nix
+    ./grocy.nix
   ];
 }
