@@ -59,6 +59,8 @@ in
     LESS = "FRX";
   };
 
+  programs.nh.enable = true;
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
