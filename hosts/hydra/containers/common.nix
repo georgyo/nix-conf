@@ -43,6 +43,7 @@ host:
   ...
 }:
 {
+
   system.stateVersion = "23.11";
 
   boot.swraid.enable = false;
