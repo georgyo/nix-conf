@@ -30,7 +30,7 @@
       },
       "locked": {
         "lastModified": 1745578983,
-        "narHash": "sha256-gWq7chAAgUgkIBo8wbi8Ypg3uXPS/DKqTWM7LcWhBpo=",
+        "narHash": "sha256-sSqyYayKR3Z00F5Mjny075JT5rz6IJrYQlnxXipbE5A=",
         "owner": "georgyo",
         "repo": "blog.shamm.as",
         "rev": "836e52b15d995f964428cf13853055e0a23256ee",
@@ -186,7 +186,7 @@
         "narHash": "sha256-SXUAlxpjPRkArRMHy5+Hdi+PiC+ND9yzzIjiaHmTvQU=",
         "rev": "8b1094356f4723d6e89d3f8a95b333ee16d9ab02",
         "type": "tarball",
-        "url": "https://git.lix.systems/api/v1/repos/lix-project/nixos-module/archive/8b1094356f4723d6e89d3f8a95b333ee16d9ab02.tar.gz?rev=8b1094356f4723d6e89d3f8a95b333ee16d9ab02"
+        "url": "https://git.lix.systems/api/v1/repos/lix-project/nixos-module/archive/8b1094356f4723d6e89d3f8a95b333ee16d9ab02.tar.gz"
       },
       "original": {
         "type": "tarball",
