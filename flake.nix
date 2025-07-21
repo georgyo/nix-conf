@@ -109,7 +109,7 @@
       hostDefaults = {
         channelName = "default";
         modules = [
-          lix-module.nixosModules.default
+          # lix-module.nixosModules.default
           sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
         ];
