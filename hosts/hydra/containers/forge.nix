@@ -47,6 +47,7 @@
               ENABLE_ACME = true;
               ACME_ACCEPTTOS = true;
               ACME_EMAIL = "acme@shamm.as";
+              ACME_URL = "https://acme-v02.api.letsencrypt.org/directory";
 
               START_SSH_SERVER = true;
               SSH_LISTEN_PORT = 2222;
