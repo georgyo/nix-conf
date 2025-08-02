@@ -53,9 +53,9 @@ with pkgs;
 
   services.resolved.enable = true;
   systemd.network.wait-online.anyInterface = true;
-  systemd.extraConfig = ''
-    DefaultLimitNOFILE=8192:524288
-  '';
+  systemd.settings.Manager = {
+    DefaultLimitNOFILE = "8192:524288";
+  };
   security.pam.loginLimits = [
     {
       domain = "*";
@@ -219,7 +219,7 @@ with pkgs;
       ];
       auto-optimise-store = true;
     };
-  #  package = nixVersions.latest;
+    #  package = nixVersions.latest;
     extraOptions = ''
       experimental-features = nix-command flakes ca-derivations
     '';
