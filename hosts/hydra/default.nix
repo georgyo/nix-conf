@@ -265,22 +265,23 @@ with pkgs;
 
   services.postfix = {
     enable = true;
-    relayHost = "email-smtp.us-east-1.amazonaws.com";
-    relayPort = 587;
-    hostname = "hydra.shamm.as";
-    domain = "shamm.as";
-    networks = [
-      "192.168.55.0/24"
-      "172.104.15.252/32"
-      "198.74.56.101/32"
-      "23.239.10.144/32"
-      "23.239.10.184/32"
-      "23.239.9.39/32"
-      "66.228.36.99/32"
-      "127.0.0.1/8"
-      "[::1]/128"
-    ];
-    config = {
+    settings.main = {
+      myhostname = "hydra.shamm.as";
+      mydomain = "shamm.as";
+      relayhost = [
+        "email-smtp.us-east-1.amazonaws.com:587"
+      ];
+      mynetworks = [
+        "192.168.55.0/24"
+        "172.104.15.252/32"
+        "198.74.56.101/32"
+        "23.239.10.144/32"
+        "23.239.10.184/32"
+        "23.239.9.39/32"
+        "66.228.36.99/32"
+        "127.0.0.1/8"
+        "[::1]/128"
+      ];
       smtp_sasl_auth_enable = "yes";
       smtp_sasl_security_options = "noanonymous";
       smtp_sasl_password_maps = "hash:/etc/postfix_oob/sasl_passwd";

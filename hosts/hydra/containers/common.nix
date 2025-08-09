@@ -109,9 +109,12 @@ host:
   services.dbus.implementation = "broker";
   services.postfix = {
     enable = true;
-    relayHost = "192.168.55.1";
-    relayPort = 25;
+    settings.main = {
+      relayhost = [
+        "192.168.55.1:25"
+      ];
+      mydomain = "fu.io";
+    };
     rootAlias = "root@shamm.as";
-    domain = "fu.io";
   };
 }
