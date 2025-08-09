@@ -74,6 +74,11 @@ host:
         443
       ];
     };
+
+    nftables = {
+      enable = true;
+    };
+
   };
 
   systemd.network.networks.eth0 = {

@@ -19,17 +19,28 @@
           3000
           3080
         ];
-        networking.firewall.extraCommands = ''
-          iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 22 -j REDIRECT --to-ports 2222
-          ip6tables -t nat -A PREROUTING -i eth0 -p tcp --dport 22 -j REDIRECT --to-ports 2222
+        networking.nftables.tables.forgenat = {
+          family = "inet";
+          content = ''
+            chain prerouting {
+              type nat hook prerouting priority 0; policy accept;
+              tcp dport 22 redirect to 2222
+              tcp dport 80 redirect to 3080
+              tcp dport 443 redirect to 3000
+            }
+          '';
+        };
+        # networking.firewall.extraCommands = ''
+        #   iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 22 -j REDIRECT --to-ports 2222
+        #   ip6tables -t nat -A PREROUTING -i eth0 -p tcp --dport 22 -j REDIRECT --to-ports 2222
 
-          iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-ports 3080
-          ip6tables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-ports 3080
+        #   iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-ports 3080
+        #   ip6tables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-ports 3080
 
-          iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 443 -j REDIRECT --to-ports 3000
-          ip6tables -t nat -A PREROUTING -i eth0 -p tcp --dport 443 -j REDIRECT --to-ports 3000
+        #   iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 443 -j REDIRECT --to-ports 3000
+        #   ip6tables -t nat -A PREROUTING -i eth0 -p tcp --dport 443 -j REDIRECT --to-ports 3000
 
-        '';
+        # '';
 
         services.forgejo = {
           enable = true;
