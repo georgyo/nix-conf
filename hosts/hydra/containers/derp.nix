@@ -41,6 +41,10 @@
         services.nginx.virtualHosts."derp.scalable.io" = {
           enableACME = true;
           quic = true;
+          locations."/debug/".extraConfig = ''
+            allow 100.64.0.0/10;
+            deny all;
+          '';
         };
       };
   };
