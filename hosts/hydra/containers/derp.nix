@@ -1,16 +1,5 @@
 { config, pkgs, ... }:
 
-let
-  tailscale_derp = pkgs.tailscale.overrideAttrs (
-    new: old: {
-      subPackages = (old.subPackages or [ ]) ++ [
-        "cmd/derper"
-        "cmd/derpprobe"
-      ];
-    }
-  );
-in
-
 {
   containers.derp = {
     autoStart = true;
@@ -35,7 +24,6 @@ in
 
         services.tailscale = {
           enable = true;
-          package = tailscale_derp;
           extraDaemonFlags = [
             "--tun=userspace-networking"
             "--socks5-server=localhost:1055"
@@ -43,14 +31,17 @@ in
           ];
         };
 
-        systemd.services.derper = {
+        services.tailscale.derper = {
           enable = true;
-          script = ''
-            ${tailscale_derp}/bin/derper -hostname derp.scalable.io -verify-clients
-          '';
-          wantedBy = [ "multi-user.target" ];
+          verifyClients = true;
+          domain = "derp.scalable.io";
         };
 
+        services.nginx.package = pkgs.nginxQuic;
+        services.nginx.virtualHosts."derp.scalable.io" = {
+          enableACME = true;
+          quic = true;
+        };
       };
   };
 }

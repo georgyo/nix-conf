@@ -84,9 +84,11 @@
         overlays = sharedOverlays ++ [ overlay ];
         config = {
           permittedInsecurePackages = [ "olm-3.2.16" ];
-          allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-             "nvidia-x11"
-           ];
+          allowUnfreePredicate =
+            pkg:
+            builtins.elem (lib.getName pkg) [
+              "nvidia-x11"
+            ];
 
         };
         patches =
@@ -118,12 +120,11 @@
       hosts.hydra.modules = [ ./hosts/hydra ];
 
       outputsBuilder = channels: {
-        formatter = channels.default.nixfmt-rfc-style;
+        formatter = channels.default.nixfmt-tree;
         # legacyPackages = channels.default;
-        packages =  {
+        packages = {
 
           inherit (channels.default) blog_shamm_as;
-
 
           home-env =
             with channels.cudaDefault;
@@ -158,21 +159,21 @@
 
             };
 
-  opengl_dir = channels.default.callPackage  (
-    {
-      buildEnv,
-      mesa,
-      linuxPackages,
-    }:
-    buildEnv {
-      name = "opengl_dir";
-      paths = [
-        mesa.drivers
-        linuxPackages.nvidia_x11.out
-      ];
+          opengl_dir = channels.default.callPackage (
+            {
+              buildEnv,
+              mesa,
+              linuxPackages,
+            }:
+            buildEnv {
+              name = "opengl_dir";
+              paths = [
+                mesa.drivers
+                linuxPackages.nvidia_x11.out
+              ];
 
-    }
-  ) { };
+            }
+          ) { };
         };
 
         devShell =

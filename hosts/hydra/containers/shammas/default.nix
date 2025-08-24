@@ -26,7 +26,11 @@
           package = pkgs.nginxQuic;
           virtualHosts = {
             "shamm.as" = {
-              serverAliases = [ "www.shamm.as" "scalable.io" "www.scalable.io" ];
+              serverAliases = [
+                "www.shamm.as"
+                "scalable.io"
+                "www.scalable.io"
+              ];
               forceSSL = true;
               enableACME = true;
               quic = true;
