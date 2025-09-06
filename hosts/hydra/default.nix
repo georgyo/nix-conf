@@ -211,7 +211,6 @@ with pkgs;
   nix = {
     settings = {
       sandbox = true;
-      extra-sandbox-paths = [ "/bin/sh=${pkgs.busybox}/bin/sh" ];
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "nixbuild.net/georgyo-1:spPZa4Zj/AsToKwV8Owne5QephxJHcZU9wDpdFlMjhw="
@@ -308,6 +307,7 @@ with pkgs;
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKrAxJtkMUjVhFJ2o5UPXbQLn8Q92c3g4xuCjCBtNmnz shammas@bigtower"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKhItTwa8QPZ+HuLEzAtYzD5U+HmE53QAsahdjHGx8rm 1password"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGF99yGzL9/m2X8W1ea6gjifSY4s2dinLhUijuYbgfaX georg@DESKTOP-AIUJF2H"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOnJ+uG3t57MAdhYyvZhYULS5XYkqfAxWh//iBGblVaz shammas@gtmlap"
     ];
   };
 
