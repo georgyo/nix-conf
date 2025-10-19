@@ -123,6 +123,8 @@ inputs:
     enable = true;
   };
 
+  services.below.enable = true;
+
   services.nfs.server.enable = true;
   services.nfs.server.exports = ''/mnt/data/media        192.168.1.118(rw,async,no_wdelay,no_root_squash,insecure_locks,sec=sys,anonuid=1025,anongid=100)	192.168.1.148(rw,async,no_wdelay,no_root_squash,insecure_locks,sec=sys,anonuid=1025,anongid=100)	192.168.1.0/24(rw,async,no_wdelay,no_root_squash,insecure_locks,sec=sys,anonuid=1025,anongid=100)	192.168.0.0/24(rw,async,no_wdelay,crossmnt,no_root_squash,insecure_locks,sec=sys,anonuid=1025,anongid=100)'';
 
