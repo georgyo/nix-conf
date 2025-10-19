@@ -6,6 +6,7 @@
 }:
 
 {
+
   users.groups.media = { };
   services.samba = {
     enable = true;
@@ -44,5 +45,17 @@
   services.samba-wsdd = {
     enable = true;
     openFirewall = true;
+  };
+
+  # For mount.cifs, required unless domain name resolution is not needed.
+  environment.systemPackages = [ pkgs.cifs-utils ];
+  fileSystems."/mnt/airportsilom" = {
+    device = "//airportsilom.tail414d48.ts.net/hypervault-georgyo";
+    fsType = "cifs";
+    options =
+      let
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+      in
+      [ "${automount_opts},credentials=${config.age.secrets.airportsilom_credentials.path}" ];
   };
 }

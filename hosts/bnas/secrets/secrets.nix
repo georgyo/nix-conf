@@ -15,4 +15,5 @@ in
     seed_system
   ];
   "local-wg-key.age".publicKeys = [ bnas_system ];
+  "airportsilom_credentials.age".publicKeys = [ bnas_system ];
 }
