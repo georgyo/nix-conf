@@ -14,6 +14,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_16;
   boot.initrd.availableKernelModules = [
     "ahci"
     "nvme"
@@ -106,4 +107,6 @@
   hardware.firmware = [ pkgs.linux-firmware ];
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
+  hardware.amdgpu.initrd.enable = true;
+  hardware.amdgpu.opencl.enable = true;
 }
