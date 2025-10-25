@@ -82,6 +82,7 @@ in
           git
           tcpdump
           restic
+          unrar
 
           ghostty.terminfo # Strictly for TERM happiness
         ];
