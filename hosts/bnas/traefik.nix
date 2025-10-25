@@ -33,11 +33,14 @@
         webprivate = {
           address = ":443";
           reusePort = true;
+          transport.respondingTimeouts.readTimeout = "60m";
           http2.maxConcurrentStreams = "250";
           http3.advertisedPort = "443";
           http.middlewares = [
             "tailscale-ipallowlist"
+            "limit"
           ];
+          # tls.certResolver = "acme";
         };
       };
     };
@@ -49,6 +52,8 @@
           clear-referer.headers.customRequestHeaders = {
             "Referer" = "";
           };
+          limit.buffering.maxRequestBodyBytes = "4000000000";
+          limit.buffering.maxResponseBodyBytes = "4000000000";
         };
         routers = {
           bnasts1 = {
@@ -106,6 +111,12 @@
             service = "plex";
             entryPoints = [ "webprivate" ];
           };
+          pictures = {
+            rule = "Host(`pictures.fu.io`)";
+            tls.certResolver = "acme";
+            service = "pictures";
+            entryPoints = [ "webprivate" ];
+          };
         };
         services = {
           sonarr.loadBalancer.servers = [ { url = "http://10.73.105.241:8989"; } ];
@@ -116,6 +127,7 @@
           qbittorrent.loadBalancer.servers = [ { url = "http://10.73.105.241:7777"; } ];
           sabnzbd.loadBalancer.servers = [ { url = "http://10.73.105.241:8080"; } ];
           plex.loadBalancer.servers = [ { url = "http://127.0.0.1:32400"; } ];
+          pictures.loadBalancer.servers = [ { url = "http://192.168.1.186:2283"; } ];
 
           service1 = {
             loadBalancer = {

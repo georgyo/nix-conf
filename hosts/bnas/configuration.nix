@@ -16,6 +16,7 @@ inputs:
     ./secrets
     ./traefik.nix
     ./plex.nix
+    ./immich.nix
     ./packages/wg-netns
     ./seed.nix
     ./local-wireguard.nix

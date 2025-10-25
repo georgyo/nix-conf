@@ -74,6 +74,10 @@
     device = "tank/data";
     fsType = "zfs";
   };
+  fileSystems."/mnt/data/immich" = {
+    device = "tank/data/immich";
+    fsType = "zfs";
+  };
   fileSystems."/mnt/data/media" = {
     device = "tank/data/media";
     fsType = "zfs";
