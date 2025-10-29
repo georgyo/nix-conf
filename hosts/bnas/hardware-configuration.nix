@@ -14,7 +14,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_16;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_17;
   boot.initrd.availableKernelModules = [
     "ahci"
     "nvme"
@@ -30,6 +30,11 @@
 
   boot.supportedFilesystems.zfs = true;
   boot.initrd.supportedFilesystems.zfs = true;
+
+  boot.zfs = {
+    removeLinuxDRM = true;
+    package = pkgs.zfsUnstable;
+  };
 
   services.zfs = {
     autoScrub = {
