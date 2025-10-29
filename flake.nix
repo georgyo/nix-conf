@@ -30,14 +30,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.2-1.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     avalon = {
       url = "github:georgyo/avalon";
       inputs.nixpkgs.follows = "nixpkgs";
