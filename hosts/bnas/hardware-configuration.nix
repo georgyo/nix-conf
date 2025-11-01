@@ -95,6 +95,10 @@
     device = "tank/nixos-containers/seed";
     fsType = "zfs";
   };
+  fileSystems."/var/lib/nixos-containers/pictures" = {
+    device = "tank/nixos-containers/pictures";
+    fsType = "zfs";
+  };
   fileSystems."/mnt/data/.state/nixarr" = {
     device = "tank/data/nixarr";
     fsType = "zfs";
