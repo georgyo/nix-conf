@@ -33,7 +33,7 @@
 
   boot.zfs = {
     removeLinuxDRM = true;
-    package = pkgs.zfsUnstable;
+    package = pkgs.zfs_unstable;
   };
 
   services.zfs = {
