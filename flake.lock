@@ -286,11 +286,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1760847508,
-        "narHash": "sha256-nQVI8lCvL/SWTtS21W9fY1k6w5uo0Zbzb0OfL97v+Ls=",
+        "lastModified": 1762002908,
+        "narHash": "sha256-O3ZLBpfhiR3i0+KNKmEFm7ItLxYuOoQDS6M9VfC8AU4=",
         "owner": "georgyo",
         "repo": "emacs-nix",
-        "rev": "407af0753dbc9a6883605eb27536cdc68514fd20",
+        "rev": "ffa30fc33ef7a823591a369d5e94ff49e08676de",
         "type": "github"
       },
       "original": {
