@@ -34,8 +34,8 @@ in
     tig
     gh
     usql
-    gitAndTools.git-hub
-    gitAndTools.hub
+    git-hub
+    hub
     btrfs-progs
     nftables
     openssl
