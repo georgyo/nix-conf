@@ -23,6 +23,7 @@ inputs:
     ./samba.nix
     ./home-assistant.nix
     ./networking.nix
+    ./smart.nix
   ];
 
   # Set your time zone.
