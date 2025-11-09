@@ -40,6 +40,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    avalon-beta = {
+      url = "github:georgyo/avalon/ai-generated";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     blog_shamm_as = {
       url = "github:georgyo/blog.shamm.as";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -89,7 +94,8 @@
   #             postBuild = ''
   #               if [ -x $out/bin/install-info -a -w $out/share/info ]; then
   #                 shopt -s nullglob
-  #                 for i in $out/share/info/*.info $out/share/info/*.info.gz; do
+  #                 for i in $out/share/info/*.info val
+  #                 $out/share/info/*.info.gz; do
   #                     $out/bin/install-info $i $out/share/info/dir
   #                 done
   #               fi
