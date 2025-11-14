@@ -73,6 +73,7 @@
           wantedBy = [ "multi-user.target" ];
           environment = {
             FIREBASE_KEY_FILE = "/etc/avalon/firebase-key.json";
+            PORT = "8002";
           };
           serviceConfig = {
             ExecStart = "${pkgs.beta.avalon-online}/bin/avalon-server";
