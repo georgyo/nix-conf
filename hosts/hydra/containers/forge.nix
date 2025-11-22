@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   containers.forge = {
     autoStart = true;
@@ -8,7 +8,7 @@
     enableTun = true;
 
     config =
-      { ... }:
+      { config, ... }:
       {
         nixpkgs.pkgs = pkgs;
         imports = [ (import ./common.nix "forge") ];
@@ -30,6 +30,7 @@
             }
           '';
         };
+
         # networking.firewall.extraCommands = ''
         #   iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 22 -j REDIRECT --to-ports 2222
         #   ip6tables -t nat -A PREROUTING -i eth0 -p tcp --dport 22 -j REDIRECT --to-ports 2222
@@ -91,12 +92,51 @@
         };
 
         services.postgresql = {
-          package = pkgs.postgresql_15;
+          package = pkgs.postgresql_17;
         };
 
         services.redis.servers."" = {
           enable = true;
         };
+
+        containers.temp-pg.config = {
+          # Just to clear compile warnings
+          boot.swraid.enable = false;
+
+          system.stateVersion = "23.11";
+          services.postgresql = {
+            enable = true;
+            package = pkgs.postgresql_17;
+
+            ## set a custom new dataDir
+            # dataDir = "/some/data/dir";
+          };
+        };
+
+        environment.systemPackages =
+          let
+            newpg = config.containers.temp-pg.config.services.postgresql;
+          in
+          [
+            (pkgs.writeScriptBin "upgrade-pg-cluster" ''
+              set -x
+              export OLDDATA="${config.services.postgresql.dataDir}"
+              export NEWDATA="${newpg.dataDir}"
+              export OLDBIN="${config.services.postgresql.package}/bin"
+              export NEWBIN="${newpg.package}/bin"
+                
+              install -d -m 0700 -o postgres -g postgres "$NEWDATA"
+              cd "$NEWDATA"
+              sudo -u postgres $NEWBIN/initdb --data-checksums -D "$NEWDATA"
+                
+              systemctl stop postgresql    # old one
+                
+              sudo -u postgres $NEWBIN/pg_upgrade \
+                --old-datadir "$OLDDATA" --new-datadir "$NEWDATA" \
+                --old-bindir $OLDBIN --new-bindir $NEWBIN \
+                "$@"
+            '')
+          ];
       };
 
   };
