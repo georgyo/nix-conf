@@ -18,8 +18,8 @@ let
           port = 5432;
         };
       };
-    }
-    // lib.optionalAttrs (type == "radarr") { package = pkgs.callPackage ./packages/radarr { }; };
+    };
+    # // lib.optionalAttrs (type == "radarr") { package = pkgs.callPackage ./packages/radarr { }; };
 
     services.postgresql = {
       ensureUsers = [
