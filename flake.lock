@@ -115,11 +115,11 @@
     "doomemacs": {
       "flake": false,
       "locked": {
-        "lastModified": 1760602791,
-        "narHash": "sha256-voIvrHMgs2zFNtYDxVnyBpmSCE3NFZAhhcZsUneDMLw=",
+        "lastModified": 1762312706,
+        "narHash": "sha256-R3I8NErGSCd6kSTUBNe7SNcRDUtJ1xl8zvD13C6SrRg=",
         "owner": "doomemacs",
         "repo": "doomemacs",
-        "rev": "f9664ae058d67b8d97cb8a9c40744fefc3e5479f",
+        "rev": "ead254e15269bf8564625df4c8d2af6690a0df49",
         "type": "github"
       },
       "original": {
@@ -139,33 +139,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1760837483,
-        "narHash": "sha256-CSjfwhEusww0SPzHJt/XSCt+ldE7/2cmM3rEXGt+uF4=",
+        "lastModified": 1764232198,
+        "narHash": "sha256-3Kyi0L/HvyGn0gHoe5KS7xMTUj/WtRQiMV/ORvkMtNI=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "2dae8a3895abc3b56556561fef7165c6078fba4e",
+        "rev": "16743d1e188db896098e16c996e7568aba825334",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "type": "github"
-      }
-    },
-    "emacs_src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1759952593,
-        "narHash": "sha256-+0ZBKK/fH8GrCSnxxp7L/XclurBTyYUsHtrsTQYHbGI=",
-        "owner": "janestreet",
-        "repo": "emacs",
-        "rev": "31a5f279ffffae16a565bb3a4b88afcd615ff8ac",
-        "type": "github"
-      },
-      "original": {
-        "owner": "janestreet",
-        "ref": "emacs-30",
-        "repo": "emacs",
         "type": "github"
       }
     },
@@ -207,11 +190,11 @@
         "nixpkgs-lib": "nixpkgs-lib_2"
       },
       "locked": {
-        "lastModified": 1760813311,
-        "narHash": "sha256-lbHQ7FXGzt6/IygWvJ1lCq+Txcut3xYYd6VIpF1ojkg=",
+        "lastModified": 1763759067,
+        "narHash": "sha256-LlLt2Jo/gMNYAwOgdRQBrsRoOz7BPRkzvNaI/fzXi2Q=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "4e627ac2e1b8f1de7f5090064242de9a259dbbc8",
+        "rev": "2cccadc7357c0ba201788ae99c4dfa90728ef5e0",
         "type": "github"
       },
       "original": {
@@ -322,7 +305,6 @@
       "inputs": {
         "doomemacs": "doomemacs",
         "emacs-overlay": "emacs-overlay",
-        "emacs_src": "emacs_src",
         "flake-parts": "flake-parts_2",
         "nix-doom-emacs": "nix-doom-emacs",
         "nixpkgs": [
@@ -330,11 +312,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1762002908,
-        "narHash": "sha256-O3ZLBpfhiR3i0+KNKmEFm7ItLxYuOoQDS6M9VfC8AU4=",
+        "lastModified": 1764247999,
+        "narHash": "sha256-2IY0FsTjPd0QB9A5U6RlpRlceBjkGMpxrhoflPQq5Js=",
         "owner": "georgyo",
         "repo": "emacs-nix",
-        "rev": "ffa30fc33ef7a823591a369d5e94ff49e08676de",
+        "rev": "c44a19bad8ec2a35e406a852d480462eeaa992de",
         "type": "github"
       },
       "original": {
@@ -360,11 +342,11 @@
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1760776702,
-        "narHash": "sha256-LDEpYekCpiIHbLjp9YEWCk99DDAYj847/gCdLVTG/bc=",
+        "lastModified": 1764233106,
+        "narHash": "sha256-//n+q0jfvmMFdNCTTr0QQuNXCmvf79UYL7X3x8Y740s=",
         "owner": "marienz",
         "repo": "nix-doom-emacs-unstraightened",
-        "rev": "43ad9b9c3f7417b42d52e6c61983772f8376fb8a",
+        "rev": "8b1103280b0fdfb0b66ce6ce2ff14551c09677e4",
         "type": "github"
       },
       "original": {
@@ -406,11 +388,11 @@
     },
     "nixpkgs-lib_2": {
       "locked": {
-        "lastModified": 1754788789,
-        "narHash": "sha256-x2rJ+Ovzq0sCMpgfgGaaqgBSwY+LST+WbZ6TytnT9Rk=",
+        "lastModified": 1761765539,
+        "narHash": "sha256-b0yj6kfvO8ApcSE+QmA6mUfu8IYG6/uU28OFn4PaC8M=",
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
-        "rev": "a73b9c743612e4244d865a2fdee11865283c04e6",
+        "rev": "719359f4562934ae99f5443f20aa06c2ffff91fc",
         "type": "github"
       },
       "original": {
