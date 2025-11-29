@@ -189,15 +189,6 @@ with pkgs;
         iifname eth0 ip daddr 23.239.9.39 accept
         iifname eth0 ip daddr 66.228.36.99 accept
       '';
-      extraCommands = ''
-        iptables -t nat -A PREROUTING -i virtbr0 -s 192.168.55.0/24 -j MARK --set-xmark 0x1/0xffffffff
-        iptables -A FORWARD -o virtbr0 -d 172.104.15.252 -j ACCEPT
-        iptables -A FORWARD -o virtbr0 -d 198.74.56.101 -j ACCEPT
-        iptables -A FORWARD -o virtbr0 -d 23.239.10.144 -j ACCEPT
-        iptables -A FORWARD -o virtbr0 -d 23.239.10.184 -j ACCEPT
-        iptables -A FORWARD -o virtbr0 -d 23.239.9.39 -j ACCEPT
-        iptables -A FORWARD -o virtbr0 -d 66.228.36.99 -j ACCEPT
-      '';
       logRefusedConnections = false;
       trustedInterfaces = [
         "virtbr0"
