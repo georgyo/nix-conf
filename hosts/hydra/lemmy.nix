@@ -8,6 +8,14 @@ let
   hostname = "hackertalks.com";
 in
 {
+  sops.secrets = {
+    "pict-rs/apikey" = {
+      format = "binary";
+      sopsFile = ./secrets/pict-rs.apikey;
+      restartUnits = [ "lemmy.service" ];
+    };
+  };
+
   services.lemmy = {
     enable = true;
     settings = {
@@ -20,9 +28,22 @@ in
         smtp_from_address = "noreply@hackertalks.com";
         tls_type = "none";
       };
+      pictrs = {
+        # Should be deprecated, but external link caching still happens when it is removed
+        cache_external_link_previews = false;
+        image_mode = "None";
+
+        # These should be getting set automatically from the nixos module, but
+        # the attr sets are merging deep enough. The api_key._secret is actually
+        # part of the lemmy nixos module and is templated to the correct value
+        # right before lemmy starts.
+        url = "http://127.0.0.1:8080";
+        api_key._secret = "pictrsApiKeyFile";
+      };
       worker_count = 5;
       retry_count = 5;
     };
+    pictrsApiKeyFile = config.sops.secrets."pict-rs/apikey".path;
     nginx.enable = true;
     caddy.enable = false;
     # database.createLocally = false;
