@@ -37,7 +37,6 @@
           domain = "derp.scalable.io";
         };
 
-        services.nginx.package = pkgs.nginxQuic;
         services.nginx.virtualHosts."derp.scalable.io" = {
           enableACME = true;
           quic = true;

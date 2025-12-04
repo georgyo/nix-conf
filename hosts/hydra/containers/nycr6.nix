@@ -111,7 +111,6 @@ in
 
           nginx = {
             enable = true;
-            package = pkgs.nginxQuic;
             virtualHosts."wiki.nycresistor.com" = {
               root = "/srv/http/wiki.nycresistor.com";
               enableACME = true;

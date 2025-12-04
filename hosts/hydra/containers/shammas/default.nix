@@ -23,7 +23,6 @@
 
         services.nginx = {
           enable = true;
-          package = pkgs.nginxQuic;
           virtualHosts = {
             "shamm.as" = {
               serverAliases = [

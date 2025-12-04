@@ -343,7 +343,6 @@ with pkgs;
 
   services.nginx = {
     enable = true;
-    package = pkgs.nginxQuic;
     recommendedProxySettings = true;
     commonHttpConfig =
       let

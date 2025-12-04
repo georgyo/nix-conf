@@ -12,7 +12,6 @@
                       '$status $body_bytes_sent "$http_referer" '
                       '"$request_body"' ;
     '';
-    package = pkgs.nginxQuic;
     virtualHosts =
       let
         vhosts = builtins.attrNames config.services.nginx.virtualHosts;
