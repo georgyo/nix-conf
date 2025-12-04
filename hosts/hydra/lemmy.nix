@@ -89,6 +89,10 @@ in
           bucket_name = 'pict-rs'
           use_path_style = true
           region = 'us-east-2'
+
+          [media.retention]
+          variants = "90d"
+          proxy = "90d"
         '';
       };
     in
