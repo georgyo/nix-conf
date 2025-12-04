@@ -60,6 +60,7 @@ in
           (makeArr "sonarr")
           (makeArr "radarr")
           (makeArr "prowlarr")
+          (makeArr "lidarr")
         ];
 
         networking = {

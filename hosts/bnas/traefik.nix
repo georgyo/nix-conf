@@ -74,6 +74,12 @@
             service = "sonarr";
             entryPoints = [ "webprivate" ];
           };
+          music = {
+            rule = "Host(`music.seed.v.fu.io`)";
+            tls.certResolver = "acme";
+            service = "lidarr";
+            entryPoints = [ "webprivate" ];
+          };
           tracker = {
             rule = "Host(`tracker.seed.v.fu.io`)";
             tls.certResolver = "acme";
@@ -121,6 +127,7 @@
         services = {
           sonarr.loadBalancer.servers = [ { url = "http://10.73.105.241:8989"; } ];
           radarr.loadBalancer.servers = [ { url = "http://10.73.105.241:7878"; } ];
+          lidarr.loadBalancer.servers = [ { url = "http://10.73.105.241:8686"; } ];
           prowlarr.loadBalancer.servers = [ { url = "http://10.73.105.241:9696"; } ];
           seed.loadBalancer.servers = [ { url = "http://10.73.105.241:80"; } ];
           autobrr.loadBalancer.servers = [ { url = "http://10.73.105.241:7474"; } ];
