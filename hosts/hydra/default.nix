@@ -189,6 +189,9 @@ with pkgs;
         iifname eth0 ip daddr 23.239.9.39 accept
         iifname eth0 ip daddr 66.228.36.99 accept
       '';
+      extraCommands = ''
+        ${pkgs.nftables}/bin/nft add rule nat PREROUTING iifname "virtbr0"  ip saddr 192.168.55.0/24 counter packets 27 bytes 1666 meta mark set 0x1
+      '';
       logRefusedConnections = false;
       trustedInterfaces = [
         "virtbr0"
