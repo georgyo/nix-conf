@@ -138,6 +138,19 @@ with pkgs;
     nat.externalInterface = "eth0";
     nat.internalInterfaces = [ "tailscale0" ];
 
+    nftables.enable = true;
+    nftables.tables = {
+      nat = {
+        content = ''
+          chain post {
+            type nat hook postrouting priority srcnat - 10;
+            iifname { "virtbr0" } oifname "eth0" ip saddr 192.168.55.0/24 counter masquerade comment "from internal interfaces"
+          }
+        '';
+        family = "ip";
+      };
+    };
+
     firewall = {
       enable = true;
       allowedTCPPorts = [
@@ -188,9 +201,6 @@ with pkgs;
         iifname eth0 ip daddr 23.239.10.184 accept
         iifname eth0 ip daddr 23.239.9.39 accept
         iifname eth0 ip daddr 66.228.36.99 accept
-      '';
-      extraCommands = ''
-        ${pkgs.nftables}/bin/nft add rule nat PREROUTING iifname "virtbr0"  ip saddr 192.168.55.0/24 counter packets 27 bytes 1666 meta mark set 0x1
       '';
       logRefusedConnections = false;
       trustedInterfaces = [
