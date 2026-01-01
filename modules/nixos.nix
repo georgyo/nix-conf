@@ -7,8 +7,8 @@
 
       environment.systemPackages = [
         pkgs.gdu
-        # inputs.myemacs.packages.${pkgs.system}.default
-        # inputs.myemacs.packages.${pkgs.system}.e
+        inputs.myemacs.packages.${pkgs.system}.default
+        inputs.myemacs.packages.${pkgs.system}.e
       ];
     };
 }
