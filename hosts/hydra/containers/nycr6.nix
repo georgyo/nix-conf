@@ -25,6 +25,7 @@ let
       display_errors = Off
       upload_max_filesize = 20M
       post_max_size = 21M
+      pcre.backtrack_limit = 2000000
     '';
   };
 
@@ -38,6 +39,12 @@ in
     privateNetwork = true;
     extraFlags = [ "-U" ];
     enableTun = true;
+
+    bindMounts.geoip = {
+      mountPoint = "/var/lib/GeoIP";
+      hostPath = "/var/lib/GeoIP";
+      isReadOnly = true;
+    };
 
     config =
       { ... }:
@@ -64,6 +71,7 @@ in
           gnupg
           lua51Packages.lua
           python3Packages.pygments
+          curl
         ];
 
         networking.firewall.allowedUDPPorts = [ 443 ];

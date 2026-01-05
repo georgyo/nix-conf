@@ -27,6 +27,7 @@ with pkgs;
     # ./surrealdb.nix
     ./lemmy.nix
     ./bird.nix
+    ./geoip.nix
   ];
 
   services.murmur.enable = true;
