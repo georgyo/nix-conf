@@ -20,7 +20,10 @@
         storage = "acme.json";
         dnsChallenge.provider = "cloudflare";
       };
-      api = { };
+      api = {
+        dashboard = true;
+        insecure = true;
+      };
       entryPoints = {
         http = {
           address = ":80";
@@ -54,6 +57,9 @@
           };
           limit.buffering.maxRequestBodyBytes = "4000000000";
           limit.buffering.maxResponseBodyBytes = "4000000000";
+          test-auth.basicAuth.users = [
+            "admin:$2y$05$IPGM.s6O0uQmWbAByRN1oetJkkfQeWGIdrUlKq8DrLECyE3Wp801S"
+          ];
         };
         routers = {
           bnasts1 = {
@@ -61,6 +67,14 @@
             service = "api@internal";
             tls.certResolver = "tailscale";
             entryPoints = [ "webprivate" ];
+            middlewares = [ "test-auth" ];
+          };
+          bnas = {
+            rule = "Host(`bnas.fu.io`)";
+            service = "api@internal";
+            tls.certResolver = "acme";
+            entryPoints = [ "webprivate" ];
+            middlewares = [ "test-auth" ];
           };
           movies = {
             rule = "Host(`movies.seed.v.fu.io`)";
