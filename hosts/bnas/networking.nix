@@ -47,9 +47,7 @@
 
   services.resolved = {
     enable = true;
-    extraConfig = ''
-      MulticastDNS=yes
-    '';
+    settings.Resolve.MulticastDNS = true;
   };
 
   systemd.services.tailscaled.environment = {
