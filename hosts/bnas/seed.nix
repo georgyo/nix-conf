@@ -94,7 +94,20 @@ in
           enable = true;
           webuiPort = 7777;
         };
-        services.sabnzbd.enable = true;
+
+        services.sabnzbd = {
+          enable = true;
+          allowConfigWrite = true;
+          settings = {
+            misc = {
+              host = "0.0.0.0";
+              port = 8080;
+              host_whitelist = "sabnzbd.seed.v.fu.io";
+            };
+
+          };
+        };
+
         services.flaresolverr.enable = true;
         services.postgresql = {
           enable = true;
