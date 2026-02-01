@@ -95,16 +95,24 @@ in
           webuiPort = 7777;
         };
 
+        age.secrets.sabnzbd_settings = {
+          file = ./secrets/sabnzbd.ini.age;
+          owner = config.services.sabnzbd.user;
+          group = config.services.sabnzbd.group;
+        };
         services.sabnzbd = {
           enable = true;
           allowConfigWrite = true;
+          secretFiles = [
+            config.age.secrets.sabnzbd_settings.path
+          ];
           settings = {
             misc = {
               host = "0.0.0.0";
               port = 8080;
               host_whitelist = "sabnzbd.seed.v.fu.io";
+              complete_dir = "/mnt/data2/incomming";
             };
-
           };
         };
 
