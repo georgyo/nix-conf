@@ -20,7 +20,7 @@
           443
           3478
         ];
-        networking.firewall.extraCommands = '''';
+        networking.firewall.extraCommands = "";
 
         services.tailscale = {
           enable = true;

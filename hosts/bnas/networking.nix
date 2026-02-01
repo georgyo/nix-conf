@@ -56,6 +56,8 @@
   services.tailscale = {
     enable = true;
     useRoutingFeatures = "both";
+    permitCertUid = "traefik";
+    serve.enable = true;
     extraSetFlags = [
       "--advertise-exit-node"
       "--accept-routes"

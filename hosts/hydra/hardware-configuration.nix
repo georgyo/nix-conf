@@ -52,36 +52,36 @@
     in
     {
       "/" = {
-        device = ''UUID=fc4d02c3-5e58-4430-91a5-2a403a4b915d'';
+        device = "UUID=fc4d02c3-5e58-4430-91a5-2a403a4b915d";
         fsType = "ext4";
       };
       "/var/lib/ipfs" = {
-        device = ''UUID=3e019d8b-bfa3-42e6-aa73-0f783694279a'';
+        device = "UUID=3e019d8b-bfa3-42e6-aa73-0f783694279a";
         fsType = "btrfs";
         options = btrfsOptions ++ [ "subvol=services/ipfs" ];
       };
       "/var/lib/postgresql" = {
-        device = ''UUID=3e019d8b-bfa3-42e6-aa73-0f783694279a'';
+        device = "UUID=3e019d8b-bfa3-42e6-aa73-0f783694279a";
         fsType = "btrfs";
         options = btrfsOptions ++ [ "subvol=services/postgresql" ];
       };
       "/var/lib/mastodon" = {
-        device = ''UUID=3e019d8b-bfa3-42e6-aa73-0f783694279a'';
+        device = "UUID=3e019d8b-bfa3-42e6-aa73-0f783694279a";
         fsType = "btrfs";
         options = btrfsOptions ++ [ "subvol=services/mastodon" ];
       };
       "/home" = {
-        device = ''UUID=3e019d8b-bfa3-42e6-aa73-0f783694279a'';
+        device = "UUID=3e019d8b-bfa3-42e6-aa73-0f783694279a";
         fsType = "btrfs";
         options = btrfsOptions ++ [ "subvol=home" ];
       };
       "/var/lib/nixos-containers" = {
-        device = ''UUID=3e019d8b-bfa3-42e6-aa73-0f783694279a'';
+        device = "UUID=3e019d8b-bfa3-42e6-aa73-0f783694279a";
         fsType = "btrfs";
         options = btrfsOptions ++ [ "subvol=nixos-containers" ];
       };
       "/var/lib/machines" = {
-        device = ''UUID=3e019d8b-bfa3-42e6-aa73-0f783694279a'';
+        device = "UUID=3e019d8b-bfa3-42e6-aa73-0f783694279a";
         fsType = "btrfs";
         options = btrfsOptions ++ [ "subvol=machines" ];
       };
@@ -89,7 +89,7 @@
 
   zramSwap = {
     enable = true;
-    writebackDevice = ''/dev/disk/by-uuid/1d530e93-10c0-47ec-94b3-0d853a3af291'';
+    writebackDevice = "/dev/disk/by-uuid/1d530e93-10c0-47ec-94b3-0d853a3af291";
   };
   #swapDevices = [{ device = "/dev/sdb"; }];
 

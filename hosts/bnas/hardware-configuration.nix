@@ -26,6 +26,7 @@
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelParams = [ "amdgpu.cwsr_enable=0" ];
   boot.extraModulePackages = [ ];
 
   boot.supportedFilesystems.zfs = true;
@@ -85,6 +86,10 @@
   };
   fileSystems."/mnt/data/media" = {
     device = "tank/data/media";
+    fsType = "zfs";
+  };
+  fileSystems."/var/lib/jellyfin" = {
+    device = "tank/app/jellyfin";
     fsType = "zfs";
   };
   fileSystems."/var/lib/nixos-containers" = {

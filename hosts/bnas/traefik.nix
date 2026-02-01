@@ -6,14 +6,25 @@
 }:
 {
 
-  systemd.services.traefik.environment = {
-    CF_API_EMAIL = "georgyo@gmail.com";
-    CF_DNS_API_TOKEN_FILE = config.age.secrets.CF_API_KEY.path;
-    CF_ZONE_API_TOKEN_FILE = config.age.secrets.CF_API_KEY.path;
+  systemd.services.traefik = {
+    environment = {
+      CF_API_EMAIL = "georgyo@gmail.com";
+      CF_DNS_API_TOKEN_FILE = config.age.secrets.CF_API_KEY.path;
+      CF_ZONE_API_TOKEN_FILE = config.age.secrets.CF_API_KEY.path;
+    };
   };
+
   services.traefik = {
     enable = true;
     staticConfigOptions = {
+      experimental.plugins.demo = {
+        moduleName = "github.com/traefik/plugindemo";
+        version = "v0.2.2";
+      };
+      experimental.localPlugins.tailscale-connectivity = {
+        moduleName = "github.com/hhftechnology/tailscale-access";
+      };
+
       certificatesResolvers.tailscale.tailscale = { };
       certificatesResolvers.acme.acme = {
         email = "acme@shamm.as";
@@ -22,7 +33,7 @@
       };
       api = {
         dashboard = true;
-        insecure = true;
+        insecure = false;
       };
       entryPoints = {
         http = {
@@ -41,7 +52,8 @@
           http3.advertisedPort = "443";
           http.middlewares = [
             "tailscale-ipallowlist"
-            "limit"
+            # "tailscale-auth"
+            # "limit"
           ];
           # tls.certResolver = "acme";
         };
@@ -60,6 +72,11 @@
           test-auth.basicAuth.users = [
             "admin:$2y$05$IPGM.s6O0uQmWbAByRN1oetJkkfQeWGIdrUlKq8DrLECyE3Wp801S"
           ];
+          tailscale-auth.plugin.tailscale-connectivity = {
+            testDomain = "bnas.taila8b68.ts.net"; # REQUIRED: Your Tailscale domain
+            sessionTimeout = "24h"; # How long verification lasts
+            allowLocalhost = true;
+          };
         };
         routers = {
           bnasts1 = {
@@ -67,14 +84,14 @@
             service = "api@internal";
             tls.certResolver = "tailscale";
             entryPoints = [ "webprivate" ];
-            middlewares = [ "test-auth" ];
+            middlewares = [ "tailscale-auth" ];
           };
           bnas = {
             rule = "Host(`bnas.fu.io`)";
             service = "api@internal";
             tls.certResolver = "acme";
             entryPoints = [ "webprivate" ];
-            middlewares = [ "test-auth" ];
+            middlewares = [ "tailscale-auth" ];
           };
           movies = {
             rule = "Host(`movies.seed.v.fu.io`)";
@@ -130,11 +147,19 @@
             tls.certResolver = "acme";
             service = "plex";
             entryPoints = [ "webprivate" ];
+            middlewares = [ "limit" ];
           };
           pictures = {
             rule = "Host(`pictures.fu.io`)";
             tls.certResolver = "acme";
             service = "pictures";
+            entryPoints = [ "webprivate" ];
+            middlewares = [ "limit" ];
+          };
+          auth = {
+            rule = "Host(`auth.fu.io`)";
+            tls.certResolver = "acme";
+            service = "tailscale-nginx-auth";
             entryPoints = [ "webprivate" ];
           };
         };
@@ -149,6 +174,7 @@
           sabnzbd.loadBalancer.servers = [ { url = "http://10.73.105.241:8080"; } ];
           plex.loadBalancer.servers = [ { url = "http://127.0.0.1:32400"; } ];
           pictures.loadBalancer.servers = [ { url = "http://192.168.1.186:2283"; } ];
+          tailscale-nginx-auth.loadBalancer.servers = [ { url = "http://127.0.0.1:9999"; } ];
 
           service1 = {
             loadBalancer = {

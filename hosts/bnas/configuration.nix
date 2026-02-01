@@ -24,6 +24,7 @@ inputs:
     ./home-assistant.nix
     ./networking.nix
     ./smart.nix
+    ./jellyfin.nix
   ];
 
   # Set your time zone.
@@ -72,7 +73,7 @@ inputs:
       vimAlias = true;
       withNodeJs = true;
       configure = {
-        customRC = '''';
+        customRC = "";
         customLuaRC = ''
           vim.g.coq_settings = {
               auto_start = true,
@@ -128,7 +129,7 @@ inputs:
   services.below.enable = true;
 
   services.nfs.server.enable = true;
-  services.nfs.server.exports = ''/mnt/data/media        192.168.1.118(rw,async,no_wdelay,no_root_squash,insecure_locks,sec=sys,anonuid=1025,anongid=100)	192.168.1.148(rw,async,no_wdelay,no_root_squash,insecure_locks,sec=sys,anonuid=1025,anongid=100)	192.168.1.0/24(rw,async,no_wdelay,no_root_squash,insecure_locks,sec=sys,anonuid=1025,anongid=100)	192.168.0.0/24(rw,async,no_wdelay,crossmnt,no_root_squash,insecure_locks,sec=sys,anonuid=1025,anongid=100)'';
+  services.nfs.server.exports = "/mnt/data/media        192.168.1.118(rw,async,no_wdelay,no_root_squash,insecure_locks,sec=sys,anonuid=1025,anongid=100)	192.168.1.148(rw,async,no_wdelay,no_root_squash,insecure_locks,sec=sys,anonuid=1025,anongid=100)	192.168.1.0/24(rw,async,no_wdelay,no_root_squash,insecure_locks,sec=sys,anonuid=1025,anongid=100)	192.168.0.0/24(rw,async,no_wdelay,crossmnt,no_root_squash,insecure_locks,sec=sys,anonuid=1025,anongid=100)";
 
   users.users.root.shell = pkgs.zsh;
 
