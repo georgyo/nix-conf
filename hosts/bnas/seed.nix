@@ -112,6 +112,7 @@ in
               port = 8080;
               host_whitelist = "sabnzbd.seed.v.fu.io";
               complete_dir = "/mnt/data2/incomming";
+              permissions = "777";
             };
           };
         };
