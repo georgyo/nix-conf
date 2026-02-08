@@ -54,11 +54,11 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1770577542,
-        "narHash": "sha256-qhVe9f5dgBE8D6YKWR/sGLAMADFliJInfjWKwI2wmrQ=",
+        "lastModified": 1770582178,
+        "narHash": "sha256-ztp0+JlZzOiJBMu2b9yAOMh6PEvaxbQYg6hK+0tXUSc=",
         "owner": "georgyo",
         "repo": "avalon",
-        "rev": "34105f45eab52f632ae533444a432193bb6c5530",
+        "rev": "c8a3aee442f149a50ef2db4cbb705aa78d17a862",
         "type": "github"
       },
       "original": {
