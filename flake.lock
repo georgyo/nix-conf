@@ -54,16 +54,16 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1762719959,
-        "narHash": "sha256-PpGcu4m8XRdiNrQv55LPWuEZDvw/zUl0C6AP+H/N64A=",
+        "lastModified": 1770509622,
+        "narHash": "sha256-sxiRZw2YeukyT06DKN7Y44k9VE/Erl8ZxMyiaLs97nk=",
         "owner": "georgyo",
         "repo": "avalon",
-        "rev": "fbb7b86d29f66ecae5556c77be8a06325a4aebd6",
+        "rev": "163ed8889cfcb0b0f6d615dcfccb63c023cfad50",
         "type": "github"
       },
       "original": {
         "owner": "georgyo",
-        "ref": "ai-generated",
+        "ref": "beads",
         "repo": "avalon",
         "type": "github"
       }
