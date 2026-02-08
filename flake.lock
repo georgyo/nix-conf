@@ -54,11 +54,11 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1770517266,
-        "narHash": "sha256-sfC/pk2s5Fcp0BCUVOS69ve+THnIAt2EqJ3Ofj4DZfg=",
+        "lastModified": 1770552024,
+        "narHash": "sha256-MZc3wGMCQlWJ2XTXyi/v7SXYcZh0boXewunSbU2w9eE=",
         "owner": "georgyo",
         "repo": "avalon",
-        "rev": "2233ea47731b21c3920330bc6a9dd0b430137513",
+        "rev": "063e70194ba766eeb85741f5a2face1e910a6b1d",
         "type": "github"
       },
       "original": {
@@ -426,11 +426,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1770145881,
-        "narHash": "sha256-ktjWTq+D5MTXQcL9N6cDZXUf9kX8JBLLBLT0ZyOTSYY=",
+        "lastModified": 1770526836,
+        "narHash": "sha256-xbvX5Ik+0inJcLJtJ/AajAt7xCk6FOCrm5ogpwwvVDg=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "17eea6f3816ba6568b8c81db8a4e6ca438b30b7c",
+        "rev": "d6e0e666048a5395d6ea4283143b7c9ac704720d",
         "type": "github"
       },
       "original": {
