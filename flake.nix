@@ -41,7 +41,7 @@
     };
 
     avalon-beta = {
-      url = "github:georgyo/avalon/ai-generated";
+      url = "github:georgyo/avalon/beads";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
