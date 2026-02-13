@@ -144,4 +144,69 @@ in
         };
       };
   };
+
+  services.traefik.dynamic.files.seed.settings.http = {
+    routers = {
+      movies = {
+        rule = "Host(`movies.seed.v.fu.io`)";
+        tls.certResolver = "acme";
+        service = "radarr";
+        entryPoints = [ "webprivate" ];
+      };
+      shows = {
+        rule = "Host(`shows.seed.v.fu.io`)";
+        tls.certResolver = "acme";
+        service = "sonarr";
+        entryPoints = [ "webprivate" ];
+      };
+      music = {
+        rule = "Host(`music.seed.v.fu.io`)";
+        tls.certResolver = "acme";
+        service = "lidarr";
+        entryPoints = [ "webprivate" ];
+      };
+      tracker = {
+        rule = "Host(`tracker.seed.v.fu.io`)";
+        tls.certResolver = "acme";
+        service = "prowlarr";
+        entryPoints = [ "webprivate" ];
+      };
+      seed = {
+        rule = "Host(`seed.v.fu.io`)";
+        tls.certResolver = "acme";
+        service = "seed";
+        entryPoints = [ "webprivate" ];
+      };
+      autobrr = {
+        rule = "Host(`autobrr.seed.v.fu.io`)";
+        tls.certResolver = "acme";
+        service = "autobrr";
+        entryPoints = [ "webprivate" ];
+      };
+      qbittorrent = {
+        rule = "Host(`qbittorrent.seed.v.fu.io`)";
+        tls.certResolver = "acme";
+        service = "qbittorrent";
+        entryPoints = [ "webprivate" ];
+        middlewares = [ "clear-referer" ];
+      };
+      sabnzbd = {
+        rule = "Host(`sabnzbd.seed.v.fu.io`)";
+        tls.certResolver = "acme";
+        service = "sabnzbd";
+        entryPoints = [ "webprivate" ];
+      };
+
+    };
+    services = {
+      sonarr.loadBalancer.servers = [ { url = "http://10.73.105.241:8989"; } ];
+      radarr.loadBalancer.servers = [ { url = "http://10.73.105.241:7878"; } ];
+      lidarr.loadBalancer.servers = [ { url = "http://10.73.105.241:8686"; } ];
+      prowlarr.loadBalancer.servers = [ { url = "http://10.73.105.241:9696"; } ];
+      seed.loadBalancer.servers = [ { url = "http://10.73.105.241:80"; } ];
+      autobrr.loadBalancer.servers = [ { url = "http://10.73.105.241:7474"; } ];
+      qbittorrent.loadBalancer.servers = [ { url = "http://10.73.105.241:7777"; } ];
+      sabnzbd.loadBalancer.servers = [ { url = "http://10.73.105.241:8080"; } ];
+    };
+  };
 }

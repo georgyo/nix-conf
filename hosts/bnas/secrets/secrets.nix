@@ -16,7 +16,8 @@ in
   ];
   "local-wg-key.age".publicKeys = [ bnas_system ];
   "airportsilom_credentials.age".publicKeys = [ bnas_system ];
-  "sabnzbd.ini.age".publicKeys = [bnas_system
+  "sabnzbd.ini.age".publicKeys = [
+    bnas_system
     seed_system
   ];
 }

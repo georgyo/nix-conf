@@ -68,4 +68,19 @@
       };
   };
 
+  services.traefik.dynamic.files.pictures.settings.http = {
+    routers = {
+      pictures = {
+        rule = "Host(`pictures.fu.io`)";
+        tls.certResolver = "acme";
+        service = "pictures";
+        entryPoints = [ "webprivate" ];
+        middlewares = [ "limit" ];
+      };
+    };
+    services = {
+      pictures.loadBalancer.servers = [ { url = "http://192.168.1.186:2283"; } ];
+    };
+  };
+
 }
