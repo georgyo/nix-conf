@@ -47,7 +47,6 @@ in
     atuin
     rclone
     restic
-    spacevim
     iftop
     ncdu
 

@@ -419,10 +419,4 @@ with pkgs;
     acceptTerms = true;
   };
 
-  services.opendkim = {
-    enable = true;
-    selector = "hydra";
-    user = "postfix";
-    group = "postfix";
-  };
 }
