@@ -5,7 +5,8 @@
     # group = "media";
   };
 
-  services.traefik.dynamic.files.plex.settings.http = {
+  # services.traefik.dynamic.files.plex.settings.http = {
+  services.traefik.dynamicConfigOptions.http = {
     routers = {
       plex = {
         rule = "Host(`plex.fu.io`)";

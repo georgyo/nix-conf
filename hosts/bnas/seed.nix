@@ -145,7 +145,8 @@ in
       };
   };
 
-  services.traefik.dynamic.files.seed.settings.http = {
+  # services.traefik.dynamic.files.seed.settings.http = {
+  services.traefik.dynamicConfigOptions.http = {
     routers = {
       movies = {
         rule = "Host(`movies.seed.v.fu.io`)";

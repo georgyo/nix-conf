@@ -31,7 +31,8 @@
 
   };
 
-  services.traefik.dynamic.files.jellyfin.settings.http = {
+  # services.traefik.dynamic.files.jellyfin.settings.http = {
+  services.traefik.dynamicConfigOptions.http = {
     routers.jellyfin = {
       rule = "Host(`fin.seed.v.fu.io`)";
       tls.certResolver = "acme";

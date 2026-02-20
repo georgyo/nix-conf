@@ -68,7 +68,8 @@
       };
   };
 
-  services.traefik.dynamic.files.pictures.settings.http = {
+  # services.traefik.dynamic.files.pictures.settings.http = {
+  services.traefik.dynamicConfigOptions.http = {
     routers = {
       pictures = {
         rule = "Host(`pictures.fu.io`)";
