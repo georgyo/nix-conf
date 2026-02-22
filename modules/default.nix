@@ -25,6 +25,7 @@
         config = {
           environment.systemPackages = [
             agenix.packages.x86_64-linux.default
+            pkgs.ghostty.terminfo
           ];
           nixpkgs.overlays = [
             self.overlay
