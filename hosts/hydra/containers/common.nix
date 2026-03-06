@@ -98,6 +98,8 @@ host:
     ];
   };
 
+  console.enable = true;
+
   environment.systemPackages = with pkgs; [
     htop
     vim
