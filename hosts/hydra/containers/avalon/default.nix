@@ -60,7 +60,7 @@
             ExecStart = "${pkgs.avalon-online}/bin/avalon-server";
             User = "avalon";
             DynamicUser = true;
-            WorkingDirectory = "${pkgs.avalon-online}/libexec/avalon/server";
+            # WorkingDirectory = "${pkgs.avalon-online}/libexec/avalon/server";
             ProtectSystem = true;
             ProtectHome = true;
             RuntimeDirectory = "avalon";

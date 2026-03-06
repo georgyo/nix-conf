@@ -92,6 +92,8 @@ in
         };
 
         services = {
+          openssh.enable = true;
+
           mysql = {
             enable = true;
             package = pkgs.mariadb;

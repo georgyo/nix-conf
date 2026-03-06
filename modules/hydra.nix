@@ -3,7 +3,7 @@ let
   inherit (inputs.self.lib.mk-os) linux;
 
   overlays =
-    { ... }:
+    { lib, ... }:
     {
       nixpkgs.overlays = [
         (import ../overlay.nix)
@@ -20,8 +20,12 @@ let
           beta = final.extend inputs.avalon-beta.overlays.default;
 
         })
-
       ];
+      nixpkgs.config.allowUnfreePredicate =
+        pkg:
+        builtins.elem (lib.getName pkg) [
+          "surrealdb"
+        ];
     };
 in
 {
