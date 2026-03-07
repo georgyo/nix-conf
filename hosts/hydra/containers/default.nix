@@ -72,5 +72,6 @@
     ./forge.nix
     ./derp.nix
     ./surrealdb
+    ./pocketid
   ];
 }

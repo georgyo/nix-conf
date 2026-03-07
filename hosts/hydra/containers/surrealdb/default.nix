@@ -46,7 +46,8 @@
             "--allow-all"
             "--deny-net"
             "--deny-funcs http"
-            "--client-ip" "X-Forwarded-For"
+            "--client-ip"
+            "X-Forwarded-For"
           ];
         };
 
