@@ -73,5 +73,6 @@
     ./derp.nix
     ./surrealdb
     ./pocketid
+    # ./authelia
   ];
 }

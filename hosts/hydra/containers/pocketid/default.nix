@@ -7,13 +7,13 @@
 
 {
 
-  services.nginx.virtualHosts."auth.fu.io" = {
+  services.nginx.virtualHosts."auth.shamm.as" = {
     enableACME = true;
     quic = true;
     http3 = true;
     forceSSL = true;
     serverAliases = [
-      "auth.fu.io"
+      "auth.shamm.as"
     ];
     locations."/" = {
       recommendedProxySettings = true;
@@ -33,7 +33,8 @@
       { config, ... }:
       {
         nixpkgs.pkgs = pkgs;
-        imports = [ (import ../common.nix "pocketid")
+        imports = [
+          (import ../common.nix "pocketid")
           pkgs.flakeInputs.sops-nix.nixosModules.sops
         ];
 
@@ -46,23 +47,22 @@
           };
           defaultSopsFile = ./secrets/secrets.yaml;
           secrets."pocketid.env" = {
-    sopsFile = ./secrets/pocketid.env;
-    format = "dotenv";
-    restartUnits = [
-      "pocket-id.service"
-    ];
-  };
+            sopsFile = ./secrets/pocketid.env;
+            format = "dotenv";
+            restartUnits = [
+              "pocket-id.service"
+            ];
+          };
         };
 
         services.pocket-id = {
           enable = true;
           settings = {
             TRUST_PROXY = true;
-            APP_URL = "https://auth.fu.io";
+            APP_URL = "https://auth.shamm.as";
             ANALYTICS_DISABLED = true;
           };
-          environmentFile = 
-        config.sops.secrets."pocketid.env".path;
+          environmentFile = config.sops.secrets."pocketid.env".path;
 
         };
 

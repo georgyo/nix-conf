@@ -3,6 +3,7 @@ keys:
   - &hydra_host age1yekmwz9jlrhuwxqsc28wxs4er3aeuua6g5kjn7qz0kqgagdsxegqysghxp
   - &hydra_pgp 46CE7FF89C5B5C099224F63BDA4450E18B0B0C49
   - &pocketid_host age13y0ewtnlh46ncnzu54svglam03s5a9qwvh6afqpgjlqm6y3mjq2qg08w4u
+  - &authelia_host age1svtgcez4ts4tey7cnudsuthyyt5eewv7t626m23u8s0mcluxmv2sdygcz0
 creation_rules:
   - path_regex: hosts/hydra/containers/pocketid/secrets/.*$
     key_groups:
@@ -12,6 +13,14 @@ creation_rules:
         - *hydra_root
         - *hydra_host
         - *pocketid_host
+  - path_regex: hosts/hydra/containers/authelia/secrets/.*$
+    key_groups:
+    - pgp:
+        - *hydra_pgp
+      age:
+        - *hydra_root
+        - *hydra_host
+        - *authelia_host
   - path_regex: hosts/hydra/(.*/)?secrets/.*$
     key_groups:
     - pgp:
