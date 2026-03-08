@@ -147,55 +147,63 @@ in
 
   # services.traefik.dynamic.files.seed.settings.http = {
   services.traefik.dynamicConfigOptions.http = {
+    middlewares.shared-backend-auth.headers.customrequestheaders.Authorization="Basic c2hhcmVkOnNoYXJlZA==";
     routers = {
       movies = {
         rule = "Host(`movies.seed.v.fu.io`)";
         tls.certResolver = "acme";
         service = "radarr";
         entryPoints = [ "webprivate" ];
+        middlewares = ["shared-backend-auth" "traefik-forward-auth-shammas"];
       };
       shows = {
         rule = "Host(`shows.seed.v.fu.io`)";
         tls.certResolver = "acme";
         service = "sonarr";
         entryPoints = [ "webprivate" ];
+        middlewares = ["shared-backend-auth" "traefik-forward-auth-shammas"];
       };
       music = {
         rule = "Host(`music.seed.v.fu.io`)";
         tls.certResolver = "acme";
         service = "lidarr";
         entryPoints = [ "webprivate" ];
+        middlewares = ["shared-backend-auth" "traefik-forward-auth-shammas"];
       };
       tracker = {
         rule = "Host(`tracker.seed.v.fu.io`)";
         tls.certResolver = "acme";
         service = "prowlarr";
         entryPoints = [ "webprivate" ];
+        middlewares = ["shared-backend-auth" "traefik-forward-auth-shammas"];
       };
       seed = {
         rule = "Host(`seed.v.fu.io`)";
         tls.certResolver = "acme";
         service = "seed";
         entryPoints = [ "webprivate" ];
+        middlewares = ["traefik-forward-auth-shammas"];
       };
       autobrr = {
         rule = "Host(`autobrr.seed.v.fu.io`)";
         tls.certResolver = "acme";
         service = "autobrr";
         entryPoints = [ "webprivate" ];
+        middlewares = ["traefik-forward-auth-shammas"];
       };
       qbittorrent = {
         rule = "Host(`qbittorrent.seed.v.fu.io`)";
         tls.certResolver = "acme";
         service = "qbittorrent";
         entryPoints = [ "webprivate" ];
-        middlewares = [ "clear-referer" ];
+        middlewares = ["traefik-forward-auth-shammas" "clear-referer" ];
       };
       sabnzbd = {
         rule = "Host(`sabnzbd.seed.v.fu.io`)";
         tls.certResolver = "acme";
         service = "sabnzbd";
         entryPoints = [ "webprivate" ];
+        middlewares = ["traefik-forward-auth-shammas"];
       };
 
     };

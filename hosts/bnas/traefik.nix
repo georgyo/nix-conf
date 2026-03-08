@@ -6,6 +6,30 @@
 }:
 {
 
+  imports = [ ./packages/traefik-forward-auth ];
+
+  services.traefik-forward-auth = {
+    enable = true;
+    configFile = config.age.secrets.traefik-forward-auth.path; 
+    # settings = {
+    #   server.hostname = "auth.fu.io";
+    #   server.port = 4181;
+    #   cookies.domain = "fu.io";
+    #   defaultPortal = "main";
+    #   portals = [
+    #     {
+    #       name = "main";
+    #       providers = [ { tailscaleWhois = { }; } ];
+    #     }
+    #   ];
+    # };
+  };
+
+  services.whoami = {
+    enable = true;
+    port = 4182;
+  };
+
   systemd.services.traefik = {
     environment = {
       CF_API_EMAIL = "georgyo@gmail.com";
@@ -82,6 +106,16 @@
             sessionTimeout = "24h"; # How long verification lasts
             allowLocalhost = true;
           };
+          traefik-forward-auth.forwardauth = {
+            address = "http://127.0.0.1:4181/portals/main";
+            authResponseHeaders= "X-Forwarded-User,X-Forwarded-Displayname,X-Authenticated-User";
+            trustForwardHeader=true;
+          };
+          traefik-forward-auth-shammas.forwardauth = {
+            address = "http://127.0.0.1:4181/portals/shammas";
+            authResponseHeaders= "X-Forwarded-User,X-Forwarded-Displayname,X-Authenticated-User";
+            trustForwardHeader=true;
+          };
         };
         routers = {
           bnasts1 = {
@@ -96,17 +130,26 @@
             service = "api@internal";
             tls.certResolver = "acme";
             entryPoints = [ "webprivate" ];
-            middlewares = [ "tailscale-auth" ];
+            middlewares = [ "traefik-forward-auth" ];
+          };
+          whoami = {
+            rule = "Host(`whoami.fu.io`)";
+            service = "whoami";
+            tls.certResolver = "acme";
+            entryPoints = [ "webprivate" ];
+            middlewares = [ "traefik-forward-auth" ];
           };
           auth = {
             rule = "Host(`auth.fu.io`)";
             tls.certResolver = "acme";
-            service = "tailscale-nginx-auth";
+            service = "traefik-auth";
             entryPoints = [ "webprivate" ];
           };
         };
         services = {
           tailscale-nginx-auth.loadBalancer.servers = [ { url = "http://127.0.0.1:9999"; } ];
+          traefik-auth.loadBalancer.servers = [ { url = "http://127.0.0.1:4181"; } ];
+          whoami.loadBalancer.servers = [ { url = "http://127.0.0.1:4182"; } ];
 
           service1 = {
             loadBalancer = {

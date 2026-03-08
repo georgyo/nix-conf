@@ -79,7 +79,7 @@
             access_control.default_policy = "one_factor";
             notifier.filesystem.filename = "/tmp/notifications.txt";
             webauthn.enable_passkey_login = true;
-              
+
           };
           secrets = {
             storageEncryptionKeyFile = config.sops.secrets.fuStorageEncryptionKey.path;

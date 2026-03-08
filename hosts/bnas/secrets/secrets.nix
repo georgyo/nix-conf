@@ -10,6 +10,7 @@ in
   "wg-quick.age".publicKeys = [ bnas_system ];
   "CF_API_KEY.age".publicKeys = [ bnas_system ];
   "wg-netns.age".publicKeys = [ bnas_system ];
+  "traefik-forward-auth.age".publicKeys = [ bnas_system ];
   "autobrr-session.age".publicKeys = [
     bnas_system
     seed_system

@@ -5,6 +5,10 @@
     local-wg-key.file = ./local-wg-key.age;
     "seedns/seed.yml".file = ./wg-netns.age;
     airportsilom_credentials.file = ./airportsilom_credentials.age;
+    traefik-forward-auth = {
+      file = ./traefik-forward-auth.age;
+      mode = "0444";
+    };
     # sabnzbd_settings = ./sabnzbd.ini.age;
     CF_API_KEY = {
       mode = "400";
