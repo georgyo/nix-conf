@@ -14,7 +14,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_19;
   boot.initrd.availableKernelModules = [
     "ahci"
     "nvme"
@@ -34,7 +34,7 @@
 
   boot.zfs = {
     removeLinuxDRM = true;
-    package = pkgs.zfs_unstable;
+    package = pkgs.zfs_2_4;
   };
 
   services.zfs = {
