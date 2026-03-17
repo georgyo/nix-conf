@@ -60,6 +60,10 @@ in
           defaults.email = "acme@shamm.as";
         };
 
+        users.users.root.openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN8OQNxjZtd5aamPItqlEqAjbw7dOfSyXi2eMI5BFFfr grischard"
+        ];
+
         environment.systemPackages = with pkgs; [
           htop
           vim
