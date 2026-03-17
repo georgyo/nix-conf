@@ -110,10 +110,10 @@ in
               settings = {
                 pm = "dynamic";
                 "listen.owner" = myConfig.services.nginx.user;
-                "pm.max_children" = 5;
-                "pm.start_servers" = 2;
-                "pm.min_spare_servers" = 1;
-                "pm.max_spare_servers" = 3;
+                "pm.max_children" = 50;
+                "pm.start_servers" = 5;
+                "pm.min_spare_servers" = 5;
+                "pm.max_spare_servers" = 10;
                 "pm.max_requests" = 500;
               };
             };
