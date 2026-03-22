@@ -108,6 +108,9 @@ host:
 
   console.enable = true;
 
+  # This causes ssh client error due to incorrect permissions.
+  programs.ssh.systemd-ssh-proxy.enable = lib.mkDefault false;
+
   environment.systemPackages = with pkgs; [
     htop
     vim
