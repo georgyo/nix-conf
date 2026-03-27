@@ -71,7 +71,7 @@
     ./avalon
     ./forge.nix
     ./derp.nix
-    ./surrealdb
+    # ./surrealdb
     ./pocketid
     # ./authelia
   ];
