@@ -161,7 +161,7 @@ in
         tls.certResolver = "acme";
         service = "sonarr";
         entryPoints = [ "webprivate" ];
-        middlewares = ["tailscale-ipallowlist"];
+        middlewares = ["tailscale-ipallowlist" "traefik-forward-auth-shammas"];
       };
       music = {
         rule = "Host(`music.seed.v.fu.io`)";
