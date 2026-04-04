@@ -154,42 +154,42 @@ in
         tls.certResolver = "acme";
         service = "radarr";
         entryPoints = [ "webprivate" ];
-        middlewares = ["shared-backend-auth" "traefik-forward-auth-shammas"];
+        middlewares = ["tailscale-ipallowlist"];
       };
       shows = {
         rule = "Host(`shows.seed.v.fu.io`)";
         tls.certResolver = "acme";
         service = "sonarr";
         entryPoints = [ "webprivate" ];
-        middlewares = ["shared-backend-auth" "traefik-forward-auth-shammas"];
+        middlewares = ["tailscale-ipallowlist"];
       };
       music = {
         rule = "Host(`music.seed.v.fu.io`)";
         tls.certResolver = "acme";
         service = "lidarr";
         entryPoints = [ "webprivate" ];
-        middlewares = ["shared-backend-auth" "traefik-forward-auth-shammas"];
+        middlewares = ["tailscale-ipallowlist"];
       };
       tracker = {
         rule = "Host(`tracker.seed.v.fu.io`)";
         tls.certResolver = "acme";
         service = "prowlarr";
         entryPoints = [ "webprivate" ];
-        middlewares = ["shared-backend-auth" "traefik-forward-auth-shammas"];
+        middlewares = ["tailscale-ipallowlist"];
       };
       seed = {
         rule = "Host(`seed.v.fu.io`)";
         tls.certResolver = "acme";
         service = "seed";
         entryPoints = [ "webprivate" ];
-        middlewares = ["traefik-forward-auth-shammas"];
+        middlewares = ["tailscale-ipallowlist"];
       };
       autobrr = {
         rule = "Host(`autobrr.seed.v.fu.io`)";
         tls.certResolver = "acme";
         service = "autobrr";
         entryPoints = [ "webprivate" ];
-        middlewares = ["traefik-forward-auth-shammas"];
+        middlewares = ["tailscale-ipallowlist"];
       };
       qbittorrent = {
         rule = "Host(`qbittorrent.seed.v.fu.io`)";
