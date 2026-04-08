@@ -31,6 +31,7 @@
             self.overlay
           ];
           environment.variables.EDITOR = lib.mkOverride 900 "emacs";
+          nix.package = pkgs.lixPackageSets.stable.lix;
           nix.registry = {
             nixpkgs.to = {
               type = "path";
