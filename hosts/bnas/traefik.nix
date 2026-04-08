@@ -10,7 +10,7 @@
 
   services.traefik-forward-auth = {
     enable = true;
-    configFile = config.age.secrets.traefik-forward-auth.path; 
+    configFile = config.age.secrets.traefik-forward-auth.path;
     # settings = {
     #   server.hostname = "auth.fu.io";
     #   server.port = 4181;
@@ -108,13 +108,13 @@
           };
           traefik-forward-auth.forwardauth = {
             address = "http://127.0.0.1:4181/portals/main";
-            authResponseHeaders= "X-Forwarded-User,X-Forwarded-Displayname,X-Authenticated-User";
-            trustForwardHeader=true;
+            authResponseHeaders = "X-Forwarded-User,X-Forwarded-Displayname,X-Authenticated-User";
+            trustForwardHeader = true;
           };
           traefik-forward-auth-shammas.forwardauth = {
             address = "http://127.0.0.1:4181/portals/shammas";
-            authResponseHeaders= "X-Forwarded-User,X-Forwarded-Displayname,X-Authenticated-User";
-            trustForwardHeader=true;
+            authResponseHeaders = "X-Forwarded-User,X-Forwarded-Displayname,X-Authenticated-User";
+            trustForwardHeader = true;
           };
         };
         routers = {
