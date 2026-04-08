@@ -222,13 +222,7 @@ with pkgs;
         "shammas-1:vYHw6rxALD2kGfWSDiEZqsaUmcGGLMDd9/J5D2piF/Q="
       ];
       auto-optimise-store = true;
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
     };
-    #  package = nixVersions.latest;
-    extraOptions = "";
   };
 
   services.dbus.implementation = "broker";

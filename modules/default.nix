@@ -32,6 +32,14 @@
           ];
           environment.variables.EDITOR = lib.mkOverride 900 "emacs";
           nix.package = pkgs.lixPackageSets.lix_2_95.lix;
+          nix.settings.pasta-path = pkgs.passt + /bin/pasta;
+          nix.settings.extra-experimental-features = [
+            "nix-command"
+            "flakes"
+            "cgroups"
+          ];
+          nix.settings.use-cgroups = true;
+
           nix.registry = {
             nixpkgs.to = {
               type = "path";

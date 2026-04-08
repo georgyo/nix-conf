@@ -96,10 +96,6 @@ inputs:
     nix-ld.enable = true;
   };
 
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes 
-  '';
-
   security.pam.zfs.enable = true;
 
   environment.systemPackages = with pkgs; [
