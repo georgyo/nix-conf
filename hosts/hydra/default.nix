@@ -225,8 +225,6 @@ with pkgs;
       experimental-features = [
         "nix-command"
         "flakes"
-        "ca-derivations"
-        "fetch-tree"
       ];
     };
     #  package = nixVersions.latest;

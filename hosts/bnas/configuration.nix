@@ -97,8 +97,7 @@ inputs:
   };
 
   nix.extraOptions = ''
-    experimental-features = nix-command flakes ca-derivations fetch-tree
-
+    experimental-features = nix-command flakes 
   '';
 
   security.pam.zfs.enable = true;
