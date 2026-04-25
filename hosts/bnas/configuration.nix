@@ -25,6 +25,7 @@ inputs:
     ./networking.nix
     ./smart.nix
     ./jellyfin.nix
+    ./vswitch.nix
   ];
 
   # Set your time zone.
