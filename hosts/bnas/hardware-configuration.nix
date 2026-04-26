@@ -76,6 +76,10 @@
     device = "tank/home/nowossjolka";
     fsType = "zfs";
   };
+  fileSystems."/home/tanyabackup" = {
+    device = "tank/home/tanyabackup";
+    fsType = "zfs";
+  };
   fileSystems."/mnt/data" = {
     device = "tank/data";
     fsType = "zfs";

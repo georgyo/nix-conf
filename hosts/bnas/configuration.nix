@@ -106,6 +106,7 @@ inputs:
     curl
     iptables
     fd
+    rclone
 
     nixfmt
     nixfmt-tree
@@ -149,6 +150,16 @@ inputs:
     isNormalUser = true;
     createHome = true;
     uid = 1001;
+    shell = pkgs.zsh;
+    extraGroups = [ ];
+    openssh.authorizedKeys.keys = [ ];
+  };
+  users.groups.tanyabackup = {};
+  users.extraUsers.tanyabackup = {
+    isSystemUser = true;
+    createHome = true;
+    home = "/home/tanyabackup";
+    group = "tanyabackup";
     shell = pkgs.zsh;
     extraGroups = [ ];
     openssh.authorizedKeys.keys = [ ];
