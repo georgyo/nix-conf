@@ -9,12 +9,28 @@
   ...
 }:
 
+let
+  myKernel = pkgs.linuxKernel.buildLinux {
+    src = pkgs.fetchurl {
+      url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.19.14.tar.xz";
+      hash = "sha256-zei/Zzm+Sgd3/tu7pTMLgYjFVoDEWpIqTfoonL7G8YU=";
+    };
+    kernelPatches = [
+      pkgs.kernelPatches.bridge_stp_helper
+      pkgs.kernelPatches.request_key_helper
+    ];
+    version = "6.19.14";
+  };
+  myKernelPackages = pkgs.linuxPackagesFor myKernel;
+in
+
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_19;
+  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_19;
+  boot.kernelPackages = myKernelPackages;
   boot.initrd.availableKernelModules = [
     "ahci"
     "nvme"
