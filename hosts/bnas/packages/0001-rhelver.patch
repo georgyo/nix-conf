@@ -1,0 +1,63 @@
+From e0483ad89b893b96bf6b2e4f95920368b1679299 Mon Sep 17 00:00:00 2001
+From: George Shammas <george@shamm.as>
+Date: Sat, 2 May 2026 08:48:42 -0400
+Subject: [PATCH] rhelver
+
+---
+ Makefile.rhelver | 44 ++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 44 insertions(+)
+ create mode 100644 Makefile.rhelver
+
+diff --git a/Makefile.rhelver b/Makefile.rhelver
+new file mode 100644
+index 000000000000..95b9fd7b5479
+--- /dev/null
++++ b/Makefile.rhelver
+@@ -0,0 +1,44 @@
++RHEL_MAJOR = 10
++RHEL_MINOR = 99
++
++#
++# RHEL_RELEASE
++# -------------
++#
++# Represents build number in 'release' part of RPM's name-version-release.
++#   name is <package_name>, e.g. kernel
++#   version is upstream kernel version this kernel is based on, e.g. 4.18.0
++#   release is <RHEL_RELEASE>.<dist_tag>[<buildid>], e.g. 100.el8
++#
++# Use this spot to avoid future merge conflicts.
++# Do not trim this comment.
++RHEL_RELEASE = 0
++
++#
++# RHEL_REBASE_NUM
++# ----------------
++#
++# Used in RPM version string for Gemini kernels, which dont use upstream
++# VERSION/PATCHLEVEL/SUBLEVEL. The number represents rebase number for
++# current MAJOR release.
++#
++# Use this spot to avoid future merge conflicts.
++# Do not trim this comment.
++RHEL_REBASE_NUM = 1
++
++#
++# Automotive
++# ----------
++#
++# Represents the major and minor release used by automotive.
++# Primarily this is used to to identify the build target when
++# building the automotive kernel package.
++AUTOMOTIVE_MAJOR = 2
++AUTOMOTIVE_MINOR = 99
++
++#
++# DERIVATIVE_BUILD
++# ---------------------------
++#
++# Set DERIVATIVE_STREAM to "yes" to enable derivative kernel versioning.
++DERIVATIVE_BUILD = 0
+-- 
+2.53.0
+

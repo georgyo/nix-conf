@@ -18,6 +18,17 @@ let
     kernelPatches = [
       pkgs.kernelPatches.bridge_stp_helper
       pkgs.kernelPatches.request_key_helper
+      ({
+        name = "patch-6.19-redhat.patch";
+        patch = pkgs.fetchurl {
+          url = "https://src.fedoraproject.org/rpms/kernel/raw/f44/f/patch-6.19-redhat.patch";
+          hash = "sha256-EDM1BWSFacBZPgiEjHZURV14vZ/4p07DH/CvDL6Tw50=";
+        };
+      })
+      ({
+        name = "rhelver.patch";
+        patch = ./packages/0001-rhelver.patch;
+      })
     ];
     version = "6.19.14";
   };
