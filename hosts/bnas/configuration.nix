@@ -105,6 +105,7 @@ inputs:
     tig
     curl
     iptables
+    ethtool
     fd
     rclone
 
@@ -154,7 +155,7 @@ inputs:
     extraGroups = [ ];
     openssh.authorizedKeys.keys = [ ];
   };
-  users.groups.tanyabackup = {};
+  users.groups.tanyabackup = { };
   users.extraUsers.tanyabackup = {
     isSystemUser = true;
     createHome = true;
