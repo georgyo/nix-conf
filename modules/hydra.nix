@@ -37,7 +37,6 @@ in
         inputs.self.nixosModule
         overlays
         inputs.sops-nix.nixosModules.sops
-        inputs.home-manager.nixosModules.home-manager
       ];
 
     };
