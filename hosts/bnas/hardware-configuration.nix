@@ -9,39 +9,12 @@
   ...
 }:
 
-let
-  myKernel = pkgs.linuxKernel.buildLinux {
-    src = pkgs.fetchurl {
-      url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.19.14.tar.xz";
-      hash = "sha256-zei/Zzm+Sgd3/tu7pTMLgYjFVoDEWpIqTfoonL7G8YU=";
-    };
-    kernelPatches = [
-      pkgs.kernelPatches.bridge_stp_helper
-      pkgs.kernelPatches.request_key_helper
-      ({
-        name = "patch-6.19-redhat.patch";
-        patch = pkgs.fetchurl {
-          url = "https://src.fedoraproject.org/rpms/kernel/raw/f44/f/patch-6.19-redhat.patch";
-          hash = "sha256-EDM1BWSFacBZPgiEjHZURV14vZ/4p07DH/CvDL6Tw50=";
-        };
-      })
-      ({
-        name = "rhelver.patch";
-        patch = ./packages/0001-rhelver.patch;
-      })
-    ];
-    version = "6.19.14";
-  };
-  myKernelPackages = pkgs.linuxPackagesFor myKernel;
-in
-
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_19;
-  boot.kernelPackages = myKernelPackages;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_7_0;
   boot.initrd.availableKernelModules = [
     "ahci"
     "nvme"
