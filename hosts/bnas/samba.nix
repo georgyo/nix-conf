@@ -12,6 +12,7 @@
     enable = true;
     package = pkgs.samba.override { enableMDNS = true; };
     openFirewall = true;
+    nsswins = true;
     settings = {
       global = {
         "workgroup" = "WORKGROUP";
@@ -24,6 +25,9 @@
         "usershare allow guests" = "yes";
         "usershare owner only" = "no";
         "guest account" = "nobody";
+        "invalid users" = [
+          "root"
+        ];
       };
       homes = {
         "browseable" = "no";
