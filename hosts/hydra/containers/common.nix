@@ -86,8 +86,6 @@ host:
     nftables = {
       enable = true;
     };
-
-    interfaces = lib.mkForce {};
   };
 
   systemd.network.networks.eth0 = {

@@ -19,6 +19,8 @@ let
 
           beta = final.extend inputs.avalon-beta.overlays.default;
 
+          nodejs-slim_20 = final.nodejs-slim;
+
         })
       ];
       nixpkgs.config.allowUnfreePredicate =
