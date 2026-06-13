@@ -85,13 +85,25 @@ in
       wants = [ "network-online.target" ];
       wantedBy = [ "multi-user.target" ];
 
-      # When a configFile (secret) is supplied, pass it via a systemd
-      # credential so the secret can stay root-only (0400) on disk: systemd
-      # reads it as root and exposes it to the DynamicUser under $CREDENTIALS_DIRECTORY.
-      environment.TFA_CONFIG = if cfg.configFile != null then "%d/config" else toString configFile;
+      # For the non-secret generated config, point at the store path directly.
+      # A secret configFile is exposed via LoadCredential instead (see ExecStart).
+      environment = lib.optionalAttrs (cfg.configFile == null) {
+        TFA_CONFIG = toString configFile;
+      };
 
       serviceConfig = {
-        ExecStart = lib.getExe cfg.package;
+        # When a configFile (secret) is supplied, systemd reads it as root and
+        # exposes it to the DynamicUser under $CREDENTIALS_DIRECTORY, so the
+        # on-disk secret can stay root-only (0400). Resolve that path at runtime
+        # rather than baking it in.
+        ExecStart =
+          if cfg.configFile != null then
+            pkgs.writeShellScript "traefik-forward-auth-start" ''
+              export TFA_CONFIG="$CREDENTIALS_DIRECTORY/config"
+              exec ${lib.getExe cfg.package}
+            ''
+          else
+            lib.getExe cfg.package;
         Restart = "on-failure";
         RestartSec = 5;
 

@@ -33,10 +33,12 @@
   };
 
   # Nightly compressed dumps of all databases (matrix/mastodon/lemmy/nextcloud/...).
-  # Writes to /var/lib/postgresql/backup — make sure that volume has headroom.
+  # The module default is /var/backup/postgresql, which lives on the root fs;
+  # pin it to the large btrfs data volume so dumps don't fill root.
   services.postgresqlBackup = {
     enable = true;
     compression = "zstd";
+    location = "/var/lib/postgresql/backup";
   };
 
   containers.temp-pg.config = {
