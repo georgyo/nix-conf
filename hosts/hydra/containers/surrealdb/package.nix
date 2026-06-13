@@ -47,11 +47,6 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   doCheck = false;
 
-  checkFlags = [
-    # requires docker
-    "--skip=database_upgrade"
-  ];
-
   __darwinAllowLocalNetworking = true;
 
   passthru.tests.version = testers.testVersion {

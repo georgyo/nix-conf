@@ -34,19 +34,4 @@
       combinelimit 5
     '';
   };
-
-  services.ntp = {
-    enable = false;
-    extraConfig = ''
-      statsdir /var/lib/ntp/
-      statistics loopstats peerstats clockstats
-      filegen loopstats file loopstats type day enable
-      filegen peerstats file peerstats type day enable
-      filegen clockstats file clockstats type day enable
-      logconfig =syncall +clockall +peerall +sysall
-
-      tos minsane 2
-    '';
-    extraFlags = [ "-N" ];
-  };
 }

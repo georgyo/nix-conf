@@ -11,18 +11,6 @@
   services.traefik-forward-auth = {
     enable = true;
     configFile = config.age.secrets.traefik-forward-auth.path;
-    # settings = {
-    #   server.hostname = "auth.fu.io";
-    #   server.port = 4181;
-    #   cookies.domain = "fu.io";
-    #   defaultPortal = "main";
-    #   portals = [
-    #     {
-    #       name = "main";
-    #       providers = [ { tailscaleWhois = { }; } ];
-    #     }
-    #   ];
-    # };
   };
 
   services.whoami = {
@@ -41,12 +29,7 @@
   services.traefik = {
     enable = true;
 
-    # static.settings = {
     staticConfigOptions = {
-      experimental.plugins.demo = {
-        moduleName = "github.com/traefik/plugindemo";
-        version = "v0.2.2";
-      };
       experimental.localPlugins.tailscale-connectivity = {
         moduleName = "github.com/hhftechnology/tailscale-access";
       };
@@ -78,18 +61,12 @@
           http3.advertisedPort = "443";
           http.middlewares = [
             "tailscale-ipallowlist"
-            # "tailscale-auth"
-            # "limit"
           ];
-          # tls.certResolver = "acme";
         };
       };
     };
 
-    # dynamic = {
-    # dir = "/var/lib/traefik/dynamic";
     dynamicConfigOptions = {
-      # files.general.settings = {
       http = {
         middlewares = {
           tailscale-ipallowlist.ipAllowList.sourceRange = [ "100.64.0.0/10" ];
@@ -98,9 +75,6 @@
           };
           limit.buffering.maxRequestBodyBytes = "4000000000";
           limit.buffering.maxResponseBodyBytes = "4000000000";
-          test-auth.basicAuth.users = [
-            "admin:$2y$05$IPGM.s6O0uQmWbAByRN1oetJkkfQeWGIdrUlKq8DrLECyE3Wp801S"
-          ];
           tailscale-auth.plugin.tailscale-connectivity = {
             testDomain = "bnas.taila8b68.ts.net"; # REQUIRED: Your Tailscale domain
             sessionTimeout = "24h"; # How long verification lasts
@@ -147,22 +121,10 @@
           };
         };
         services = {
-          tailscale-nginx-auth.loadBalancer.servers = [ { url = "http://127.0.0.1:9999"; } ];
           traefik-auth.loadBalancer.servers = [ { url = "http://127.0.0.1:4181"; } ];
           whoami.loadBalancer.servers = [ { url = "http://127.0.0.1:4182"; } ];
-
-          service1 = {
-            loadBalancer = {
-              servers = [
-                {
-                  url = "http://localhost:8080";
-                }
-              ];
-            };
-          };
         };
       };
-      # };
     };
 
   };

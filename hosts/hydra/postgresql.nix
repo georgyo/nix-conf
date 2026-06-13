@@ -32,6 +32,15 @@
     enableJIT = true;
   };
 
+  # Nightly compressed dumps of all databases (matrix/mastodon/lemmy/nextcloud/...).
+  # The module default is /var/backup/postgresql, which lives on the root fs;
+  # pin it to the large btrfs data volume so dumps don't fill root.
+  services.postgresqlBackup = {
+    enable = true;
+    compression = "zstd";
+    location = "/var/lib/postgresql/backup";
+  };
+
   containers.temp-pg.config = {
     # Just to clear compile warnings
     boot.swraid.enable = false;
@@ -57,13 +66,13 @@
         export NEWDATA="${newpg.dataDir}"
         export OLDBIN="${config.services.postgresql.package}/bin"
         export NEWBIN="${newpg.package}/bin"
-          
+
         install -d -m 0700 -o postgres -g postgres "$NEWDATA"
         cd "$NEWDATA"
         sudo -u postgres $NEWBIN/initdb --data-checksums -D "$NEWDATA"
-          
+
         systemctl stop postgresql    # old one
-          
+
         sudo -u postgres $NEWBIN/pg_upgrade \
           --old-datadir "$OLDDATA" --new-datadir "$NEWDATA" \
           --old-bindir $OLDBIN --new-bindir $NEWBIN \

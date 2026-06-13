@@ -6,16 +6,18 @@ let
     { lib, ... }:
     {
       nixpkgs.overlays = [
-        (import ../overlay.nix)
         inputs.sops-nix.overlays.default
-        # self.overlay
         inputs.avalon.overlays.default
         inputs.blog_shamm_as.overlay
         (final: prev: {
           flakeInputs = inputs;
 
-          cloudflare_ips_v4 = final.lib.strings.splitString "\n" (builtins.readFile inputs.cloudflare_ips_v4);
-          cloudflare_ips_v6 = final.lib.strings.splitString "\n" (builtins.readFile inputs.cloudflare_ips_v6);
+          cloudflare_ips_v4 = final.lib.filter (s: s != "") (
+            final.lib.strings.splitString "\n" (builtins.readFile inputs.cloudflare_ips_v4)
+          );
+          cloudflare_ips_v6 = final.lib.filter (s: s != "") (
+            final.lib.strings.splitString "\n" (builtins.readFile inputs.cloudflare_ips_v6)
+          );
 
           beta = final.extend inputs.avalon-beta.overlays.default;
 

@@ -5,11 +5,9 @@
     local-wg-key.file = ./local-wg-key.age;
     "seedns/seed.yml".file = ./wg-netns.age;
     airportsilom_credentials.file = ./airportsilom_credentials.age;
-    traefik-forward-auth = {
-      file = ./traefik-forward-auth.age;
-      mode = "0444";
-    };
-    # sabnzbd_settings = ./sabnzbd.ini.age;
+    # Read by the traefik-forward-auth service via systemd LoadCredential,
+    # so it can stay root-only (agenix default 0400) rather than world-readable.
+    traefik-forward-auth.file = ./traefik-forward-auth.age;
     CF_API_KEY = {
       mode = "400";
       owner = "traefik";

@@ -24,7 +24,6 @@ in
     whois
     my-python3
     wireguard-tools
-    # mailutils
     lsof
     lsb-release
     jq
@@ -34,14 +33,11 @@ in
     tig
     gh
     usql
-    git-hub
-    hub
     btrfs-progs
     nftables
     openssl
     nixpkgs-fmt
     graphviz-nox
-    # pantalaimon
     gnupg
     grml-zsh-config
     atuin
@@ -74,7 +70,6 @@ in
   programs.tmux.enable = true;
   programs.zsh = rec {
     enable = true;
-    #promptInit = "";
     enableBashCompletion = true;
     shellInit = ''
       source ${pkgs.grml-zsh-config}/etc/zsh/zshrc

@@ -34,11 +34,6 @@ inputs:
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # networking.hostName = "nixos"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-
   nixpkgs.config.allowUnfreePredicate =
     pkg:
     builtins.elem (lib.getName pkg) [
@@ -48,7 +43,6 @@ inputs:
   programs = {
     zsh = rec {
       enable = true;
-      #promptInit = "";
       enableBashCompletion = true;
       shellInit = ''
         source ${pkgs.grml-zsh-config}/etc/zsh/zshrc
@@ -126,7 +120,9 @@ inputs:
   services.below.enable = true;
 
   services.nfs.server.enable = true;
-  services.nfs.server.exports = "/mnt/data/media        192.168.1.118(rw,async,no_wdelay,no_root_squash,insecure_locks,sec=sys,anonuid=1025,anongid=100)	192.168.1.148(rw,async,no_wdelay,no_root_squash,insecure_locks,sec=sys,anonuid=1025,anongid=100)	192.168.1.0/24(rw,async,no_wdelay,no_root_squash,insecure_locks,sec=sys,anonuid=1025,anongid=100)	192.168.0.0/24(rw,async,no_wdelay,crossmnt,no_root_squash,insecure_locks,sec=sys,anonuid=1025,anongid=100)";
+  # Specific trusted hosts keep no_root_squash; the broad LAN subnets are
+  # root_squash so a random host on the network can't write as root.
+  services.nfs.server.exports = "/mnt/data/media        192.168.1.118(rw,async,no_wdelay,no_root_squash,insecure_locks,sec=sys,anonuid=1025,anongid=100)	192.168.1.148(rw,async,no_wdelay,no_root_squash,insecure_locks,sec=sys,anonuid=1025,anongid=100)	192.168.1.0/24(rw,async,no_wdelay,root_squash,insecure_locks,sec=sys,anonuid=1025,anongid=100)	192.168.0.0/24(rw,async,no_wdelay,crossmnt,root_squash,insecure_locks,sec=sys,anonuid=1025,anongid=100)";
 
   users.users.root.shell = pkgs.zsh;
 
@@ -164,11 +160,6 @@ inputs:
     extraGroups = [ ];
     openssh.authorizedKeys.keys = [ ];
   };
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

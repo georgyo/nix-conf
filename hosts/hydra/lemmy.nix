@@ -14,6 +14,11 @@ in
       sopsFile = ./secrets/pict-rs.apikey;
       restartUnits = [ "lemmy.service" ];
     };
+    "pict-rs/env" = {
+      format = "dotenv";
+      sopsFile = ./secrets/pict-rs.env;
+      restartUnits = [ "pict-rs.service" ];
+    };
   };
 
   services.lemmy = {
@@ -46,7 +51,6 @@ in
     pictrsApiKeyFile = config.sops.secrets."pict-rs/apikey".path;
     nginx.enable = true;
     caddy.enable = false;
-    # database.createLocally = false;
     database.uri = "postgres:///lemmy?host=/run/postgresql&user=lemmy";
   };
 
@@ -54,14 +58,6 @@ in
     forceSSL = true;
     enableACME = true;
     quic = true;
-  };
-
-  sops.secrets = {
-    "pict-rs/env" = {
-      format = "dotenv";
-      sopsFile = ./secrets/pict-rs.env;
-      restartUnits = [ "pict-rs.service" ];
-    };
   };
 
   systemd.services.lemmy.environment = {

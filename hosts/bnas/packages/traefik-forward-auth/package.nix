@@ -24,9 +24,11 @@ buildGoModule.override { go = go_1_26; } (finalAttrs: {
     terser
   ];
 
-  # nixpkgs has Go 1.26.0 but go.mod requires 1.26.1
+  # nixpkgs currently ships Go 1.26.0 but upstream go.mod requires 1.26.1.
+  # Use --replace-quiet so this no-ops (rather than failing the build) once
+  # upstream bumps go.mod or nixpkgs catches up to 1.26.1.
   postPatch = ''
-    substituteInPlace go.mod --replace-fail "go 1.26.1" "go 1.26.0"
+    substituteInPlace go.mod --replace-quiet "go 1.26.1" "go 1.26.0"
   '';
 
   # Build the embedded client assets before Go compilation

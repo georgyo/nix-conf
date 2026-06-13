@@ -31,18 +31,6 @@
           '';
         };
 
-        # networking.firewall.extraCommands = ''
-        #   iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 22 -j REDIRECT --to-ports 2222
-        #   ip6tables -t nat -A PREROUTING -i eth0 -p tcp --dport 22 -j REDIRECT --to-ports 2222
-
-        #   iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-ports 3080
-        #   ip6tables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-ports 3080
-
-        #   iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 443 -j REDIRECT --to-ports 3000
-        #   ip6tables -t nat -A PREROUTING -i eth0 -p tcp --dport 443 -j REDIRECT --to-ports 3000
-
-        # '';
-
         services.forgejo = {
           enable = true;
           package = pkgs.forgejo;
@@ -124,13 +112,13 @@
               export NEWDATA="${newpg.dataDir}"
               export OLDBIN="${config.services.postgresql.package}/bin"
               export NEWBIN="${newpg.package}/bin"
-                
+
               install -d -m 0700 -o postgres -g postgres "$NEWDATA"
               cd "$NEWDATA"
               sudo -u postgres $NEWBIN/initdb --data-checksums -D "$NEWDATA"
-                
+
               systemctl stop postgresql    # old one
-                
+
               sudo -u postgres $NEWBIN/pg_upgrade \
                 --old-datadir "$OLDDATA" --new-datadir "$NEWDATA" \
                 --old-bindir $OLDBIN --new-bindir $NEWBIN \

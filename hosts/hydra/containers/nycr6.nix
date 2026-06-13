@@ -55,11 +55,6 @@ in
           (import ./modules/cloudflare_remoteip.nix "wiki")
         ];
 
-        security.acme = {
-          acceptTerms = true;
-          defaults.email = "acme@shamm.as";
-        };
-
         users.users.root.openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN8OQNxjZtd5aamPItqlEqAjbw7dOfSyXi2eMI5BFFfr grischard"
         ];
@@ -134,7 +129,7 @@ in
               extraConfig = ''
                 fastcgi_split_path_info ^(.+\.php)(/.+)$;
                 include ${pkgs.nginx}/conf/fastcgi.conf;
-                index = "index.php";
+                index index.php;
               '';
               locations = lib.fix (self: {
                 # Most of this matches the config from here:

@@ -1,11 +1,5 @@
 { config, pkgs, ... }:
 {
-  #services.nginx.virtualHosts."test.nycr.chat" = {
-  #  forceSSL = true;
-  #  enableACME = true;
-  #  locations."/".proxyPass = "http://192.168.55.10/";
-  #};
-
   containers.shammas = {
     autoStart = true;
     hostBridge = "virtbr0";

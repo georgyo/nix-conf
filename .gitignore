@@ -1,2 +1,9 @@
 /.jj
 result
+result-*
+
+# Never commit decrypted secret material or private keys
+*.dec
+*.key
+key.txt
+keys/*.txt

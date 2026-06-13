@@ -1,19 +1,11 @@
-# Copied from https://github.com/vic/vix/blob/main/modules/community/lib/%2Bmk-os.nix
+# Originally adapted from https://github.com/vic/vix/blob/main/modules/community/lib/%2Bmk-os.nix
 { inputs, lib, ... }:
 let
   flake.lib.mk-os = {
-    inherit mkNixos mkDarwin;
-    inherit wsl linux linux-arm;
-    inherit darwin darwin-intel;
+    inherit mkNixos linux;
   };
 
-  wsl = mkNixos "x86_64-linux" "wsl";
-
   linux = mkNixos "x86_64-linux" "nixos";
-  linux-arm = mkNixos "aarch64-linux" "nixos";
-
-  darwin-intel = mkDarwin "x86_64-darwin";
-  darwin = mkDarwin "aarch64-darwin";
 
   mkNixos =
     system: cls: name:
@@ -26,21 +18,6 @@ let
           networking.hostName = lib.mkDefault name;
           nixpkgs.hostPlatform = lib.mkDefault system;
           system.stateVersion = lib.mkDefault "25.11";
-        }
-      ];
-    };
-
-  mkDarwin =
-    system: name:
-    inputs.nix-darwin.lib.darwinSystem {
-      inherit system;
-      modules = [
-        inputs.self.modules.darwin.darwin
-        inputs.self.modules.darwin.${name}
-        {
-          networking.hostName = lib.mkDefault name;
-          nixpkgs.hostPlatform = lib.mkDefault system;
-          system.stateVersion = 6;
         }
       ];
     };
