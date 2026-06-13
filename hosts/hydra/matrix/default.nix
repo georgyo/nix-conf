@@ -27,11 +27,7 @@ let
     };
   };
 
-  fqdn = "nycr.chat";
   baseUrl = "https://nycr.chat:443";
-  serverConfig = {
-    "m.server" = "${fqdn}:443";
-  };
   clientConfig = {
     "m.homeserver" = {
       "base_url" = baseUrl;
@@ -82,8 +78,6 @@ in
       ];
       presence.enabled = true;
       enable_registration = false;
-      enable_registration_captcha = true;
-      recaptcha_public_key = "6LcrI1gpAAAAAKm0ySV8exH23RPWnTytZJNaM-f_";
       turn_uris = [
         "turn:${config.services.coturn.realm}:5349?transport=udp"
         "turn:${config.services.coturn.realm}:5349?transport=tcp"
@@ -92,7 +86,10 @@ in
       turn_user_lifetime = "1h";
       listeners = [
         {
-          bind_addresses = [ "" ];
+          bind_addresses = [
+            "127.0.0.1"
+            "::1"
+          ];
           port = 8447;
           resources = [
             {
@@ -126,7 +123,6 @@ in
     plugins = with config.services.matrix-synapse.package.plugins; [
       matrix-synapse-ldap3
       matrix-synapse-pam
-      #matrix-synapse-s3-storage-provider
     ];
     extraConfigFiles = [ config.sops.secrets."matrix/extra-config.yaml".path ];
   };
@@ -166,7 +162,6 @@ in
       forceSSL = true;
       enableACME = true;
       quic = true;
-      #locations."= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
       locations."= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
       locations."/".proxyPass = "http://127.0.0.1:8447";
     };
@@ -174,7 +169,6 @@ in
       forceSSL = true;
       enableACME = true;
       quic = true;
-      #locations."= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
       locations."= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
       locations."/".proxyPass = "http://127.0.0.1:8447";
     };

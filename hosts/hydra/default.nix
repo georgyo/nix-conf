@@ -21,10 +21,8 @@ with pkgs;
     ./syncthing.nix
     ./containers
     ./mastodon
-    # ./kubo.nix
     ./tailscale.nix
     ./secrets
-    # ./surrealdb.nix
     ./lemmy.nix
     ./bird.nix
     ./geoip.nix
@@ -46,12 +44,6 @@ with pkgs;
     "net.ipv4.tcp_congestion_control" = "bbr";
     "net.ipv4.tcp_ecn" = 1;
   };
-  # boot.loader.grub.efiSupport = true;
-  # boot.loader.grub.efiInstallAsRemovable = true;
-  # boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  # Define on which hard drive you want to install Grub.
-  # boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
-
   services.resolved.enable = true;
   systemd.network.wait-online.anyInterface = true;
   systemd.settings.Manager = {
@@ -65,43 +57,13 @@ with pkgs;
       value = "8192";
     }
   ];
-  #systemd.network = {
-  #    enable = true;
-  #    networks.eth0 = {
-  #      matchConfig = {
-  #        Name = "eth0";
-  #      };
-  #      gateway = [
-  #        "172.104.14.1"
-  #        "fe80::1"
-  #      ];
-  #      address = [
-  #        "172.104.14.163/24"
-  #        "2600:3c03::f03c:91ff:fed8:373c/128"
-  #      ];
-  #    };
-  #};
-
   networking = {
     hostName = "hydra"; # Define your hostname.
     domain = "shamm.as";
-    # hosts = {
-    #  "192.168.54.142" = [ "dir1.n.shamm.as" ];
-    #  "192.168.54.171" = [ "dir3.n.shamm.as" ];
-    #};
     usePredictableInterfaceNames = false;
 
     useNetworkd = true;
 
-    #defaultGateway = {
-    #  address = "172.104.14.1";
-    #  interface = "eth0";
-    #};
-    #defaultGateway6 = {
-    #  address = "fe80::1";
-    #  interface = "eth0";
-    #};
-    # nameservers = [ "1.1.1.1" "8.8.8.8" ];
     interfaces.eth0 = {
       ipv4 = {
         addresses = [
@@ -157,9 +119,6 @@ with pkgs;
       allowedTCPPorts = [
         80
         443
-        3000
-        4001
-        4002
         8000
         8080
         8448
@@ -173,7 +132,6 @@ with pkgs;
       ];
       allowedUDPPorts = [
         443
-        4001
         51820
         3478
         3479
@@ -197,10 +155,8 @@ with pkgs;
       allowPing = true;
       extraForwardRules = ''
         iifname eth0 ip daddr 172.104.15.252 accept
-        iifname eth0 ip daddr 192.168.181.165 accept
         iifname eth0 ip daddr 23.239.10.144 accept
         iifname eth0 ip daddr 23.239.10.184 accept
-        iifname eth0 ip daddr 23.239.9.39 accept
         iifname eth0 ip daddr 66.228.36.99 accept
       '';
       logRefusedConnections = false;
@@ -319,29 +275,6 @@ with pkgs;
   # system.stateVersion = "18.03"; # Did you read the comment?
   system.stateVersion = "22.11";
 
-  services.hydra = {
-    enable = false;
-    hydraURL = "http://hydra.shamm.as:3000"; # externally visible URL
-    notificationSender = "hydra@shamm.as"; # e-mail of hydra service
-    # a standalone hydra will require you to unset the buildMachinesFiles list to avoid using a nonexistant /etc/nix/machines
-    buildMachinesFiles = [ ];
-    # you will probably also want, otherwise *everything* will be built from scratch
-    useSubstitutes = true;
-  };
-
-  services.prosody.extraConfig = ''
-    turncredentials_secret = "${config.services.coturn.static-auth-secret}";
-    turncredentials_port = 3478;
-    turncredentials_ttl = 3600;
-    turncredentials = {
-      { type = "stun", host = "${config.services.coturn.realm}" },
-      { type = "turn", host = "${config.services.coturn.realm}", port = 5349},
-      { type = "turns", host = "${config.services.coturn.realm}", port = 5349, transport = "tcp" }
-    }
-  '';
-  services.prosody.extraPluginPaths = [ "/etc/prosody/plugins" ];
-  services.prosody.extraModules = [ "turncredentials" ];
-
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
@@ -367,25 +300,10 @@ with pkgs;
       quic = true;
       root = "/var/lib/acme/acme-challenges";
     };
-    virtualHosts."hydra.shamm.as" = {
-      forceSSL = true;
-      enableACME = true;
-      quic = true;
-      locations."/".proxyPass = "http://127.0.0.1:3000";
-    };
     virtualHosts."meet.nycr.chat" = {
       enableACME = true;
       forceSSL = true;
       quic = true;
-    };
-    virtualHosts."ipfs.scalable.io" = {
-      enableACME = true;
-      addSSL = true;
-      quic = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:4002";
-        proxyWebsockets = true;
-      };
     };
   };
 

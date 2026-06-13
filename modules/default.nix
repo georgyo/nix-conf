@@ -12,7 +12,7 @@
       default = self.overlay;
     };
 
-    # Default module, for use in dependent flakes. Deprecated, use nixosModules.default instead.
+    # Default module, for use in dependent flakes (also exposed as nixosModules.default).
     nixosModule =
       {
         config,

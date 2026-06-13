@@ -75,9 +75,11 @@
             default_2fa_method = "webauthn";
             authentication_backend.file.path = "/etc/authelia/users_database.yml";
             session.domain = "auth.fu.io";
-            storage.local.path = "/tmp/db.sqlite3";
+            # Persist in the instance StateDirectory (/var/lib/authelia-fu) so
+            # sessions and the user DB survive reboots, not in volatile /tmp.
+            storage.local.path = "/var/lib/authelia-fu/db.sqlite3";
             access_control.default_policy = "one_factor";
-            notifier.filesystem.filename = "/tmp/notifications.txt";
+            notifier.filesystem.filename = "/var/lib/authelia-fu/notifications.txt";
             webauthn.enable_passkey_login = true;
 
           };
@@ -94,17 +96,10 @@
         environment.etc."authelia/users_database.yml" = {
           mode = "0400";
           user = "authelia-fu";
+          # Define real users before enabling this instance. Generate password
+          # hashes with: authelia crypto hash generate argon2
           text = ''
-            users:
-              bob:
-                disabled: false
-                displayname: bob
-                # password of password
-                password: $argon2id$v=19$m=65536,t=3,p=4$2ohUAfh9yetl+utr4tLcCQ$AsXx0VlwjvNnCsa70u4HKZvFkC8Gwajr2pHGKcND/xs
-                email: bob@jim.com
-                groups:
-                  - admin
-                  - dev
+            users: {}
           '';
         };
 

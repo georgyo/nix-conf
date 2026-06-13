@@ -31,18 +31,6 @@
           '';
         };
 
-        # networking.firewall.extraCommands = ''
-        #   iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 22 -j REDIRECT --to-ports 2222
-        #   ip6tables -t nat -A PREROUTING -i eth0 -p tcp --dport 22 -j REDIRECT --to-ports 2222
-
-        #   iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-ports 3080
-        #   ip6tables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-ports 3080
-
-        #   iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 443 -j REDIRECT --to-ports 3000
-        #   ip6tables -t nat -A PREROUTING -i eth0 -p tcp --dport 443 -j REDIRECT --to-ports 3000
-
-        # '';
-
         services.forgejo = {
           enable = true;
           package = pkgs.forgejo;
@@ -98,45 +86,6 @@
         services.redis.servers."" = {
           enable = true;
         };
-
-        containers.temp-pg.config = {
-          # Just to clear compile warnings
-          boot.swraid.enable = false;
-
-          system.stateVersion = "23.11";
-          services.postgresql = {
-            enable = true;
-            package = pkgs.postgresql_17;
-
-            ## set a custom new dataDir
-            # dataDir = "/some/data/dir";
-          };
-        };
-
-        environment.systemPackages =
-          let
-            newpg = config.containers.temp-pg.config.services.postgresql;
-          in
-          [
-            (pkgs.writeScriptBin "upgrade-pg-cluster" ''
-              set -x
-              export OLDDATA="${config.services.postgresql.dataDir}"
-              export NEWDATA="${newpg.dataDir}"
-              export OLDBIN="${config.services.postgresql.package}/bin"
-              export NEWBIN="${newpg.package}/bin"
-                
-              install -d -m 0700 -o postgres -g postgres "$NEWDATA"
-              cd "$NEWDATA"
-              sudo -u postgres $NEWBIN/initdb --data-checksums -D "$NEWDATA"
-                
-              systemctl stop postgresql    # old one
-                
-              sudo -u postgres $NEWBIN/pg_upgrade \
-                --old-datadir "$OLDDATA" --new-datadir "$NEWDATA" \
-                --old-bindir $OLDBIN --new-bindir $NEWBIN \
-                "$@"
-            '')
-          ];
       };
 
   };

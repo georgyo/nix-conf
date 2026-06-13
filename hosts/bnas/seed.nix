@@ -19,7 +19,6 @@ let
         };
       };
     };
-    # // lib.optionalAttrs (type == "radarr") { package = pkgs.callPackage ./packages/radarr { }; };
 
     services.postgresql = {
       ensureUsers = [
@@ -145,10 +144,7 @@ in
       };
   };
 
-  # services.traefik.dynamic.files.seed.settings.http = {
   services.traefik.dynamicConfigOptions.http = {
-    middlewares.shared-backend-auth.headers.customrequestheaders.Authorization =
-      "Basic c2hhcmVkOnNoYXJlZA==";
     routers = {
       movies = {
         rule = "Host(`movies.seed.v.fu.io`)";

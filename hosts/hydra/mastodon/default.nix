@@ -7,7 +7,6 @@
       "mastodon-sidekiq.service"
       "mastodon-streaming.service"
       "mastodon-web.service"
-      "redis-mastodon.service"
     ];
     owner = config.services.mastodon.user;
     group = config.services.mastodon.group;
@@ -20,13 +19,13 @@
       fromAddress = "no-reply@nycr.social";
       host = "localhost";
       port = 25;
+      createLocally = false;
     };
     streamingProcesses = 3;
     mediaAutoRemove = {
       olderThanDays = 90;
       enable = true;
     };
-    smtp.createLocally = false;
     extraConfig = {
       RAILS_LOG_LEVEL = "warn";
       S3_ENABLED = "true";

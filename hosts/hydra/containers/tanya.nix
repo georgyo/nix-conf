@@ -35,11 +35,6 @@ in
           (import ./modules/cloudflare_remoteip.nix "wordpress")
         ];
 
-        security.acme = {
-          acceptTerms = true;
-          defaults.email = "acme@shamm.as";
-        };
-
         environment.systemPackages = with pkgs; [
           htop
           vim

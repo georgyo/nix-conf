@@ -37,7 +37,8 @@
         "path" = "/mnt/data/media";
         "browseable" = "yes";
         "read only" = "no";
-        "guest ok" = "yes";
+        # Require an authenticated user (global "security = user"); no anonymous writes.
+        "guest ok" = "no";
         "create mask" = "0644";
         "directory mask" = "1755";
         "force user" = "nobody";
