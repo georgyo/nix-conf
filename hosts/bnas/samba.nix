@@ -19,6 +19,9 @@
         "server string" = "bnas";
         "netbios name" = "bnas";
         "security" = "user";
+        # Unknown/anonymous logins fall back to the guest account instead of
+        # being rejected, enabling read-only guest access on shares below.
+        "map to guest" = "bad user";
         "unix password sync" = "yes";
         "usershare path" = "/var/lib/samba/usershares";
         "usershare max shares" = "100";
@@ -33,12 +36,24 @@
         "browseable" = "no";
         "writable" = "yes";
       };
+      # Explicit share that presents the connecting user's own home dir as
+      # "home" (browseable), alongside the per-username [homes] share above.
+      "home" = {
+        "path" = "%H";
+        "browseable" = "yes";
+        "writable" = "yes";
+        "guest ok" = "no";
+        "valid users" = "%U";
+      };
       "media" = {
         "path" = "/mnt/data/media";
         "browseable" = "yes";
-        "read only" = "no";
-        # Require an authenticated user (global "security = user"); no anonymous writes.
-        "guest ok" = "no";
+        # Read-only for guests; any authenticated user may write. All normal
+        # login users share the "users" primary group, while the guest account
+        # (nobody) does not, so @users == "all non-guest users".
+        "read only" = "yes";
+        "guest ok" = "yes";
+        "write list" = "@users";
         "create mask" = "0644";
         "directory mask" = "1755";
         "force user" = "nobody";
