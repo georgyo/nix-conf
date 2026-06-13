@@ -86,10 +86,7 @@ in
       turn_user_lifetime = "1h";
       listeners = [
         {
-          bind_addresses = [
-            "127.0.0.1"
-            "::1"
-          ];
+          bind_addresses = [ "" ];
           port = 8447;
           resources = [
             {

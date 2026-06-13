@@ -155,8 +155,10 @@ with pkgs;
       allowPing = true;
       extraForwardRules = ''
         iifname eth0 ip daddr 172.104.15.252 accept
+        iifname eth0 ip daddr 192.168.181.165 accept
         iifname eth0 ip daddr 23.239.10.144 accept
         iifname eth0 ip daddr 23.239.10.184 accept
+        iifname eth0 ip daddr 23.239.9.39 accept
         iifname eth0 ip daddr 66.228.36.99 accept
       '';
       logRefusedConnections = false;

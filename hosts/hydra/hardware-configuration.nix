@@ -55,6 +55,11 @@
         device = "UUID=fc4d02c3-5e58-4430-91a5-2a403a4b915d";
         fsType = "ext4";
       };
+      "/var/lib/ipfs" = {
+        device = "UUID=3e019d8b-bfa3-42e6-aa73-0f783694279a";
+        fsType = "btrfs";
+        options = btrfsOptions ++ [ "subvol=services/ipfs" ];
+      };
       "/var/lib/postgresql" = {
         device = "UUID=3e019d8b-bfa3-42e6-aa73-0f783694279a";
         fsType = "btrfs";
