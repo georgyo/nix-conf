@@ -69,19 +69,15 @@ inputs:
       configure = {
         customRC = "";
         customLuaRC = ''
-          vim.g.coq_settings = {
-              auto_start = true,
-          }
-            local coq = require "coq" -- add this
-
+          local coq = require "coq" 
           vim.lsp.config('nixd', coq.lsp_ensure_capabilities())
-            vim.lsp.enable('nixd')
+          vim.lsp.enable('nixd')
           vim.opt.completeopt = { "menuone", "noselect", "popup" } 
-
         '';
         packages.all.start = with pkgs.vimPlugins; [
-          # coc-nvim
+          coc-nvim
           coq_nvim
+          coq-lsp-nvim
           nvim-lspconfig
           nvim-treesitter.withAllGrammars # to install all grammars (including nix)
         ];
