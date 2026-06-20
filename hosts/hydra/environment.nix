@@ -77,8 +77,4 @@ in
     loginShellInit = shellInit;
     interactiveShellInit = shellInit;
   };
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
 }
