@@ -80,6 +80,10 @@
     device = "tank/home/tanyabackup";
     fsType = "zfs";
   };
+  fileSystems."/home/habackup" = {
+    device = "tank/home/habackup";
+    fsType = "zfs";
+  };
   fileSystems."/mnt/data" = {
     device = "tank/data";
     fsType = "zfs";
