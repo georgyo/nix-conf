@@ -52,6 +52,10 @@
     settings.Resolve.MulticastDNS = true;
   };
 
+  systemd.network.networks."40-enp196s0".networkConfig = {
+    IPv6AcceptRA = false;
+  };
+
   systemd.services.tailscaled.environment = {
     "TS_DEBUG_FIREWALL_MODE" = "auto";
   };

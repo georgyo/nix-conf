@@ -35,6 +35,7 @@
   boot.zfs = {
     removeLinuxDRM = true;
     package = pkgs.zfs_2_4;
+    forceImportRoot = false;
   };
 
   services.zfs = {
