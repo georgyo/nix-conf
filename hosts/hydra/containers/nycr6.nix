@@ -146,7 +146,9 @@ in
                   # as required starting from v1.40
                   add_header X-Content-Type-Options "nosniff";
                   # Serve uploaded HTML as plaintext, don't execute SHTML
-                  types { text/plain html htm shtml phtml; }
+                  location ~* \.(html?|shtml|phtml)$ {
+                    types { text/plain html htm shtml phtml; }
+                  }
                 '';
                 "~ ^/w/resources/(assets|lib|src)".extraConfig = ''
                   try_files $uri =404;
