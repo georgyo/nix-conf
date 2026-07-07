@@ -141,14 +141,29 @@ in
 
                   '';
                 };
-                "/w/images".extraConfig = ''
-                  # Separate location for images/ so .php execution won't apply
-                  # as required starting from v1.40
-                  add_header X-Content-Type-Options "nosniff";
-                  # Serve uploaded HTML as plaintext, don't execute SHTML
-                  location ~* \.(html?|shtml|phtml)$ {
-                    types { text/plain html htm shtml phtml; }
+                "~* ^/(w/)?images/.+\\.svgz?$".extraConfig = ''
+                  # Uploaded SVGs are served with their real MIME type, but
+                  # sandboxed when opened directly as documents. This reduces
+                  # the risk of uploaded SVGs acting as same-origin web apps.
+                  #
+                  # Do not add allow-scripts or allow-same-origin here.
+                  add_header X-Content-Type-Options "nosniff" always;
+                  add_header Content-Security-Policy "sandbox; default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline';" always;
+
+                  types {
+                    image/svg+xml svg svgz;
                   }
+                '';
+                "~* ^/(w/)?images/.+\\.(html?|shtml|phtml)$".extraConfig = ''
+                  # Treat uploaded HTML-like files as inert text.
+                  add_header X-Content-Type-Options "nosniff" always;
+                  types { text/plain html htm shtml phtml; }
+                '';
+                "/w/images".extraConfig = ''
+                  # Uploaded files are served statically; PHP execution is intentionally not
+                  # available under images.
+                  add_header X-Content-Type-Options "nosniff" always;
+                  try_files $uri =404;
                 '';
                 "~ ^/w/resources/(assets|lib|src)".extraConfig = ''
                   try_files $uri =404;
@@ -156,11 +171,7 @@ in
                   expires 7d;
                 '';
 
-                "= /favicon.ico".extraConfig = ''
-                  alias /w/images/6/64/Favicon.ico;
-                  add_header Cache-Control "public";
-                  expires 7d;
-                '';
+                "= /favicon.ico" = { };
                 "/w/rest.php/".tryFiles = "$uri $uri/ /w/rest.php?$query_string";
 
                 "~ ^/w/(skins|extensions)/.+\\.(css|js|gif|jpg|jpeg|png|svg|wasm|ttf|woff|woff2)$".extraConfig = ''
