@@ -160,8 +160,6 @@ in
                   types { text/plain html htm shtml phtml; }
                 '';
                 "/w/images".extraConfig = ''
-                  # Uploaded files are served statically; PHP execution is intentionally not
-                  # available under images.
                   add_header X-Content-Type-Options "nosniff" always;
                   try_files $uri =404;
                 '';
