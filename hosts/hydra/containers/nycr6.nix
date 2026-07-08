@@ -148,7 +148,7 @@ in
                   add_header Content-Security-Policy "default-src 'none'; style-src 'unsafe-inline' data:; font-src data:; img-src data: 'self'; media-src data: 'self'; object-src 'self'" always;
                   try_files $uri =404;
                 '';
-                "~ ^/(w/)?images".extraConfig = ''
+                "/w/images".extraConfig = ''
                   # Equivalent of the images/ .htaccess: no MIME sniffing, PHP is
                   # never executed here (no fastcgi route), and a locked-down CSP.
                   # Keep CSP in sync with ContentSecurityPolicy::UPLOAD_CSP.
