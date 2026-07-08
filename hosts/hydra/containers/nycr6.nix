@@ -141,26 +141,19 @@ in
 
                   '';
                 };
-                "~* ^/(w/)?images/.+\\.svgz?$".extraConfig = ''
-                  # Uploaded SVGs are served with their real MIME type, but
-                  # sandboxed when opened directly as documents. This reduces
-                  # the risk of uploaded SVGs acting as same-origin web apps.
-                  #
-                  # Do not add allow-scripts or allow-same-origin here.
+                "~* ^/(w/)?images/.+\\.pdf$".extraConfig = ''
+                  # Chrome wants no sandbox and object-src 'self' to load PDFs.
+                  # Keep CSP in sync with ContentSecurityPolicy::UPLOAD_CSP_PDF.
                   add_header X-Content-Type-Options "nosniff" always;
-                  add_header Content-Security-Policy "sandbox; default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline';" always;
-
-                  types {
-                    image/svg+xml svg svgz;
-                  }
+                  add_header Content-Security-Policy "default-src 'none'; style-src 'unsafe-inline' data:; font-src data:; img-src data: 'self'; media-src data: 'self'; object-src 'self'" always;
+                  try_files $uri =404;
                 '';
-                "~* ^/(w/)?images/.+\\.(html?|shtml|phtml)$".extraConfig = ''
-                  # Treat uploaded HTML-like files as inert text.
+                "~ ^/(w/)?images".extraConfig = ''
+                  # Equivalent of the images/ .htaccess: no MIME sniffing, PHP is
+                  # never executed here (no fastcgi route), and a locked-down CSP.
+                  # Keep CSP in sync with ContentSecurityPolicy::UPLOAD_CSP.
                   add_header X-Content-Type-Options "nosniff" always;
-                  types { text/plain html htm shtml phtml; }
-                '';
-                "/w/images".extraConfig = ''
-                  add_header X-Content-Type-Options "nosniff" always;
+                  add_header Content-Security-Policy "default-src 'none'; style-src 'unsafe-inline' data:; font-src data:; img-src data: 'self'; media-src data: 'self'; sandbox" always;
                   try_files $uri =404;
                 '';
                 "~ ^/w/resources/(assets|lib|src)".extraConfig = ''
