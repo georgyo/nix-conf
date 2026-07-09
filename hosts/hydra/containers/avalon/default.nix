@@ -55,7 +55,7 @@
       extraConfig = ''
         add_header Access-Control-Allow-Origin $avalon_api_cors always;
         add_header Access-Control-Allow-Methods "GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS" always;
-        add_header Access-Control-Allow-Headers "Authorization, Content-Type, Accept, Origin, X-Requested-With" always;
+        add_header Access-Control-Allow-Headers "Authorization, Content-Type, Accept, Origin, X-Requested-With, X-Avalon-Auth" always;
         add_header Access-Control-Allow-Credentials "true" always;
         add_header Access-Control-Max-Age 86400 always;
         add_header Vary Origin always;
