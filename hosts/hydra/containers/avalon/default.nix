@@ -32,6 +32,40 @@
     };
   };
 
+  # Echo the Origin header back only for origins allowed to hit the API.
+  services.nginx.appendHttpConfig = ''
+    map $http_origin $avalon_api_cors {
+      default "";
+      "~^https://(www\.)?avalon\.onl$" $http_origin;
+      "~^https?://localhost(:[0-9]+)?$" $http_origin;
+      "~^https?://127\.0\.0\.1(:[0-9]+)?$" $http_origin;
+    }
+  '';
+
+  services.nginx.virtualHosts."api.avalon.onl" = {
+    enableACME = true;
+    quic = true;
+    http3 = true;
+    forceSSL = true;
+    locations."/".return = "404";
+    locations."/api" = {
+      recommendedProxySettings = true;
+      proxyWebsockets = true;
+      proxyPass = "http://192.168.55.14:8001";
+      extraConfig = ''
+        add_header Access-Control-Allow-Origin $avalon_api_cors always;
+        add_header Access-Control-Allow-Methods "GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "Authorization, Content-Type, Accept, Origin, X-Requested-With" always;
+        add_header Access-Control-Allow-Credentials "true" always;
+        add_header Access-Control-Max-Age 86400 always;
+        add_header Vary Origin always;
+        if ($request_method = OPTIONS) {
+          return 204;
+        }
+      '';
+    };
+  };
+
   containers.avalon = {
     autoStart = true;
     hostBridge = "virtbr0";
