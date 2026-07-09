@@ -37,6 +37,7 @@
     map $http_origin $avalon_api_cors {
       default "";
       "~^https://(www\.)?avalon\.onl$" $http_origin;
+      "~^https://ocaml\.avalon\.onl$" $http_origin;
       "~^https?://localhost(:[0-9]+)?$" $http_origin;
       "~^https?://127\.0\.0\.1(:[0-9]+)?$" $http_origin;
     }
