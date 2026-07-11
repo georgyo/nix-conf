@@ -1,0 +1,31 @@
+name: Build NixOS configs
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - hydra
+          - bnas
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: nixbuild/nix-quick-install-action@v35
+
+      - uses: nixbuild/nixbuild-action@v25
+        with:
+          nixbuild_token: ${{ secrets.nixbuild_token }}
+
+      - name: Build ${{ matrix.config }}
+        run: |
+          nix build \
+            --extra-experimental-features 'nix-command flakes' \
+            --print-build-logs \
+            '.#nixosConfigurations.${{ matrix.config }}.config.system.build.toplevel'
