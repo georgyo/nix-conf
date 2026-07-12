@@ -12,6 +12,9 @@
       ];
 
       nix = {
+        settings = {
+          builders-use-substitutes = true;
+        };
         buildMachines =
           builtins.map
             (system: {
