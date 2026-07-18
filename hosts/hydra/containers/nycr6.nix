@@ -71,6 +71,7 @@ in
           lua51Packages.lua
           python3Packages.pygments
           curl
+          librsvg
         ];
 
         networking.firewall.allowedUDPPorts = [ 443 ];
