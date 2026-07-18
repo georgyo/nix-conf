@@ -25,6 +25,7 @@ inputs:
     ./networking.nix
     ./smart.nix
     ./jellyfin.nix
+    ./steamvm
   ];
 
   # Set your time zone.
@@ -39,6 +40,8 @@ inputs:
     builtins.elem (lib.getName pkg) [
       "plexmediaserver"
       "unrar"
+      "steamcmd"
+      "steam-unwrapped"
     ];
   programs = {
     zsh = rec {
