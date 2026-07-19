@@ -71,6 +71,17 @@
           # are on different origins (e.g. reads from S3/CDN at cacheUrl), so the
           # landing page can fetch stats from ${serverUrl}/api/cache-stats.
           serverUrl = "https://niks3.fu.io";
+
+          oidc.providers = {
+            github = {
+              issuer = "https://token.actions.githubusercontent.com";
+              audience = "https://niks3.fu.io";
+              boundClaims = {
+                repository_owner = [ "georgyo" ];
+              };
+              boundSubject = [ "repo:georgyo/*:*" ];
+            };
+          };
         };
       };
   };
