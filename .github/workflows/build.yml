@@ -14,10 +14,16 @@ jobs:
         config:
           - hydra
           - bnas
+    permissions:
+      id-token: write
     steps:
       - uses: actions/checkout@v6
 
       - uses: DeterminateSystems/nix-installer-action@main
+
+      - uses: Mic92/niks3-action@v1
+        with:
+          server-url: https://niks3.fu.io
 
       - uses: nixbuild/nixbuild-action@v25
         with:
