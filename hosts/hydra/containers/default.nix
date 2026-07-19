@@ -39,5 +39,6 @@
     # ./surrealdb
     ./pocketid
     # ./authelia
+    ./niks3
   ];
 }

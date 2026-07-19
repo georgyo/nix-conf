@@ -9,6 +9,11 @@
     import-tree.url = "github:vic/import-tree";
     flake-file.url = "github:vic/flake-file";
 
+    niks3 = {
+      url = "github:Mic92/niks3";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
