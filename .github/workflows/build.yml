@@ -25,10 +25,6 @@ jobs:
         with:
           server-url: https://niks3.fu.io
 
-      - uses: nixbuild/nixbuild-action@v25
-        with:
-          nixbuild_token: ${{ secrets.nixbuild_token }}
-
       - name: Build ${{ matrix.config }}
         run: |
           nix build \
