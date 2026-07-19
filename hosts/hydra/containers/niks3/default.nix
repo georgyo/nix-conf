@@ -1,5 +1,21 @@
 { config, pkgs, ... }:
 {
+
+  services.nginx.virtualHosts."niks3.fu.io" = {
+    enableACME = true;
+    quic = true;
+    http3 = true;
+    forceSSL = true;
+    serverAliases = [
+      "niks3.fu.io"
+    ];
+    locations."/" = {
+      recommendedProxySettings = true;
+      proxyWebsockets = true;
+      proxyPass = "http://192.168.55.20:5751";
+    };
+  };
+
   containers.niks3 = {
     autoStart = true;
     hostBridge = "virtbr0";
@@ -8,7 +24,7 @@
     enableTun = true;
 
     config =
-      { ... }:
+      { config, ... }:
       {
         nixpkgs.pkgs = pkgs;
         imports = [
@@ -22,38 +38,34 @@
             keyFile = "/var/lib/sops-nix/key.txt";
             generateKey = true;
           };
-         defaultSopsFile = ./secrets/secrets.yaml;
-  secrets.niks3-api-token.owner = "niks3";
-  secrets.niks3-signing-key.owner = "niks3";
-  secrets.niks3-s3-access-key.owner = "niks3";
-  secrets.niks3-s3-secret-key.owner = "niks3";
-         # secrets."pocketid.env" = {
-         #   sopsFile = ./secrets/pocketid.env;
-         #   format = "dotenv";
-         #   restartUnits = [
-         #     "pocket-id.service"
-         #   ];
-         # };
+          defaultSopsFile = ./secrets/secrets.yaml;
+          secrets.niks3-api-token.owner = "niks3";
+          secrets.niks3-signing-key.owner = "niks3";
+          secrets.niks3-s3-access-key.owner = "niks3";
+          secrets.niks3-s3-secret-key.owner = "niks3";
         };
+        networking.firewall.allowedUDPPorts = [ ];
+        networking.firewall.allowedTCPPorts = [ 5751 ];
         services.niks3 = {
           enable = true;
+          httpAddr = "0.0.0.0:5751";
 
           s3 = {
             endpoint = "s3.us-east-2.wasabisys.com"; # or your S3-compatible endpoint
-            bucket = "nix";
+            bucket = "cache.fu.io";
             useSSL = true;
-            accessKeyFile = "/run/secrets/s3-access-key";
-            secretKeyFile = "/run/secrets/s3-secret-key";
+            accessKeyFile = config.sops.secrets."niks3-s3-access-key".path;
+            secretKeyFile = config.sops.secrets."niks3-s3-secret-key".path;
           };
           # API authentication token (minimum 36 characters)
-          apiTokenFile = "/run/secrets/niks3-api-token";
+          apiTokenFile = config.sops.secrets."niks3-api-token".path;
 
           # Signing keys for NAR signing
-          signKeyFiles = [ "/run/secrets/niks3-signing-key" ];
+          signKeyFiles = [ config.sops.secrets."niks3-signing-key".path ];
 
           # Public cache URL (optional) - if exposed via https
           # Generates a landing page with usage instructions and public keys
-          cacheUrl = "https://s3.us-east-2.wasabisys.com/nix";
+          cacheUrl = "https://cache.fu.io";
 
           # Public niks3 server URL (optional). Set when the cache and niks3 server
           # are on different origins (e.g. reads from S3/CDN at cacheUrl), so the
