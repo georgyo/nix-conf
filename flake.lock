@@ -32,11 +32,11 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1784707668,
-        "narHash": "sha256-CRiJVEEpxJecTfFNaH0IgRmNmCVVYjRpzxkf8Km6mmY=",
+        "lastModified": 1784802732,
+        "narHash": "sha256-bQ6s/KemMt9azuESLPhGCX/M25vqmEgE7U77yFjmp3g=",
         "owner": "georgyo",
         "repo": "avalon",
-        "rev": "2a067cda01763a99d36e57a5d3d0dcc80615d86a",
+        "rev": "bec48fd547fae4714a598cdd055ff97320ba7086",
         "type": "github"
       },
       "original": {
@@ -372,11 +372,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1784497964,
-        "narHash": "sha256-vlHUuqAcbcH2RKmHbPiuQzbv1pnzzavXnI62RD0bqCU=",
+        "lastModified": 1784796856,
+        "narHash": "sha256-wWFrV5/Qbm+lyt5x20E/bSbfJiGKMo4RCxZV8cl/WZI=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "241313f4e8e508cb9b13278c2b0fa25b9ca27163",
+        "rev": "e2587caef70cea85dd97d7daab492899902dbf5d",
         "type": "github"
       },
       "original": {
