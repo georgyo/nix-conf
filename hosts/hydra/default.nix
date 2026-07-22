@@ -192,10 +192,10 @@ with pkgs;
   services.openssh = {
     enable = true;
     authorizedKeysFiles = [ "/etc/ssh/authorized_keys.d/%u" ];
-    moduliFile = pkgs.runCommand "moduli" { } ''
-      ${pkgs.gawk}/bin/awk '$5 >= 3071' ${config.programs.ssh.package}/etc/ssh/moduli > $out
-    '';
     settings = {
+      ModuliFile = "${pkgs.runCommand "moduli" { } ''
+        ${pkgs.gawk}/bin/awk '$5 >= 3071' ${config.programs.ssh.package}/etc/ssh/moduli > $out
+      ''}";
       PermitRootLogin = "no";
       Ciphers = [
         # "chacha20-poly1305@openssh.com"
