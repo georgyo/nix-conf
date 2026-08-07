@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: NixOS/nix-installer-action@main
 
       - uses: Mic92/niks3-action@v1
         with:
