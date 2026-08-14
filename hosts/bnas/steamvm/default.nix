@@ -36,7 +36,7 @@ in
           openFirewall = true;
 
           servers.palworld = lib.recursiveUpdate presets.palworld {
-            enable = true;
+            enable = false;
           };
         };
 
