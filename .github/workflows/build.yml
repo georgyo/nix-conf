@@ -7,13 +7,20 @@ on:
 
 jobs:
   build:
+    name: Build ${{ matrix.name }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        config:
-          - hydra
-          - bnas
+        include:
+          - name: hydra
+            installable: nixosConfigurations.hydra.config.system.build.toplevel
+          - name: bnas
+            installable: nixosConfigurations.bnas.config.system.build.toplevel
+          # Every flake input source tree, so later builds substitute them
+          # from the cache instead of fetching from GitHub.
+          - name: flake-inputs
+            installable: packages.x86_64-linux.flake-inputs
     permissions:
       id-token: write
     steps:
@@ -25,6 +32,6 @@ jobs:
         with:
           server-url: https://niks3.fu.io
 
-      - name: Build ${{ matrix.config }}
+      - name: Build ${{ matrix.name }}
         run: |
-          nix build '.#nixosConfigurations.${{ matrix.config }}.config.system.build.toplevel'
+          nix build '.#${{ matrix.installable }}'
