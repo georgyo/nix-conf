@@ -160,7 +160,6 @@ in
         entryPoints = [ "webprivate" ];
         middlewares = [
           "tailscale-ipallowlist"
-          "traefik-forward-auth-shammas"
         ];
       };
       music = {
@@ -197,7 +196,6 @@ in
         service = "qbittorrent";
         entryPoints = [ "webprivate" ];
         middlewares = [
-          "traefik-forward-auth-shammas"
           "clear-referer"
         ];
       };
@@ -206,7 +204,7 @@ in
         tls.certResolver = "acme";
         service = "sabnzbd";
         entryPoints = [ "webprivate" ];
-        middlewares = [ "traefik-forward-auth-shammas" ];
+        middlewares = [ ];
       };
 
     };
