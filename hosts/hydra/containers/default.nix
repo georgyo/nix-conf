@@ -40,5 +40,6 @@
     ./pocketid
     # ./authelia
     ./niks3
+    ./tranquil-pds
   ];
 }

@@ -30,6 +30,16 @@ creation_rules:
         - *hydra_root
         - *hydra_host
         - *niks3_host
+  # TODO: add the tranquil-pds container's age key (generated on first boot at
+  # /var/lib/nixos-containers/tranquil-pds/var/lib/sops-nix/key.txt), then run
+  # `sops updatekeys hosts/hydra/containers/tranquil-pds/secrets/tranquil-pds.env`
+  - path_regex: hosts/hydra/containers/tranquil-pds/secrets/.*$
+    key_groups:
+    - pgp:
+        - *hydra_pgp
+      age:
+        - *hydra_root
+        - *hydra_host
   - path_regex: hosts/hydra/(.*/)?secrets/.*$
     key_groups:
     - pgp:
