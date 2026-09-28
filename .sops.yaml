@@ -5,7 +5,7 @@ keys:
   - &pocketid_host age13y0ewtnlh46ncnzu54svglam03s5a9qwvh6afqpgjlqm6y3mjq2qg08w4u
   - &authelia_host age1svtgcez4ts4tey7cnudsuthyyt5eewv7t626m23u8s0mcluxmv2sdygcz0
   - &niks3_host age1gng3uhs9j0rnax8jaa7c2qqsz74jq3rc6xuevqvsg4qthj90xvnqm5h9ru
-  - &pds_host age1ucqt07zalnjpzems6vlsfs7d4tfn269kxsezwqvvyus0gftampfs69tm3e
+  - &pds_host age1xdfgm0pgdxgfkqllfh9gxle69a0sqeg0txaxa9jgs86enx25wulstuz755
 creation_rules:
   - path_regex: hosts/hydra/containers/pocketid/secrets/.*$
     key_groups:

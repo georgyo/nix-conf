@@ -69,6 +69,8 @@
               host = "0.0.0.0";
               port = 3000;
               contact_email = "pds@shamm.as";
+              enable_pds_hosted_did_web = true;
+              user_handle_domains = [ "shamm.as" ];
             };
             email = {
               from_address = "pds@shamm.as";
