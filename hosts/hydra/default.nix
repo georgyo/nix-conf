@@ -28,7 +28,6 @@ with pkgs;
     ./geoip.nix
   ];
 
-  services.murmur.enable = true;
   documentation.info.enable = false;
 
   # Use the GRUB 2 boot loader.
@@ -128,7 +127,6 @@ with pkgs;
         5350
         9898
         9969
-        64738
       ];
       allowedUDPPorts = [
         443
@@ -138,7 +136,6 @@ with pkgs;
         5349
         5350
         9969
-        64738
       ];
       allowedUDPPortRanges = [
         {
