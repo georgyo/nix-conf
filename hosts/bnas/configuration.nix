@@ -35,6 +35,9 @@ inputs:
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Blank (and DPMS-off) the text console after 10 minutes of inactivity.
+  boot.kernelParams = [ "consoleblank=600" ];
+
   nixpkgs.config.allowUnfreePredicate =
     pkg:
     builtins.elem (lib.getName pkg) [
