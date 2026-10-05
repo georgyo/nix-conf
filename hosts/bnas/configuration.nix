@@ -35,8 +35,18 @@ inputs:
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Blank (and DPMS-off) the text console after 10 minutes of inactivity.
+  # Blank the text console after 10 minutes of inactivity.
   boot.kernelParams = [ "consoleblank=600" ];
+
+  # The default console blank (FB_BLANK_NORMAL) leaves amdgpu's CRTC running,
+  # so switch the VT blanking mode to powerdown to actually turn the display off.
+  systemd.services.console-powerdown = {
+    description = "Power off the display when the console blanks";
+    wantedBy = [ "multi-user.target" ];
+    environment.TERM = "linux";
+    serviceConfig.Type = "oneshot";
+    script = "${pkgs.util-linux}/bin/setterm --powersave powerdown < /dev/tty1 > /dev/tty1";
+  };
 
   nixpkgs.config.allowUnfreePredicate =
     pkg:
