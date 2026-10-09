@@ -125,7 +125,6 @@ in
         age.secrets.autobrr-session.file = ./secrets/autobrr-session.age;
         services.autobrr = {
           enable = true;
-          secretFile = config.age.secrets.autobrr-session.path;
           settings = {
             host = "0.0.0.0";
             port = 7474;
