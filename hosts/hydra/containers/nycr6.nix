@@ -57,6 +57,7 @@ in
 
         users.users.root.openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN8OQNxjZtd5aamPItqlEqAjbw7dOfSyXi2eMI5BFFfr grischard"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOL6l8xhfepeJlAK4igd/EuYqqJYlBU6c3qG3ISyOuC0 j@june.site"
         ];
 
         environment.systemPackages = with pkgs; [
