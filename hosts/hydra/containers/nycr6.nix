@@ -129,6 +129,7 @@ in
               quic = true;
               default = true;
               extraConfig = ''
+                client_max_body_size 21M;
                 fastcgi_split_path_info ^(.+\.php)(/.+)$;
                 include ${pkgs.nginx}/conf/fastcgi.conf;
                 index index.php;
