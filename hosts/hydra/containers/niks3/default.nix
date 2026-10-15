@@ -72,6 +72,11 @@
           # landing page can fetch stats from ${serverUrl}/api/cache-stats.
           serverUrl = "https://niks3.fu.io";
 
+          gc = {
+            olderThan = "120d";
+            failedUploadsOlderThan = "80d";
+          };
+
           oidc.providers = {
             github = {
               issuer = "https://token.actions.githubusercontent.com";
