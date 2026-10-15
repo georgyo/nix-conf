@@ -73,8 +73,8 @@
           serverUrl = "https://niks3.fu.io";
 
           gc = {
-            olderThan = "120d";
-            failedUploadsOlderThan = "80d";
+            olderThan = "2880h";
+            failedUploadsOlderThan = "1920h";
           };
 
           oidc.providers = {
