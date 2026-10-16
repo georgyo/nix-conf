@@ -23,8 +23,8 @@ let
     extraConfig = ''
       log_errors = On
       display_errors = Off
-      upload_max_filesize = 20M
-      post_max_size = 21M
+      upload_max_filesize = 50M
+      post_max_size = 51M
       pcre.backtrack_limit = 2000000
     '';
   };
@@ -129,7 +129,7 @@ in
               quic = true;
               default = true;
               extraConfig = ''
-                client_max_body_size 21M;
+                client_max_body_size 51M;
                 fastcgi_split_path_info ^(.+\.php)(/.+)$;
                 include ${pkgs.nginx}/conf/fastcgi.conf;
                 index index.php;
