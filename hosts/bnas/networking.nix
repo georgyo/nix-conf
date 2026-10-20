@@ -97,10 +97,12 @@
             </service-group>
       '';
     };
-    publish.hinfo = true;
-    publish.enable = true;
-    publish.addresses = true;
-    publish.userServices = true;
+    settings.publish = {
+      disable-publishing = false;
+      disable-user-service-publishing = false;
+      publish-addresses = true;
+      publish-hinfo = true;
+    };
   };
 
 }

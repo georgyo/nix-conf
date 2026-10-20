@@ -101,6 +101,7 @@ in
         };
         services.sabnzbd = {
           enable = true;
+          configFile = null;
           allowConfigWrite = true;
           secretFiles = [
             config.age.secrets.sabnzbd_settings.path
