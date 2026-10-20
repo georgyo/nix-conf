@@ -13,7 +13,6 @@ let
       enabled
       ++ (with all; [
         imagick
-        opcache
         apcu
         wikidiff2
         luasandbox

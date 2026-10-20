@@ -6,7 +6,6 @@ let
       enabled
       ++ (with all; [
         imagick
-        opcache
         apcu
         redis
       ])
