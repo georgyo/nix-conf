@@ -13,8 +13,6 @@ let
     extraConfig = ''
       log_errors = On
       display_errors = Off
-      ; Mitigation for CVE-2026-109618 / CVE-2026-109619
-      session.upload_progress.enabled = Off
     '';
   };
 in
@@ -80,15 +78,6 @@ in
               enableACME = true;
               forceSSL = true;
               documentRoot = "/srv/http/";
-              # Mitigation for CVE-2026-109618 / CVE-2026-109619: lock upload
-              # progress off and reject multipart bodies before PHP parses them.
-              # Note: this blocks WordPress media uploads until PHP is patched.
-              extraConfig = ''
-                php_admin_flag session.upload_progress.enabled off
-                <If "req('Content-Type') =~ /multipart/i">
-                  Require all denied
-                </If>
-              '';
             };
             extraConfig = ''
                 <Directory "/srv/http">
