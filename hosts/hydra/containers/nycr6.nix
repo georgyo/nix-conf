@@ -25,6 +25,8 @@ let
       upload_max_filesize = 50M
       post_max_size = 51M
       pcre.backtrack_limit = 2000000
+      ; Mitigation for CVE-2026-109618 / CVE-2026-109619
+      session.upload_progress.enabled = Off
     '';
   };
 
@@ -115,12 +117,22 @@ in
                 "pm.min_spare_servers" = 5;
                 "pm.max_spare_servers" = 10;
                 "pm.max_requests" = 500;
+                # Mitigation for CVE-2026-109618 / CVE-2026-109619
+                "php_admin_flag[session.upload_progress.enabled]" = "off";
               };
             };
           };
 
           nginx = {
             enable = true;
+            # Mitigation for CVE-2026-109618 / CVE-2026-109619: reject multipart
+            # bodies before PHP parses them. Blocks wiki file uploads until PHP is patched.
+            appendHttpConfig = ''
+              map $http_content_type $block_multipart {
+                default       0;
+                "~*multipart" 1;
+              }
+            '';
             virtualHosts."wiki.nycresistor.com" = {
               root = "/srv/http/wiki.nycresistor.com";
               enableACME = true;
@@ -128,6 +140,9 @@ in
               quic = true;
               default = true;
               extraConfig = ''
+                if ($block_multipart) {
+                  return 403;
+                }
                 client_max_body_size 51M;
                 fastcgi_split_path_info ^(.+\.php)(/.+)$;
                 include ${pkgs.nginx}/conf/fastcgi.conf;
