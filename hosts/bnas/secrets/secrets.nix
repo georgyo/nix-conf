@@ -1,6 +1,10 @@
 let
   shammas_user = "age17jww3vhjultwv2l7rhjj98k4qyuvzffnvlenuxkdl8vdmrv8zegqnz086d";
-  users = [ shammas_user ];
+  shammas_ssh_user = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKrAxJtkMUjVhFJ2o5UPXbQLn8Q92c3g4xuCjCBtNmnz";
+  users = [
+    shammas_user
+    shammas_ssh_user
+  ];
 
   bnas_system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOIgw62N+wiff/kK1t2Y1kuuQcqxr/XMAHvxDGMV6FJ5";
   seed_system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOCxckTAyIYmD6DK4HB64A61CGDPg0eYcaF1ZVmWfE6M";
