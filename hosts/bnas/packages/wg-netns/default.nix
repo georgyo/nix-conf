@@ -6,7 +6,18 @@
 }:
 let
   wg-netns = pkgs.callPackage ./package.nix { };
+  mullvad-relay = pkgs.writers.writePython3 "mullvad-relay" {
+    libraries = [ pkgs.python3Packages.pyyaml ];
+    flakeIgnore = [ "E501" ];
+  } (builtins.readFile ./mullvad-relay.py);
+  # Pick a random Mullvad-owned relay in these countries on every start.
+  mullvadCountries = [
+    "se"
+    "ch"
+  ];
   script = ''
+    ${mullvad-relay} /run/agenix/seedns/seed.yml "$RUNTIME_DIRECTORY/seed.yml" \
+      "$STATE_DIRECTORY/relays.json" ${lib.escapeShellArgs mullvadCountries}
     ${wg-netns}/bin/wg-netns up seed
     until  ${pkgs.iproute2}/bin/ip netns exec seed ${pkgs.coreutils}/bin/true; do
       echo will retry
@@ -69,7 +80,7 @@ in
       environment = {
         WG_ENDPOINT_RESOLUTION_RETRIES = "infinity";
         WG_VERBOSE = "1";
-        WG_PROFILE_DIR = "/run/agenix/seedns";
+        WG_PROFILE_DIR = "/run/wg-netns-seed";
       };
       inherit script;
       serviceConfig = {
@@ -82,6 +93,10 @@ in
         WorkingDirectory = "%E/wireguard";
         ConfigurationDirectory = "wireguard";
         ConfigurationDirectoryMode = "0700";
+        RuntimeDirectory = "wg-netns-seed";
+        RuntimeDirectoryMode = "0700";
+        StateDirectory = "wg-netns-seed";
+        StateDirectoryMode = "0700";
 
         CapabilityBoundingSet = "CAP_NET_ADMIN CAP_SYS_ADMIN";
         LimitNOFILE = "4096";
@@ -92,7 +107,7 @@ in
         ProtectClock = "true";
         ProtectHostname = "true";
         RemoveIPC = "true";
-        RestrictAddressFamilies = "AF_INET AF_INET6 AF_NETLINK";
+        RestrictAddressFamilies = "AF_INET AF_INET6 AF_NETLINK AF_UNIX";
         RestrictNamespaces = "mnt net";
         RestrictRealtime = "true";
         RestrictSUIDSGID = "true";
