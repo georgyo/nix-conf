@@ -27,6 +27,9 @@ jobs:
       - uses: actions/checkout@v7
 
       - uses: NixOS/nix-installer-action@main
+        with:
+          extra-conf: |
+            always-allow-substitutes = true
 
       - uses: Mic92/niks3-action@v1
         with:

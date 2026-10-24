@@ -14,6 +14,7 @@
       nix = {
         settings = {
           builders-use-substitutes = true;
+          always-allow-substitutes = true;
           extra-substituters = [ "https://cache.fu.io" ];
           extra-trusted-public-keys = [
             "georgyo-1:2yY6X+H3y0xp9e94WQsjXlWNDX2ElWWrp5P89pQ9zPM="
