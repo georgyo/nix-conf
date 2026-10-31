@@ -9,7 +9,11 @@ let
 
   # Upstream nixpkgs PRs not yet in nixos-unstable. Drop each once the flake
   # lock includes it; when the list is empty, nixpkgs is used unpatched.
+  #
+  # brotli-1.2.1.patch: 577208, brotli 1.2.0 -> 1.2.1 (staging). Also drops
+  # nodejs's brotli CVE-2026-111497 backport, which 1.2.1 already contains.
   nixpkgsPatches = pkgs: [
+    ../../patches/brotli-1.2.1.patch
   ];
 
   # Re-instantiate the nixpkgs flake from the patched source, keeping the
