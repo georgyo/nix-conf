@@ -82,9 +82,17 @@
               issuer = "https://token.actions.githubusercontent.com";
               audience = "https://niks3.fu.io";
               boundClaims = {
-                repository_owner = [ "georgyo" ];
+                repository_owner = [
+                  "georgyo"
+                  "ai-georgyo"
+                  "openrtx"
+                ];
               };
-              boundSubject = [ "repo:georgyo/*:*" ];
+              boundSubject = [
+                "repo:georgyo/*:*"
+                "repo:ai-georgyo/*:*"
+                "repo:openrtx/*:*"
+              ];
             };
           };
         };
