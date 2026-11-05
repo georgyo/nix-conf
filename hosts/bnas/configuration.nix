@@ -129,7 +129,7 @@ inputs:
     enable = true;
   };
 
-  services.below.enable = true;
+  # services.below.enable = true;
 
   services.nfs.server.enable = true;
   # Specific trusted hosts keep no_root_squash; the broad LAN subnets are

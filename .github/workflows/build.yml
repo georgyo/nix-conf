@@ -6,21 +6,33 @@ on:
   workflow_dispatch:
 
 jobs:
+  # The build matrix comes from the flake's `githubActions` output
+  # (modules/github-actions.nix, via nix-community/nix-github-actions): one job
+  # per check, i.e. each NixOS system plus the flake-inputs source trees.
+  matrix:
+    name: Generate matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: NixOS/nix-installer-action@main
+
+      - id: set-matrix
+        name: Generate Nix matrix
+        run: |
+          set -Eeuo pipefail
+          echo -n 'matrix=' >> "$GITHUB_OUTPUT"
+          nix eval --json '.#githubActions.matrix' | tee -a "$GITHUB_OUTPUT"
+
   build:
     name: Build ${{ matrix.name }}
-    runs-on: ubuntu-latest
+    needs: matrix
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - name: hydra
-            installable: nixosConfigurations.hydra.config.system.build.toplevel
-          - name: bnas
-            installable: nixosConfigurations.bnas.config.system.build.toplevel
-          # Every flake input source tree, so later builds substitute them
-          # from the cache instead of fetching from GitHub.
-          - name: flake-inputs
-            installable: packages.x86_64-linux.flake-inputs
+      matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
     permissions:
       id-token: write
     steps:
@@ -36,5 +48,24 @@ jobs:
           server-url: https://niks3.fu.io
 
       - name: Build ${{ matrix.name }}
+        id: build
         run: |
-          nix build '.#${{ matrix.installable }}'
+          out=$(nix build --no-link --print-out-paths '.#${{ matrix.attr }}')
+          echo "out=$out" >> "$GITHUB_OUTPUT"
+
+      # One tar per build, holding just its top-level store path (symlinks
+      # kept as-is). The full closures run to many GiB and are already in the
+      # binary cache, so `nix copy --from https://cache.fu.io <path>` fetches
+      # everything the tar points at.
+      - name: Package ${{ matrix.name }}
+        run: |
+          tar -cf '${{ matrix.name }}.tar' -C /nix/store \
+            "$(basename '${{ steps.build.outputs.out }}')"
+
+      # archive: false uploads the tar itself rather than a zip around it; the
+      # artifact is named after the file.
+      - uses: actions/upload-artifact@v7
+        with:
+          path: ${{ matrix.name }}.tar
+          archive: false
+          if-no-files-found: error
