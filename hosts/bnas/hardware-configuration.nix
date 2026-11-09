@@ -10,20 +10,20 @@
 }:
 
 let
-  # # linux_7_0 was removed from nixpkgs (EOL upstream), but ZFS does not yet
-  # # support 7.1, so build 7.0 from source until zfs works on 7.x.
-  # myKernel = pkgs.linuxKernel.buildLinux {
-  #   src = pkgs.fetchurl {
-  #     url = "https://cdn.kernel.org/pub/linux/kernel/v7.x/linux-7.0.14.tar.xz";
-  #     hash = "sha256-3pmZt4TSKT8A05xi2PkqCKuKVLxOgP/SUKDAnLB6D5g=";
-  #   };
-  #   kernelPatches = [
-  #     pkgs.kernelPatches.bridge_stp_helper
-  #     pkgs.kernelPatches.request_key_helper
-  #   ];
-  #   version = "7.0.14";
-  # };
-  # myKernelPackages = pkgs.linuxPackagesFor myKernel;
+  # linux_7_2 was removed from nixpkgs (EOL upstream), but ZFS does not yet
+  # support 7.3, so build 7.2 from source until zfs works on 7.3.
+  myKernel = pkgs.linuxKernel.buildLinux {
+    src = pkgs.fetchurl {
+      url = "https://cdn.kernel.org/pub/linux/kernel/v7.x/linux-7.2.15.tar.xz";
+      hash = "sha256-0Pax1zJMk3zK61xMpwhL/Pcdsu2z4tOjHwrYOmgYCas=";
+    };
+    kernelPatches = [
+      pkgs.kernelPatches.bridge_stp_helper
+      pkgs.kernelPatches.request_key_helper
+    ];
+    version = "7.2.15";
+  };
+  myKernelPackages = pkgs.linuxPackagesFor myKernel;
 in
 
 {
@@ -31,7 +31,7 @@ in
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_7_2;
+  boot.kernelPackages = myKernelPackages;
   boot.initrd.availableKernelModules = [
     "ahci"
     "nvme"

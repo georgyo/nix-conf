@@ -322,11 +322,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1793693699,
-        "narHash": "sha256-rJLLSdzk33iyKVIhG0UuCKjI6RGWMSTZD6qhuVIbbqg=",
+        "lastModified": 1794226401,
+        "narHash": "sha256-ssKKtq4I595Z32NQR9sc/hlKAeqaYtI2jz83M0TZSos=",
         "owner": "Mic92",
         "repo": "niks3",
-        "rev": "2ae7fce37ce1c8d9029ba0a180bb67606baf151e",
+        "rev": "c5e97507ba99a6e1d1a0ae3c02c3bbbd4ab31ac0",
         "type": "github"
       },
       "original": {
@@ -388,16 +388,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1793838540,
-        "narHash": "sha256-3yEbLbD0RzGjnvgkWxyRWkLBBQsJm9FyKZbGv1++HLg=",
-        "owner": "georgyo",
+        "lastModified": 1794042290,
+        "narHash": "sha256-ziZn2PvCJE5JEEpqTdxXwJpPB+L3YqoCpTAMCzyaP3U=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "8a293483aebee033fbcb06cef307d1370e2a9553",
+        "rev": "f4a03c008967841f2a0b3cb7c436fc6fc31671f6",
         "type": "github"
       },
       "original": {
-        "owner": "georgyo",
-        "ref": "fix-below-forgejo-staging-next",
+        "owner": "nixos",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -457,11 +457,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793657466,
-        "narHash": "sha256-GoOvpdsjO5hqZuO6T6ok9u6sJEjO0iPli2zRr9oNUNw=",
+        "lastModified": 1793995029,
+        "narHash": "sha256-ZlE4BtMjWhfC6rFXLO9Qimn36Ene1INqCgKDDvazjhc=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "b18e01ce148eb3efff5de2f2d3181ca53b2b2a54",
+        "rev": "89a234ce2daf6e568a7d4b4fe250afdd23d84e20",
         "type": "github"
       },
       "original": {
