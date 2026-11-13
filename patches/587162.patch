@@ -1,0 +1,28 @@
+From 5ba1bb0676f215ad765bd567c740c3711a0c51a6 Mon Sep 17 00:00:00 2001
+From: arcayr <git@arcayr.online>
+Date: Thu, 12 Nov 2026 23:11:44 +1100
+Subject: [PATCH] apacheHttpd: 2.4.69 -> 2.4.71
+
+resolves #587139.
+---
+ pkgs/by-name/ap/apacheHttpd_2_4/package.nix | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/by-name/ap/apacheHttpd_2_4/package.nix b/pkgs/by-name/ap/apacheHttpd_2_4/package.nix
+index e449ce70cf566d..d509d28ca81e23 100644
+--- a/pkgs/by-name/ap/apacheHttpd_2_4/package.nix
++++ b/pkgs/by-name/ap/apacheHttpd_2_4/package.nix
+@@ -41,11 +41,11 @@ in
+ 
+ stdenv.mkDerivation rec {
+   pname = "apache-httpd";
+-  version = "2.4.69";
++  version = "2.4.71";
+ 
+   src = fetchurl {
+     url = "mirror://apache/httpd/httpd-${version}.tar.bz2";
+-    hash = "sha256-xebrxm40m4fX/GkWrnzCqAjtNIAD3hNM+enYnT4sxz0=";
++    hash = "sha256-K8XaWjPCRzQd4IJxfU68tctJ6Lc6Bbf9331dbcL43mI=";
+   };
+ 
+   patches = [

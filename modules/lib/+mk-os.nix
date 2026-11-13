@@ -7,7 +7,16 @@ let
 
   linux = mkNixos "x86_64-linux" "nixos";
 
-  nixpkgsPatches = pkgs: [
+  # Every *.patch file in ./patches at the repo root, in sorted order.
+  patchesDir = ../../patches;
+  localPatches = lib.pipe (builtins.readDir patchesDir) [
+    (lib.filterAttrs (n: t: t == "regular" && lib.hasSuffix ".patch" n))
+    lib.attrNames
+    (map (n: patchesDir + "/${n}"))
+  ];
+
+  # Extra patches (e.g. pkgs.fetchpatch) can be appended here.
+  nixpkgsPatches = pkgs: localPatches ++ [
   ];
 
   # Re-instantiate the nixpkgs flake from the patched source, keeping the
