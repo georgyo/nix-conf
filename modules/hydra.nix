@@ -23,6 +23,13 @@ let
 
           nodejs-slim_20 = final.nodejs-slim;
 
+          # Hugo 0.170 dropped the bundled LibSass, so the ananke theme's
+          # css.Sass call now needs the Dart Sass binary on PATH. Drop this
+          # once blog.shamm.as adds dart-sass to its own nativeBuildInputs.
+          blog_shamm_as = prev.blog_shamm_as.overrideAttrs (old: {
+            nativeBuildInputs = old.nativeBuildInputs ++ [ final.dart-sass ];
+          });
+
         })
       ];
       nixpkgs.config.allowUnfreePredicate =
